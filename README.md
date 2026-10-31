@@ -1,7 +1,7 @@
-# TerraGen Labs
+# Teregon Labs
 
-A responsive landing page for TerraGen Labs. Static HTML and CSS, ready for Vercel.
+A responsive, static landing site for Teregon Labs. It is built with HTML and CSS and deploys directly to Vercel with no build step.
 
 ## Deploy
 
-Import this repository into Vercel as a static site (no build command; output directory `.`). Add `teregonlabs.com` in Vercel project settings. Terraform in `infra/` configures Cloudflare DNS to Vercel once the Vercel project/domain values are known.
+Connect this repository to the `teregonlabs-site` Vercel project. Set the output directory to `.` and leave the build command empty. The Cloudflare DNS record for `teregonlabs.com` is described in `infra.tf`.
