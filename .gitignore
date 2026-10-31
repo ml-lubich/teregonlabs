@@ -4,3 +4,5 @@
 *.tfvars
 !terraform.tfvars.example
 crash.log
+.vercel
+.env*

@@ -15,13 +15,8 @@ variable "cloudflare_api_token" {
 
 variable "zone_id" {
   type        = string
-  description = "Cloudflare zone ID for tereg(on)labs.com"
+  description = "Cloudflare zone ID for teregonlabs.com"
   default     = "803cbbc234e8e661421501e85d7d9a12"
-}
-
-variable "vercel_cname_target" {
-  type        = string
-  description = "CNAME target shown by Vercel for the custom domain"
 }
 
 provider "cloudflare" {
@@ -32,7 +27,7 @@ resource "cloudflare_dns_record" "site" {
   zone_id = var.zone_id
   name    = "@"
   type    = "CNAME"
-  content = var.vercel_cname_target
+  content = "6e405568a12fae88.vercel-dns-017.com"
   ttl     = 1
   proxied = false
 }
