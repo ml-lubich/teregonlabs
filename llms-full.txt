@@ -1,0 +1,41 @@
+# Teregon Labs
+
+Teregon Labs is an environmental intelligence studio. It makes environmental change easier to see, understand, and act on by connecting landscape, water, and climate signals in place and over time.
+
+## What Teregon does
+
+### Landscape intelligence
+
+Teregon helps build a clearer picture of landscape conditions, natural assets, and the pressures reshaping them. The goal is grounded, place-based evidence that helps people understand the landscapes they steward.
+
+### Watershed systems
+
+Teregon helps people understand watersheds as connected systems, tracing how upstream conditions affect downstream communities, ecosystems, and infrastructure.
+
+### Climate resilience
+
+Teregon surfaces meaningful patterns and early indicators across a changing climate. It keeps uncertainty visible and gives emerging signals the context needed to understand what deserves attention.
+
+## How Teregon works
+
+1. Read the landscape: bring satellite, field, and environmental observations into one grounded view of place. Make known evidence and data gaps visible.
+2. Find what is changing: trace patterns and pressure points through time, while communicating uncertainty clearly.
+3. Move with clarity: turn complex environmental evidence into a practical next step for the people responsible for action.
+
+## Working principles
+
+- Start with place: environmental change is specific to a landscape, so context comes first.
+- Make uncertainty visible: communicate what is known and what is still emerging.
+- Make insight useful: connect understanding to a grounded next move.
+- See the system, not just the signal.
+
+## Pages
+
+- Home: https://teregonlabs.com/
+- What we do: https://teregonlabs.com/work.html
+- Approach: https://teregonlabs.com/approach.html
+- About: https://teregonlabs.com/about.html
+
+## Contact
+
+hello@teregonlabs.com

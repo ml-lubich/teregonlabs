@@ -1,7 +1,17 @@
 # Teregon Labs
 
-A responsive, static landing site for Teregon Labs. It is built with HTML and CSS and deploys directly to Vercel with no build step.
+A responsive, static site for Teregon Labs. It uses HTML, CSS, a small optional WebGL terrain layer, and no build step or runtime dependencies.
+
+## Pages and discovery
+
+- `/` — studio overview
+- `/work.html` — landscape intelligence, watershed systems, and climate resilience
+- `/approach.html` — the observation-to-action process
+- `/about.html` — mission and working principles
+- `/sitemap.xml` — public page index for search engines
+- `/robots.txt` — crawler access and sitemap location
+- `/llms.txt` and `/llms-full.txt` — concise and detailed site context for language models
 
 ## Deploy
 
-Connect this repository to the `teregonlabs-site` Vercel project. Set the output directory to `.` and leave the build command empty. The Cloudflare DNS record for `teregonlabs.com` is described in `infra.tf`.
+The repository is connected to the `teregonlabs-site` Vercel project on `main`. It serves static files from the repository root; there is no build command.
