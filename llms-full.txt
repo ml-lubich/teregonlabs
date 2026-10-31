@@ -1,9 +1,6 @@
 # Teregon — full site context
 
-Teregon is the parent studio connecting people, software, and the living world. It works through two clear practices:
-
-1. **Teregon Labs** — applied AI and software delivery.
-2. **Teregon Water** — water intelligence, water product operations, and watershed systems.
+Teregon connects people, software, and the living world. **Teregon Labs** is a broad applied AI and software studio for customer workflows, business operations, and complex software problems. **Teregon Water** is a focused vertical for water filtration and appliance customer service, water operations, and watershed systems.
 
 ## What Teregon Labs builds
 
@@ -62,6 +59,10 @@ The team reports company-level ARR context of approximately $240K during BrioBot
 3. Ship into the real workflow, review with the people using it, and compare against an agreed baseline.
 
 Measures may include handling time, time to detect, repeat issues, exposure reduced, or revenue protected. Publish an impact result only after the client verifies it. No outcomes are inferred from the Brio ARR context.
+
+## Founder
+
+Misha Lubich is CEO of Teregon Labs. His background includes machine-learning research using USGS stream data, machine-learning pipeline experience at Lawrence Berkeley National Laboratory (LBNL), and six peer-reviewed publications in machine learning for hydrology and environmental science. This phrasing describes research using USGS data and LBNL experience; it does not imply USGS employment or that the publications were jointly produced with either institution.
 
 ## Teregon Guide and contact
 

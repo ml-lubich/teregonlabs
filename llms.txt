@@ -1,12 +1,12 @@
 # Teregon
 
-> Teregon connects people, software, and the living world through two focused practices: Teregon Labs for applied AI and software, and Teregon Water for water intelligence and watershed systems.
+> Teregon Labs is a broad applied AI and software studio for customer workflows, business operations, and complex software problems. Teregon Water is a focused vertical for water filtration and appliance customer service, plus watershed systems.
 
 ## The three roles
 
 - **Teregon** — the parent point of view: systems that connect people, software, and the living world.
-- **Teregon Labs** — applied AI, decision systems, and production software for real workflows.
-- **Teregon Water** — configurable AI and software offerings for water filtration and appliance businesses, service teams, and watershed decisions. Offerings are not presented as deployed water products or live monitoring.
+- **Teregon Labs** — the broad applied AI and software studio, building decision systems and production software for real business workflows.
+- **Teregon Water** — a focused specialization offering configurable AI and software for water filtration/appliance customer service, water operations, and watershed decisions. Offerings are not presented as deployed water products or live monitoring.
 
 ## Live client website builds
 
