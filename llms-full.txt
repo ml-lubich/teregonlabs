@@ -2,6 +2,16 @@
 
 Teregon Labs is an applied AI and software studio building useful systems for messy data, real decisions, and a living world. It works across customer operations, knowledge systems, forecasting, custom software, and nature-led intelligence.
 
+## Live client websites
+
+### ERIA Events — https://www.eria.co/
+
+Teregon designed and deployed a digital front door for ERIA’s Bay Area venues and event experiences. The site connects venue discovery, event stories and press, and a private-event or corporate inquiry path. The implementation uses Next.js 16, React 19, and Sanity CMS. The live brand site lists Forbes among its press features.
+
+### W3 Sourcing — https://www.w3sourcing.com/
+
+Teregon built and deployed a public website for a principal-led executive search firm. The site explains technology, legal, and finance practices, positions leadership and the firm’s process, and gives prospective clients a direct inquiry path. The implementation uses Next.js 16, React 19, and TypeScript. W3 describes its search practice as AI-assisted with human partner judgment; this describes the client’s service, not an AI system delivered by Teregon.
+
 ## Selected systems and concepts
 
 ### Brio team product experience

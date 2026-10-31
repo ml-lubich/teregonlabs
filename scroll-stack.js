@@ -31,7 +31,6 @@
       cards.forEach((card) => {
         card.style.removeProperty('--stack-index');
         card.style.removeProperty('--stack-scale');
-        card.style.removeProperty('--stack-opacity');
       });
     };
     const measure = () => {
@@ -47,7 +46,6 @@
         const progress = index === cards.length - 1 ? 0 : Math.max(0, Math.min(1, (y + win.innerHeight * 0.82 - tops[index + 1]) / span));
         card.style.setProperty('--stack-index', index);
         card.style.setProperty('--stack-scale', (1 - progress * 0.06).toFixed(3));
-        card.style.setProperty('--stack-opacity', (1 - progress * 0.28).toFixed(3));
       });
     };
     const schedule = () => {

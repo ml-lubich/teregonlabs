@@ -72,6 +72,24 @@ class TeregonSiteContract(unittest.TestCase):
         for phrase in ("baseline", "revenue protected", "client has verified it"):
             self.assertIn(phrase, home.lower())
 
+    def test_homepage_shows_deployed_client_projects_with_real_screenshots(self):
+        home = (ROOT / "index.html").read_text()
+        for domain, image, project, detail in (
+            ("https://www.eria.co/", "project-eria.jpg", "ERIA", "Sanity"),
+            ("https://www.w3sourcing.com/", "project-w3sourcing.jpg", "W3 Sourcing", "methodology"),
+        ):
+            with self.subTest(project=project):
+                self.assertIn(domain, home)
+                self.assertIn(image, home)
+                self.assertIn(project, home)
+                self.assertIn(detail, home)
+                project_image = ROOT / "assets" / image
+                self.assertTrue(project_image.is_file())
+                self.assertLess(project_image.stat().st_size, 250_000)
+        self.assertIn("CLIENT PROJECTS / LIVE SITES", home)
+        self.assertIn('alt="Screenshot of the live ERIA website"', home)
+        self.assertIn('alt="Screenshot of the live W3 Sourcing website"', home)
+
     def test_homepage_uses_a_clear_ai_and_nature_positioning(self):
         home = (ROOT / "index.html").read_text().lower()
         self.assertIn("applied ai / software studio", home)
@@ -116,6 +134,8 @@ class TeregonSiteContract(unittest.TestCase):
         self.assertIn("prefers-reduced-motion:reduce", css)
         self.assertIn("@media(max-width:560px)", css)
         self.assertIn("visual-sheen", css)
+        self.assertIn("@keyframes mesh-float", css)
+        self.assertIn("@keyframes title-rise", css)
 
 
 if __name__ == "__main__":
