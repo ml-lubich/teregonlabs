@@ -56,3 +56,24 @@ html{scroll-behavior:smooth}
 @media(max-width:900px){.client-project-grid{gap:15px}.client-project-copy{padding:20px}.project-title-row{align-items:flex-start;flex-direction:column;gap:2px}.project-title-row h3{font-size:31px}.ai-band{grid-template-columns:1fr;gap:15px}.ai-flow-art{grid-row:2;min-height:320px}.ai-band-copy{grid-row:1}}
 @media(max-width:560px){.client-projects{padding-top:63px;padding-bottom:66px}.client-projects .section-head{display:block}.client-projects .section-head h2{font-size:43px}.client-projects .cases-intro{margin-top:14px}.client-project-grid{grid-template-columns:1fr;gap:16px}.client-project-image{aspect-ratio:1.5}.client-project-copy{padding:18px}.project-title-row{flex-direction:row;align-items:center}.project-title-row h3{font-size:31px}.project-proof{font-size:6px}.client-project-copy>p:not(.eyebrow):not(.project-stack){font-size:10px}.project-deliverables{margin:12px 0;gap:5px}.project-deliverables span{font-size:6px;padding:6px}.client-project-copy .project-stack{font-size:7px}.project-links{align-items:flex-start;flex-direction:column;gap:10px}.ai-band{padding:66px 7%;gap:9px}.ai-flow-art{min-height:262px;margin:0 -13px}.flow-mesh{inset:-12% -8% 0;width:116%;height:112%}.ai-flow-art .flow-node{min-width:57px;padding:7px 5px;font-size:6px}.ai-flow-art .flow-node small{font-size:5px}.ai-flow-art .node-in{left:0;top:63%}.ai-flow-art .node-retrieval{left:20%;top:43%}.ai-flow-art .node-ai{left:41%;top:31%;min-width:66px;padding:9px 6px}.ai-flow-art .node-check{left:63%;top:43%}.ai-flow-art .node-out{right:0;top:62%}.ai-capabilities{gap:8px;margin:19px 0 22px}.ai-capabilities span{font-size:6px}.hero-ai-mesh{opacity:.86}}
 @media(prefers-reduced-motion:reduce){.hero-title-line{animation:none;opacity:1;transform:none}.hero-ai-mesh .mesh-glow,.flow-mesh,.flow-surface-points circle,.client-project-card{animation:none!important;view-timeline-name:none!important}.client-project-image img{transition:none}}
+
+/* A compact technical signal between the studio point of view and the work. */
+.capability-signal{position:relative;overflow:hidden;background:#17231d;color:#d7e2ca;border-top:1px solid #ffffff12;border-bottom:1px solid #ffffff12}
+.capability-signal:before,.capability-signal:after{content:"";position:absolute;z-index:1;inset:0 auto 0 0;width:8%;background:linear-gradient(90deg,#17231d,transparent);pointer-events:none}
+.capability-signal:after{inset:0 0 0 auto;transform:scaleX(-1)}
+.capability-track{display:flex;width:max-content;min-width:100%;padding:20px 0}
+.capability-run{display:flex;flex:0 0 auto;align-items:center;gap:0}
+.capability-run>span{display:inline-flex;align-items:center;gap:20px;padding:0 25px;color:#d7e2ca;font:8px var(--mono);letter-spacing:1px;white-space:nowrap}
+.capability-run>span:after{content:"";width:5px;height:5px;border:1px solid #b8cc96;border-radius:50%;box-shadow:0 0 12px #c4dfa34d}
+@media(prefers-reduced-motion:no-preference){.capability-track{animation:capability-loop 42s linear infinite}.capability-signal:hover .capability-track{animation-play-state:paused}}
+@keyframes capability-loop{to{transform:translateX(-50%)}}
+
+/* Keep the pinned case rhythm, with much shorter handoff gaps between cards. */
+@media(min-width:1367px) and (prefers-reduced-motion:no-preference){.case-stack[data-variant="stack"] .case-stack-card:not(:last-child){margin-bottom:22vh}}
+
+/* Headline reveals use the browser's view timeline and composite-only motion. */
+@supports (animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){.intro h2,.section-head h2,.outcomes-heading h2,.ai-band-copy h2{animation:title-rise linear both;animation-timeline:view();animation-range:entry 0% entry 42%}}
+}
+@media(max-width:560px){.capability-track{padding:16px 0}.capability-run>span{gap:14px;padding:0 17px;font-size:7px}.capability-signal:before,.capability-signal:after{width:5%}}
+@media(prefers-reduced-motion:reduce){.capability-track{transform:none!important;animation:none!important}.intro h2,.section-head h2,.outcomes-heading h2,.ai-band-copy h2{animation:none!important;opacity:1;transform:none}}
