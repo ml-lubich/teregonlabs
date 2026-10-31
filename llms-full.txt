@@ -1,60 +1,60 @@
 # Teregon Labs
 
-Teregon Labs is an environmental intelligence studio. It makes environmental change easier to see, understand, and act on by connecting landscape, water, and climate signals in place and over time.
+Teregon Labs is an applied AI and software studio building useful systems for messy data, real decisions, and a living world. It works across customer operations, knowledge systems, forecasting, custom software, and nature-led intelligence.
 
-## Brio product systems
+## Selected systems and concepts
 
-- **BrioBot:** evidence-bound Salesforce case triage. The agent gathers case context, retrieves evidence, drafts actions, and passes deterministic checks before approved writes.
-- **Briopedia:** internal support knowledge base with a git-backed wiki, search, and local or cloud LLM chat.
-- **BrioScope:** customer support analytics with trending issue analysis, real-time ticket metrics, and a web dashboard.
-- **Brio Sales Navigator:** read-only Salesforce analytics combining SARIMAX and XGBoost forecasts with churn, lifecycle, and SKU analysis over DuckDB and Parquet.
+### Brio team product experience
 
-These are Brio product systems, not Teregon client engagements. No unverified revenue or performance outcomes are claimed.
+These are prior Brio product systems built by team members, not Teregon client engagements.
 
-## Selected systems and case studies
+- **BrioBot:** evidence-bound Salesforce case triage. The agent gathers case context, retrieves policy and product evidence, drafts an action, and passes deterministic checks before an approved update is written.
+- **Briopedia:** internal support knowledge base pairing a git-backed wiki with search and local or cloud LLM chat.
+- **BrioScope:** support analytics that brings events together to surface trending issues and live service signals.
+- **Brio Sales Navigator:** read-only Salesforce pipeline analytics combining SARIMAX and XGBoost forecasts with churn, lifecycle, and SKU analysis over DuckDB and Parquet.
 
-### BrioScope
+### Nature-led exploratory concepts
 
-BrioScope is a customer service analytics platform that brings support events together to surface trending issues and live service signals. It helps teams move from individual conversations to a clearer view of customer experience.
+“From ridge to river” explores a shared watershed view combining land cover, rainfall, stream observations, and nearby assets. “Where heat settles” explores heat exposure alongside canopy, terrain, and community assets. These are illustrative Teregon concepts, not reported client work.
 
-### Illustrative concepts
+## What Teregon builds
 
-“From ridge to river” explores a shared watershed view combining land cover, rainfall, stream observations, and nearby assets. “Where heat settles” explores heat exposure alongside canopy, terrain, and community assets. These are illustrative Teregon concept studies, not reported client work.
+### Applied AI
+
+AI workflows for knowledge search, support and operations triage, summarization, and decision support. Keep answers grounded in trusted sources, show evidence, and leave consequential decisions with people.
+
+### Data and decision systems
+
+Connect scattered operational, customer, product, field, and environmental sources. Build forecasts, dashboards, and shared views that fit the decisions people need to make.
+
+### Software engineering
+
+Design and ship focused software around real workflows, including integrations, internal tools, evaluation, observability, and iteration.
+
+### Nature-led intelligence
+
+Bring land, water, climate, and community signals into grounded context to help teams explore what is changing and where to focus. This is the studio’s environmental application area, alongside broader applied AI and software work.
+
+## How Teregon works
+
+1. Understand the decision, workflow, source data, constraints, and owners. Make gaps and assumptions visible.
+2. Connect the right sources, retrieval, models, and software checks. Keep outputs tied to evidence and communicate uncertainty.
+3. Ship into the real workflow, review with the people using it, and compare results against an agreed baseline. Publish outcomes only after client verification.
+
+## Working principles
+
+- Start with the real work and the decision it needs to support.
+- Keep evidence close and communicate uncertainty.
+- Keep people in control of consequential decisions.
+- Build for connected, changing systems.
+
+## Measuring business impact
+
+Engagements begin with an agreed baseline and decision. Measures can include time saved, time to detect, repeat issues, exposure reduced, or revenue protected. Results are published only after client verification; no unverified financial results are claimed.
 
 ## Team
 
 Misha Lubich, Joseph Heupler, and Yuvaraj Tankala.
-
-## What Teregon does
-
-### Landscape intelligence
-
-Teregon helps build a clearer picture of landscape conditions, natural assets, and the pressures reshaping them. The goal is grounded, place-based evidence that helps people understand the landscapes they steward.
-
-### Watershed systems
-
-Teregon helps people understand watersheds as connected systems, tracing how upstream conditions affect downstream communities, ecosystems, and infrastructure.
-
-### Climate resilience
-
-Teregon surfaces meaningful patterns and early indicators across a changing climate. It keeps uncertainty visible and gives emerging signals the context needed to understand what deserves attention.
-
-## Measuring business impact
-
-Engagements begin with an agreed baseline and decision. Teregon can track measures such as time saved, time to detect, repeat issues, exposure reduced, or revenue protected. Results are published only after client verification; no unverified financial results are claimed.
-
-## How Teregon works
-
-1. Read the landscape: bring satellite, field, and environmental observations into one grounded view of place. Make known evidence and data gaps visible.
-2. Find what is changing: trace patterns and pressure points through time, while communicating uncertainty clearly.
-3. Move with clarity: turn complex environmental evidence into a practical next step for the people responsible for action.
-
-## Working principles
-
-- Start with place: environmental change is specific to a landscape, so context comes first.
-- Make uncertainty visible: communicate what is known and what is still emerging.
-- Make insight useful: connect understanding to a grounded next move.
-- See the system, not just the signal.
 
 ## Pages
 

@@ -1,28 +1,19 @@
 # Teregon Labs
 
-> Teregon Labs is an environmental intelligence studio making environmental change easier to see, understand, and act on.
+> Teregon Labs is an applied AI and software studio building useful systems for messy data, real decisions, and a living world.
 
-Teregon Labs connects landscape, watershed, and climate signals to help people build a clearer picture of a changing world and decide what to do next. Its work emphasizes place-based context, honest communication of uncertainty, and practical decisions for a living world.
+We build AI workflows, data and decision systems, and focused software for customer operations, knowledge search, forecasting, and nature-led intelligence. Our work is grounded in evidence, human review, and measurable outcomes.
 
-## Applied systems
+## Selected systems
 
-The site also features BrioBot (evidence-bound support case triage), Briopedia (a git-backed support knowledge base), BrioScope (support analytics), and Brio Sales Navigator (read-only sales forecasting and customer analytics). These are Brio product systems, not Teregon client engagements.
-
-## Selected work
-
-- BrioScope: customer support analytics that surfaces trending issues and live service signals.
-- “From ridge to river” and “Where heat settles” are illustrative Teregon concept studies, not client engagements.
-
-## Team
-
-Misha Lubich, Joseph Heupler, and Yuvaraj Tankala.
+The site describes BrioBot (evidence-bound support triage), Briopedia (a git-backed knowledge base), BrioScope (support analytics), and Brio Sales Navigator (read-only forecasting and customer analytics). These are prior Brio team product systems, not Teregon client engagements. “From ridge to river” and “Where heat settles” are exploratory Teregon concepts, not completed client projects.
 
 ## Pages
 
-- [Home](https://teregonlabs.com/): Overview of Teregon Labs, selected systems, and case studies.
-- [What we do](https://teregonlabs.com/work.html): Landscape intelligence, watershed systems, and climate resilience.
-- [Approach](https://teregonlabs.com/approach.html): How Teregon connects environmental observations to clear next steps.
-- [About](https://teregonlabs.com/about.html): Mission, perspective, working principles, and team.
+- [Home](https://teregonlabs.com/): Applied AI and software studio overview, selected systems, and nature-led concepts.
+- [What we do](https://teregonlabs.com/work.html): Applied AI, data and decision systems, software engineering, and nature-led intelligence.
+- [Approach](https://teregonlabs.com/approach.html): How Teregon scopes, builds, and measures useful systems.
+- [About](https://teregonlabs.com/about.html): Studio point of view, working principles, and team.
 
 ## Contact
 

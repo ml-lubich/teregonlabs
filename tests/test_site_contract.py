@@ -72,6 +72,19 @@ class TeregonSiteContract(unittest.TestCase):
         for phrase in ("baseline", "revenue protected", "client has verified it"):
             self.assertIn(phrase, home.lower())
 
+    def test_homepage_uses_a_clear_ai_and_nature_positioning(self):
+        home = (ROOT / "index.html").read_text().lower()
+        self.assertIn("applied ai / software studio", home)
+        self.assertIn("messy data", home)
+        self.assertIn("living world", home)
+        self.assertIn("bring us a problem", home)
+
+    def test_selected_work_has_one_desktop_scroll_stack_and_compact_fallback(self):
+        home = (ROOT / "index.html").read_text()
+        self.assertIn('data-scroll-stack="cases"', home)
+        self.assertIn('data-variant="compact"', home)
+        self.assertIn('src="/scroll-stack.js"', home)
+
     def test_homepage_covers_the_brio_product_portfolio(self):
         home = (ROOT / "index.html").read_text().lower()
         for project in ("briobot", "briopedia", "brioscope", "sales navigator"):
