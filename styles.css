@@ -77,3 +77,146 @@ html{scroll-behavior:smooth}
 }
 @media(max-width:560px){.capability-track{padding:16px 0}.capability-run>span{gap:14px;padding:0 17px;font-size:7px}.capability-signal:before,.capability-signal:after{width:5%}}
 @media(prefers-reduced-motion:reduce){.capability-track{transform:none!important;animation:none!important}.intro h2,.section-head h2,.outcomes-heading h2,.ai-band-copy h2{animation:none!important;opacity:1;transform:none}}
+
+/* Hero phrase: a short 3D flip that explains the studio's range. */
+.hero-copy h1 .hero-cycle{display:block;perspective:900px;transform-style:preserve-3d}
+.hero-cycle-static{display:block}
+.hero-cycle-words{grid-area:2/1;display:grid;grid-template-columns:minmax(0,1fr);align-items:start;perspective:900px}
+.hero-cycle-word{grid-area:1/1;display:block;backface-visibility:hidden;opacity:0;transform:translate3d(0,42%,0) rotateX(-58deg);transform-origin:50% 70%;animation:hero-cycle-flip 12s ease-in-out infinite}
+.hero-cycle{display:grid;grid-template-columns:max-content;align-items:start;min-height:1.92em;overflow:hidden}
+.hero-cycle-static{grid-area:1/1}
+.hero-cycle-word:nth-child(1){animation-delay:0s}
+.hero-cycle-word:nth-child(2){animation-delay:3s}
+.hero-cycle-word:nth-child(3){animation-delay:6s}
+.hero-cycle-word:nth-child(4){animation-delay:9s}
+@keyframes hero-cycle-flip{0%,2%{opacity:0;transform:translate3d(0,42%,0) rotateX(-58deg)}7%,22%{opacity:1;transform:translate3d(0,0,0) rotateX(0)}27%,100%{opacity:0;transform:translate3d(0,-38%,0) rotateX(48deg)}}
+
+/* Give the terrain signal a second, receding surface; keep motion on transforms. */
+.hero-ai-mesh{transform-style:preserve-3d}
+.hero-ai-mesh:before{content:"";position:absolute;z-index:0;inset:18% -5% -8% 2%;background-image:linear-gradient(#d8e9bf24 1px,transparent 1px),linear-gradient(90deg,#d8e9bf24 1px,transparent 1px);background-size:43px 34px;transform:perspective(760px) rotateX(62deg) rotateZ(-15deg) translate3d(0,16px,-25px) scale(1.2);transform-origin:50% 90%;opacity:.28;mask-image:radial-gradient(ellipse at 55% 50%,#000 14%,transparent 76%);animation:terrain-plane-drift 18s ease-in-out infinite alternate}
+.hero-ai-mesh svg{position:relative;z-index:1}
+.mesh-tag{z-index:2}
+.work-card:first-child .art-land:before{content:"";position:absolute;inset:-34% -12% -38%;background-image:linear-gradient(#eef4e34a 1px,transparent 1px),linear-gradient(90deg,#eef4e34a 1px,transparent 1px);background-size:25px 22px;transform:perspective(450px) rotateX(57deg) rotateZ(-11deg) scale(1.2);transform-origin:50% 85%;mask-image:radial-gradient(ellipse at center,#000 10%,transparent 73%);opacity:.42;animation:card-mesh-drift 14s ease-in-out infinite alternate}
+.flow-mesh{transform-style:preserve-3d;filter:drop-shadow(0 14px 18px #07100b40)}
+.ai-flow-art:before{content:"";position:absolute;z-index:0;inset:7% -5% 2%;background-image:linear-gradient(#c5d9a72a 1px,transparent 1px),linear-gradient(90deg,#c5d9a72a 1px,transparent 1px);background-size:38px 32px;transform:perspective(780px) rotateX(65deg) rotateZ(-17deg) translate3d(0,10px,-34px) scale(1.16);transform-origin:50% 65%;mask-image:radial-gradient(ellipse at center,#000 8%,transparent 75%);opacity:.42;animation:terrain-plane-drift 20s ease-in-out infinite alternate}
+@keyframes terrain-plane-drift{from{transform:perspective(760px) rotateX(62deg) rotateZ(-15deg) translate3d(0,16px,-25px) scale(1.2)}to{transform:perspective(760px) rotateX(65deg) rotateZ(-12deg) translate3d(0,-6px,-25px) scale(1.23)}}
+@keyframes card-mesh-drift{from{transform:perspective(450px) rotateX(57deg) rotateZ(-11deg) scale(1.2)}to{transform:perspective(450px) rotateX(60deg) rotateZ(-8deg) translate3d(0,-4px,0) scale(1.23)}}
+@media(max-width:800px){.hero-ai-mesh:before{opacity:.17}.ai-flow-art:before{opacity:.18}}
+@media(max-width:560px){.hero-copy h1 .hero-cycle{min-height:1.82em;grid-template-columns:minmax(0,1fr)}.hero-cycle-word{font-size:.88em}.hero-ai-mesh:before{opacity:.12}.work-card:first-child .art-land:before{opacity:.2}.ai-flow-art:before{opacity:.12}}
+@media(prefers-reduced-motion:reduce){.hero-cycle-word{display:none;animation:none!important;opacity:0;transform:none}.hero-cycle-word:first-child{display:block;opacity:1}.hero-ai-mesh:before,.work-card:first-child .art-land:before,.ai-flow-art:before{animation:none!important}}
+
+/* A clear three-part brand system: point of view, studio, water practice. */
+.brand-architecture{position:relative;overflow:hidden;padding:clamp(64px,8vw,108px) 12.5%;background:#e2e8dc;color:var(--ink)}
+.brand-architecture>.eyebrow{margin-bottom:18px}
+.brand-architecture>h2{max-width:850px;margin:0 0 34px;font-size:clamp(38px,5vw,64px);font-weight:500;line-height:1;letter-spacing:-.075em}
+.brand-architecture>p:not(.eyebrow){max-width:58ch;color:#5d6a5b;font-size:13px;line-height:1.8}
+.brand-architecture-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:36px;border-top:1px solid #bfcbbb;border-bottom:1px solid #bfcbbb}
+.brand-architecture article{min-width:0;padding:25px 23px 29px}
+.brand-architecture article+article{border-left:1px solid #bfcbbb}
+.brand-architecture article>span:first-child{display:block;margin-bottom:31px;color:#65765e;font:8px var(--mono);letter-spacing:1px}
+.brand-architecture article h3{margin:0 0 9px;font-size:clamp(22px,2.5vw,32px);font-weight:500;letter-spacing:-.06em}
+.brand-architecture article p{max-width:34ch;margin:0;color:#5c6958;font-size:11px;line-height:1.85}
+.brand-architecture article a{display:inline-block;margin-top:18px;color:#344a37;font-size:10px;border-bottom:1px solid #9eae96;padding-bottom:6px}
+.brand-architecture article:last-child{position:relative;background:linear-gradient(145deg,#253c31,#17251e);color:#eef2e7}
+.brand-architecture article:last-child>span:first-child,.brand-architecture article:last-child p{color:#c1ceb9}
+.brand-architecture article:last-child a{color:#e6edd9;border-color:#809076}
+
+/* The contact form is a mail-draft helper, not a server submission endpoint. */
+.contact-form{display:grid;gap:16px;max-width:680px;margin-top:32px}
+.contact-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.contact-form label,.guide-form label{display:grid;gap:7px;color:#52604f;font:8px var(--mono);letter-spacing:.65px}
+.contact-form input,.contact-form textarea,.guide-form input{width:100%;min-width:0;border:1px solid #bdc9b9;border-radius:2px;background:#f7f8f2;color:#20281f;font:13px/1.5 var(--sans);padding:12px 13px;outline:none}
+.contact-form textarea{min-height:130px;resize:vertical}
+.contact-form input::placeholder,.contact-form textarea::placeholder,.guide-form input::placeholder{color:#758171;opacity:1}
+.contact-form input:focus-visible,.contact-form textarea:focus-visible,.guide-form input:focus-visible{border-color:#627b58;box-shadow:0 0 0 3px #9dae8b44}
+.contact-form button,.guide-form button{justify-self:start;min-height:46px;border:0;border-radius:2px;padding:12px 18px;background:#24392c;color:#f2f4eb;font:10px var(--sans);cursor:pointer;transition:background .18s ease,transform .18s ease}
+.contact-form button:hover,.guide-form button:hover{background:#40563d}
+.contact-help{max-width:54ch;color:#5e6a5b;font-size:10px;line-height:1.7}
+.contact-panel{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);align-items:start;gap:7%;padding:30px;border:1px solid #53634e;background:#192920}
+.contact-panel h3{margin:0 0 9px;color:#edf1e7;font-size:clamp(20px,2.7vw,30px);font-weight:500;letter-spacing:-.05em}
+.contact-panel>div>p{max-width:36ch;margin:0;color:#c1cdb9;font-size:11px;line-height:1.8}
+.closing .contact-form{margin-top:0}
+.closing .contact-form label,.closing .contact-help{color:#c5d0c0}
+.contact-fields label:has(textarea){grid-column:1/-1}
+.contact-form :focus-visible,.guide-form :focus-visible,#guide-open:focus-visible,#guide-close:focus-visible{outline:2px solid #8ca276;outline-offset:3px}
+
+/* First-party guide dialog; native dialog supplies Escape and focus management. */
+#guide-open{position:fixed;z-index:80;right:24px;bottom:22px;display:flex;align-items:center;gap:10px;min-height:52px;padding:0 17px;border:1px solid #a8bd91;border-radius:999px;background:#20362a;color:#f1f4e9;box-shadow:0 8px 30px #07100b45;font:10px var(--mono);letter-spacing:.35px;cursor:pointer;transition:transform .2s var(--ease),background .2s ease}
+#guide-open:before{content:"";width:8px;height:8px;border-radius:50%;background:#bfd69a;box-shadow:0 0 0 4px #bfd69a25}
+#guide-open:hover{transform:translateY(-2px);background:#2e4937}
+#teregon-guide{position:fixed;inset:auto 22px 84px auto;width:min(410px,calc(100vw - 28px));height:min(620px,calc(100dvh - 112px));max-width:none;max-height:none;margin:0;padding:0;overflow:hidden;border:1px solid #c4d0bc;border-radius:6px;background:#f4f6ef;color:#20281f;box-shadow:0 24px 80px #07100b55}
+#teregon-guide[open]{display:flex;flex-direction:column;animation:guide-enter .22s var(--ease) both}
+.guide-panel{display:flex;flex:1;flex-direction:column;min-height:0;height:100%}
+#teregon-guide::backdrop{background:#08120db8;backdrop-filter:blur(3px)}
+.guide-header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:19px 19px 16px;background:#1b2d23;color:#edf1e6;border-bottom:1px solid #8a9b7e}
+.guide-header .eyebrow{color:#bdcca9}
+.guide-header h2{margin:7px 0 0;font-size:21px;font-weight:500;letter-spacing:-.04em}
+.guide-header p{margin:6px 0 0;color:#c6d0be;font-size:10px;line-height:1.6}
+#guide-close{flex:0 0 38px;width:38px;height:38px;border:1px solid #809177;border-radius:2px;background:transparent;color:#f1f4e9;font-size:19px;line-height:1;cursor:pointer}
+#guide-close:hover{background:#ffffff14}
+.guide-messages{display:flex;flex:1;flex-direction:column;align-items:stretch;gap:12px;min-height:0;overflow-y:auto;padding:17px;background:linear-gradient(180deg,#edf1e8,#f4f6ef)}
+.guide-messages>*{max-width:92%;padding:11px 12px;border:1px solid #d1d9cc;border-radius:4px;background:#fafbf6;color:#3c493b;font-size:11px;line-height:1.7;overflow-wrap:anywhere}
+.guide-messages [data-role="user"],.guide-messages .guide-user{align-self:flex-end;background:#e1e9d9;border-color:#c2cfb9}
+.guide-messages a{color:#344d38;text-decoration:underline;text-underline-offset:2px}
+.guide-answer{align-self:flex-start}
+.guide-prompts{display:flex;flex-wrap:wrap;gap:7px;padding:0 17px 13px;background:#f4f6ef}
+.guide-prompts button{min-height:34px;padding:7px 9px;border:1px solid #c2ceba;border-radius:2px;background:#edf1e8;color:#445540;font:9px var(--sans);cursor:pointer}
+.guide-prompts button:hover{background:#e0e8d8}
+.guide-form{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;padding:13px 16px 12px;border-top:1px solid #d3dbce;background:#f4f6ef}
+.guide-form label{grid-column:1/-1}
+.guide-form>div{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:8px}
+.guide-form input{padding:10px 11px;font-size:12px}
+.guide-form button{min-height:42px;padding:10px 13px}
+.guide-form small{grid-column:1/-1;color:#63705e;font:8px/1.55 var(--mono)}
+.guide-answer{align-self:stretch;margin:0;padding:0 16px 13px;background:#f4f6ef;color:#63705e;font:8px/1.55 var(--mono)}
+@keyframes guide-enter{from{opacity:0;transform:translate3d(0,12px,0) scale(.98)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@media(max-width:800px){.brand-architecture{padding:68px 8%}.brand-architecture-grid{grid-template-columns:1fr}.brand-architecture article{padding:21px 18px 24px}.brand-architecture article+article{border-left:0;border-top:1px solid #bfcbbb}.brand-architecture article>span:first-child{margin-bottom:15px}.contact-panel{grid-template-columns:1fr;gap:20px}}
+@media(max-width:560px){.brand-architecture{padding:58px 7%}.brand-architecture>h2{font-size:40px}.contact-fields{grid-template-columns:1fr}.contact-fields label:has(textarea){grid-column:auto}.contact-panel{padding:19px}.contact-form textarea{min-height:112px}#guide-open{right:14px;bottom:14px;min-height:48px;padding:0 14px}#teregon-guide{right:10px;bottom:72px;width:calc(100vw - 20px);height:min(650px,calc(100dvh - 88px))}.guide-header{padding:16px}.guide-messages{padding:13px}.guide-prompts{padding:0 13px 11px}.guide-form{padding:11px 12px 10px}.guide-answer{padding:0 12px 11px}}
+@media(prefers-reduced-motion:reduce){#guide-open{transition:none}#guide-open:hover{transform:none}#teregon-guide[open]{animation:none}}
+
+/* Water story: the scene stays in view as its sources become a decision. */
+.water-story{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);align-items:start;gap:7%;padding-top:clamp(76px,9vw,126px);padding-bottom:clamp(76px,9vw,126px);background:#17251f;color:#eff2e8;overflow:clip}
+.water-story-heading{position:sticky;top:118px;align-self:start;padding-top:26px}
+.water-story-heading .eyebrow{color:#c0cfb2}
+.water-story-heading h2{margin:20px 0;font-size:clamp(45px,5.4vw,72px);font-weight:500;line-height:.98;letter-spacing:-.075em}
+.water-story-heading>p:not(.eyebrow){max-width:42ch;color:#c5d0c0;font-size:12px;line-height:1.9}
+.water-story-heading .arrow-link{display:inline-block;margin-top:15px;border-color:#82947a}
+.water-story-visual{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(0,1.1fr);align-items:start;gap:clamp(17px,3vw,38px);min-width:0}
+.water-story-stage{position:sticky;top:calc(50svh - 220px);align-self:start;display:grid;place-items:center;min-width:0;width:100%;height:min(55svh,440px);min-height:300px;overflow:hidden;border:1px solid #b4c89440;background:radial-gradient(ellipse at 50% 70%,#5a725333 0%,transparent 58%),linear-gradient(160deg,#20382d,#13221c);box-shadow:inset 0 0 55px #08120d40;perspective:900px;isolation:isolate}
+.water-story-stage:before,.water-story-stage:after{content:"";position:absolute;inset:12%;border:1px solid #b8d09624;border-radius:50%;transform:rotateX(68deg) rotateZ(-12deg) scale(1.15);box-shadow:0 0 0 24px #b8d0960b,0 0 0 56px #b8d09608;pointer-events:none}
+.water-story-stage:after{inset:24%;transform:rotateX(68deg) rotateZ(22deg) scale(1.35);opacity:.6}
+.water-scene{position:relative;z-index:1;display:block;width:100%;height:100%;overflow:visible;transform:rotateX(4deg)}
+.water-mesh{transform-box:fill-box;transform-origin:center;opacity:.78}
+.water-drop{transform-box:fill-box;transform-origin:center;transform:translateY(135px) scale(.76);filter:drop-shadow(0 8px 15px #c4e4a548)}
+.water-ripple{transform-box:fill-box;transform-origin:center;opacity:.75;transform:scale(.66)}
+.water-ripple-two{opacity:.48;transform:scale(.74)}
+.water-scene-label{position:absolute;z-index:2;left:15px;bottom:13px;color:#d2dfc6;font:7px var(--mono);letter-spacing:.75px}
+.water-story-steps{display:grid;align-content:start;min-width:0}
+.water-story-step{position:relative;min-height:clamp(230px,31vh,310px);display:flex;flex-direction:column;justify-content:center;padding:29px 0;border-top:1px solid #91a68155;opacity:1;transform:translateY(0)}
+.water-story-step:last-child{border-bottom:1px solid #91a68155}
+.water-story-step>span{color:#bfcead;font:8px var(--mono);letter-spacing:.95px}
+.water-story-step h3{max-width:16ch;margin:17px 0 10px;font-size:clamp(23px,2.4vw,32px);font-weight:500;line-height:1.1;letter-spacing:-.055em}
+.water-story-step p{max-width:38ch;margin:0;color:#c1ccbc;font-size:11px;line-height:1.85}
+.case-business-context{max-width:48ch;margin:14px 0 0;padding:9px 11px;border-left:2px solid #b6ca91;background:#e4eade;color:#53614e;font-size:9px;line-height:1.65}
+@supports (animation-timeline:view()){
+  .water-story{view-timeline-name:--water-story;view-timeline-axis:block}
+  .water-story-step{view-timeline-name:--water-step;view-timeline-axis:block;animation:water-step-rise linear both;animation-timeline:--water-step;animation-range:entry 4% entry 54%}
+  .water-drop{animation:water-dropfall linear both;animation-timeline:--water-story;animation-range:entry 12% entry 52%}
+  .water-ripple{animation:water-ripple-expand linear both;animation-timeline:--water-story;animation-range:entry 40% entry 72%}
+  .water-ripple-two{animation-range:entry 46% entry 78%}
+  .water-mesh{animation:water-mesh-reveal linear both;animation-timeline:--water-story;animation-range:entry 30% entry 76%}
+}
+@keyframes water-step-rise{from{opacity:.72;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes water-dropfall{from{opacity:.98;transform:translateY(-148px) scale(.86)}to{opacity:.74;transform:translateY(135px) scale(.76)}}
+@keyframes water-ripple-expand{from{opacity:.18;transform:scale(.38)}to{opacity:.78;transform:scale(1.18)}}
+@keyframes water-mesh-reveal{from{opacity:.28;transform:translateY(10px) scale(.98)}to{opacity:.88;transform:translateY(0) scale(1)}}
+@media(max-width:900px){.water-story{grid-template-columns:1fr;gap:35px}.water-story-heading{position:relative;top:auto;padding-top:0}.water-story-heading>p:not(.eyebrow){max-width:60ch}.water-story-visual{grid-template-columns:minmax(210px,.85fr) minmax(0,1.15fr)}}
+@media(max-width:560px){.water-story{padding:64px 7%;gap:25px}.water-story-heading h2{font-size:45px}.water-story-visual{grid-template-columns:1fr;gap:0}.water-story-stage{position:relative;top:auto;height:auto;min-height:0;aspect-ratio:1/0.82;margin-bottom:10px}.water-story-stage:before{inset:9%}.water-story-stage:after{inset:22%}.water-scene-label{font-size:6px}.water-story-step{min-height:0;padding:25px 0 28px}.water-story-step h3{font-size:25px}.water-story-step p{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.water-story-step,.water-drop,.water-ripple,.water-ripple-two,.water-mesh{animation:none!important;opacity:1;transform:none}.water-drop{transform:translateY(135px) scale(.76)}}
+
+/* Keep the new water and brand surfaces legible at WCAG AA sizes. */
+.hero-cycle-word{color:#b6ca91}
+.brand-architecture article>span:first-child{color:#52604f}
+.service-number{color:#526a49}
+.service-list article>div>p:not(.eyebrow){color:#596355}
+.water-contact .contact-form label,.water-contact .contact-help{color:#c5d0c0}

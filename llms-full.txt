@@ -1,78 +1,79 @@
-# Teregon Labs
+# Teregon — full site context
 
-Teregon Labs is an applied AI and software studio building useful systems for messy data, real decisions, and a living world. It works across customer operations, knowledge systems, forecasting, custom software, and nature-led intelligence.
+Teregon is the parent studio connecting people, software, and the living world. It works through two clear practices:
 
-## Live client websites
+1. **Teregon Labs** — applied AI and software delivery.
+2. **Teregon Water** — water intelligence, water product operations, and watershed systems.
 
-### ERIA Events — https://www.eria.co/
-
-Teregon designed and deployed a digital front door for ERIA’s Bay Area venues and event experiences. The site connects venue discovery, event stories and press, and a private-event or corporate inquiry path. The implementation uses Next.js 16, React 19, and Sanity CMS. The live brand site lists Forbes among its press features.
-
-### W3 Sourcing — https://www.w3sourcing.com/
-
-Teregon built and deployed a public website for a principal-led executive search firm. The site explains technology, legal, and finance practices, positions leadership and the firm’s process, and gives prospective clients a direct inquiry path. The implementation uses Next.js 16, React 19, and TypeScript. W3 describes its search practice as AI-assisted with human partner judgment; this describes the client’s service, not an AI system delivered by Teregon.
-
-## Selected systems and concepts
-
-### Brio team product experience
-
-These are prior Brio product systems built by team members, not Teregon client engagements.
-
-- **BrioBot:** evidence-bound Salesforce case triage. The agent gathers case context, retrieves policy and product evidence, drafts an action, and passes deterministic checks before an approved update is written.
-- **Briopedia:** internal support knowledge base pairing a git-backed wiki with search and local or cloud LLM chat.
-- **BrioScope:** support analytics that brings events together to surface trending issues and live service signals.
-- **Brio Sales Navigator:** read-only Salesforce pipeline analytics combining SARIMAX and XGBoost forecasts with churn, lifecycle, and SKU analysis over DuckDB and Parquet.
-
-### Nature-led exploratory concepts
-
-“From ridge to river” explores a shared watershed view combining land cover, rainfall, stream observations, and nearby assets. “Where heat settles” explores heat exposure alongside canopy, terrain, and community assets. These are illustrative Teregon concepts, not reported client work.
-
-## What Teregon builds
+## What Teregon Labs builds
 
 ### Applied AI
 
-AI workflows for knowledge search, support and operations triage, summarization, and decision support. Keep answers grounded in trusted sources, show evidence, and leave consequential decisions with people.
+Grounded knowledge search, support and operations assistants, case triage, summarization, and decision support. Workflows can retrieve approved source material, show evidence, and keep consequential decisions with people.
 
 ### Data and decision systems
 
-Connect scattered operational, customer, product, field, and environmental sources. Build forecasts, dashboards, and shared views that fit the decisions people need to make.
+Connect scattered CRM, product, support, and operational data; build forecasts, dashboards, and shared views shaped around a real decision.
 
 ### Software engineering
 
-Design and ship focused software around real workflows, including integrations, internal tools, evaluation, observability, and iteration.
+Ship production web applications, internal tools, integrations, evaluation, and observability around existing workflows.
 
-### Nature-led intelligence
+## Teregon Water
 
-Bring land, water, climate, and community signals into grounded context to help teams explore what is changing and where to focus. This is the studio’s environmental application area, alongside broader applied AI and software work.
+Teregon Water focuses software and applied AI on water filtration and appliance businesses, service operations, and watershed decisions. These are configurable offerings—not deployed Teregon Water products or claims of proven impact:
+
+- **Grounded product support:** search approved product manuals, installation guides, and service policies; draft source-linked answers and escalate when evidence is missing.
+- **Evidence-gated case triage:** classify a service case, retrieve product and policy evidence, draft a next step, then require deterministic checks and human review before consequential record changes.
+- **Service-signal analytics:** group recurring cases, questions, and service notes so teams can investigate patterns against source records.
+- **Watershed context:** combine available rainfall, stream observations, land cover, and community assets to support human-led planning. Data availability and freshness are confirmed with each project; no live sensor network is implied.
+
+Illustrative low-flow service scenario: a case arrives with a product model and customer description; the assistant retrieves relevant manual and service-policy sections; the technician reviews the draft and approves any next action. This is a proposed workflow, not a deployed water customer system.
+
+## Live client website builds
+
+### ERIA Events — https://www.eria.co/
+
+A deployed site for ERIA’s Bay Area venues and event experiences. It connects venue discovery, event stories, press context, and private-event or corporate inquiries. Built with Next.js 16, React 19, and Sanity CMS. The current public site lists Forbes among its press features. This is a website build, not an AI or water-system deployment.
+
+### W3 Sourcing — https://www.w3sourcing.com/
+
+A deployed public website for a principal-led executive search firm. It explains technology, legal, and finance practices, methodology, results, leadership, and inquiry. Built with Next.js 16, React 19, and TypeScript. W3’s AI-assisted search is its own service description, not an AI system delivered by Teregon.
+
+## Prior Brio team experience
+
+These product examples were built by team members in prior Brio work; they are not Teregon client engagements:
+
+- **BrioBot / Case Triage Agent:** e-commerce Salesforce case triage. A LangGraph flow gathers case context, retrieves product and policy evidence, reads attached images, plans and extracts a structured action. Deterministic Python evidence gates validate writable fields; dry-run and safe-stop paths control optional Salesforce updates; Langfuse provides traces for review.
+- **Briopedia:** internal support knowledge system with a Next.js interface, FastAPI async backend, git-backed wiki corpus, FAISS retrieval, and provider-agnostic local or cloud LLM chat. Retrieved source context grounds answers while the wiki preserves editable history.
+- **BrioScope:** support analytics that brings service events together to surface recurring issues and patterns.
+- **Sales Navigator:** read-only Salesforce pipeline analytics combining SARIMAX and XGBoost forecasts with churn, lifecycle, and SKU analysis over a DuckDB and Parquet warehouse.
+
+The team reports company-level ARR context of approximately $240K during BrioBot work and approximately $2M currently for Briopedia's company. These figures describe company scale only; they are not attributed to BrioBot or Briopedia and are not Teregon client results.
+
+## Nature and watershed concepts
+
+“From ridge to river” illustrates a watershed view combining land cover, rainfall, stream observations, and nearby assets. “Where water gathers” explores rainfall, slope, land cover, drainage paths, and nearby assets as a hypothetical runoff-planning view. These are illustrative concepts, not completed water client work, live data products, or sensor monitoring deployments.
 
 ## How Teregon works
 
-1. Understand the decision, workflow, source data, constraints, and owners. Make gaps and assumptions visible.
-2. Connect the right sources, retrieval, models, and software checks. Keep outputs tied to evidence and communicate uncertainty.
-3. Ship into the real workflow, review with the people using it, and compare results against an agreed baseline. Publish outcomes only after client verification.
+1. Understand the decision, workflow, source data, constraints, and owners.
+2. Connect relevant sources, retrieval, models, and software checks; keep uncertainty visible and evidence close.
+3. Ship into the real workflow, review with the people using it, and compare against an agreed baseline.
 
-## Working principles
+Measures may include handling time, time to detect, repeat issues, exposure reduced, or revenue protected. Publish an impact result only after the client verifies it. No outcomes are inferred from the Brio ARR context.
 
-- Start with the real work and the decision it needs to support.
-- Keep evidence close and communicate uncertainty.
-- Keep people in control of consequential decisions.
-- Build for connected, changing systems.
+## Teregon Guide and contact
 
-## Measuring business impact
-
-Engagements begin with an agreed baseline and decision. Measures can include time saved, time to detect, repeat issues, exposure reduced, or revenue protected. Results are published only after client verification; no unverified financial results are claimed.
-
-## Team
-
-Misha Lubich, Joseph Heupler, and Yuvaraj Tankala.
+The site guide uses a small first-party answer set grounded in page content. It is not a model-backed or open-ended AI assistant; visitor prompts are not sent to an external model service. The static contact form opens a mail draft and does not store submissions.
 
 ## Pages
 
 - Home: https://teregonlabs.com/
-- What we do: https://teregonlabs.com/work.html
+- What we build: https://teregonlabs.com/work.html
+- Teregon Water: https://teregonlabs.com/water.html
 - Approach: https://teregonlabs.com/approach.html
 - About: https://teregonlabs.com/about.html
+- Studio deck and PDF: https://teregonlabs.com/pitch-deck.html
 
-## Contact
-
-hello@teregonlabs.com
+Contact: hello@teregonlabs.com

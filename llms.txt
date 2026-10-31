@@ -1,25 +1,46 @@
-# Teregon Labs
+# Teregon
 
-> Teregon Labs is an applied AI and software studio building useful systems for messy data, real decisions, and a living world.
+> Teregon connects people, software, and the living world through two focused practices: Teregon Labs for applied AI and software, and Teregon Water for water intelligence and watershed systems.
 
-Teregon builds custom software, grounded AI workflows, connected data systems, and nature-led intelligence. The site includes two live client website launches and prior Brio team systems.
+## The three roles
 
-## Client websites built and deployed
+- **Teregon** — the parent point of view: systems that connect people, software, and the living world.
+- **Teregon Labs** — applied AI, decision systems, and production software for real workflows.
+- **Teregon Water** — configurable AI and software offerings for water filtration and appliance businesses, service teams, and watershed decisions. Offerings are not presented as deployed water products or live monitoring.
 
-- **ERIA Events** — https://www.eria.co/ — a Bay Area venues and events site with venue discovery, event stories, press, and a private-event and corporate inquiry journey. Built with Next.js 16, React 19, and Sanity CMS.
-- **W3 Sourcing** — https://www.w3sourcing.com/ — a principal-led executive search site explaining its technology, legal, and finance practices, leadership, methodology, results, and contact path. Built with Next.js 16, React 19, and TypeScript.
+## Live client website builds
 
-## Applied systems and concepts
+- **ERIA Events** — https://www.eria.co/ — a Bay Area venue and events site with discovery, event stories, and private-event and corporate inquiry. Built with Next.js 16, React 19, and Sanity CMS.
+- **W3 Sourcing** — https://www.w3sourcing.com/ — an executive-search site explaining technology, legal, and finance practices, methodology, results, leadership, and inquiry. Built with Next.js 16, React 19, and TypeScript.
 
-The site also features BrioBot (evidence-bound support case triage), Briopedia (a git-backed support knowledge base), BrioScope (support analytics), and Brio Sales Navigator (read-only sales forecasting and customer analytics). These are prior Brio product systems built by team members, not Teregon client engagements. “From ridge to river” and “Where heat settles” are illustrative Teregon concepts, not completed client projects.
+These are Teregon website builds, not water or AI product deployments.
+
+## Prior Brio team systems
+
+These describe prior Brio product experience by team members, not Teregon client engagements:
+
+- **BrioBot** — e-commerce Salesforce case triage with LangGraph, retrieval, image reading, deterministic Python write gates, dry-run/safe-stop paths, and Langfuse tracing.
+- **Briopedia** — Next.js and FastAPI support knowledge system with a git-backed wiki, FAISS retrieval, and local or cloud LLM chat.
+- **BrioScope** — support analytics for recurring issues and service signals.
+- **Sales Navigator** — read-only Salesforce forecasting and customer analytics with SARIMAX, XGBoost, DuckDB, and Parquet.
+
+Team-reported company-level ARR context: approximately $240K during BrioBot work and approximately $2M currently for Briopedia's company. These figures are not attributed to either system and are not Teregon client results.
+
+## Water offerings
+
+Teregon Water can build or configure grounded support assistants for approved manuals and policies, evidence-gated service triage, and support-signal analytics for water product businesses. Watershed concepts can bring together available rainfall, stream observations, land cover, and community context for planning. These are proposed offerings and illustrative concepts, not deployed water products or live sensor services.
 
 ## Pages
 
-- [Home](https://teregonlabs.com/): Studio overview, live client websites, applied AI systems, and nature-led concepts.
-- [What we do](https://teregonlabs.com/work.html): Applied AI, data and decision systems, software engineering, and nature-led intelligence.
+- [Home](https://teregonlabs.com/): Teregon, Teregon Labs, Teregon Water, live client websites, and prior team systems.
+- [What we build](https://teregonlabs.com/work.html): Applied AI, connected data systems, software engineering, and Teregon Water.
+- [Teregon Water](https://teregonlabs.com/water.html): Water filtration and appliance workflows, service systems, and watershed context.
 - [Approach](https://teregonlabs.com/approach.html): How Teregon scopes, builds, and measures useful systems.
-- [About](https://teregonlabs.com/about.html): Studio point of view, working principles, and team.
+- [About](https://teregonlabs.com/about.html): Parent point of view, practices, principles, and team.
+- [Studio deck](https://teregonlabs.com/pitch-deck.html): On-page presentation and downloadable PDF.
 
-## Contact
+## Guide and contact
+
+The Teregon Guide answers a small set of questions from current site content. It is not generative AI; visitor prompts stay in the browser and are not sent to a model service. Contact forms open an email draft and do not store submissions.
 
 - Email: hello@teregonlabs.com
