@@ -90,7 +90,7 @@ class TeregonSiteContract(unittest.TestCase):
 
     def test_about_links_each_team_member_to_their_own_site(self):
         about = (ROOT / "about.html").read_text()
-        for url in ("https://mishalubich.com/", "https://www.josephheupler.com/", "https://yuvarajt.com/"):
+        for url in ("https://www.mishalubich.com/", "https://www.josephheupler.com/", "https://yuvarajt.com/"):
             self.assertIn(url, about)
         self.assertIn("Yuvaraj Tankala", about)
 
