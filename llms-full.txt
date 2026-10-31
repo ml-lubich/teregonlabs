@@ -2,6 +2,29 @@
 
 Teregon Labs is an environmental intelligence studio. It makes environmental change easier to see, understand, and act on by connecting landscape, water, and climate signals in place and over time.
 
+## Brio product systems
+
+- **BrioBot:** evidence-bound Salesforce case triage. The agent gathers case context, retrieves evidence, drafts actions, and passes deterministic checks before approved writes.
+- **Briopedia:** internal support knowledge base with a git-backed wiki, search, and local or cloud LLM chat.
+- **BrioScope:** customer support analytics with trending issue analysis, real-time ticket metrics, and a web dashboard.
+- **Brio Sales Navigator:** read-only Salesforce analytics combining SARIMAX and XGBoost forecasts with churn, lifecycle, and SKU analysis over DuckDB and Parquet.
+
+These are Brio product systems, not Teregon client engagements. No unverified revenue or performance outcomes are claimed.
+
+## Selected systems and case studies
+
+### BrioScope
+
+BrioScope is a customer service analytics platform that brings support events together to surface trending issues and live service signals. It helps teams move from individual conversations to a clearer view of customer experience.
+
+### Illustrative concepts
+
+“From ridge to river” explores a shared watershed view combining land cover, rainfall, stream observations, and nearby assets. “Where heat settles” explores heat exposure alongside canopy, terrain, and community assets. These are illustrative Teregon concept studies, not reported client work.
+
+## Team
+
+Misha Lubich, Joseph Heupler, and Yuvaraj Tankala.
+
 ## What Teregon does
 
 ### Landscape intelligence
@@ -15,6 +38,10 @@ Teregon helps people understand watersheds as connected systems, tracing how ups
 ### Climate resilience
 
 Teregon surfaces meaningful patterns and early indicators across a changing climate. It keeps uncertainty visible and gives emerging signals the context needed to understand what deserves attention.
+
+## Measuring business impact
+
+Engagements begin with an agreed baseline and decision. Teregon can track measures such as time saved, time to detect, repeat issues, exposure reduced, or revenue protected. Results are published only after client verification; no unverified financial results are claimed.
 
 ## How Teregon works
 

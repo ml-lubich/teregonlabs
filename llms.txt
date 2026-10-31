@@ -4,12 +4,25 @@
 
 Teregon Labs connects landscape, watershed, and climate signals to help people build a clearer picture of a changing world and decide what to do next. Its work emphasizes place-based context, honest communication of uncertainty, and practical decisions for a living world.
 
+## Applied systems
+
+The site also features BrioBot (evidence-bound support case triage), Briopedia (a git-backed support knowledge base), BrioScope (support analytics), and Brio Sales Navigator (read-only sales forecasting and customer analytics). These are Brio product systems, not Teregon client engagements.
+
+## Selected work
+
+- BrioScope: customer support analytics that surfaces trending issues and live service signals.
+- “From ridge to river” and “Where heat settles” are illustrative Teregon concept studies, not client engagements.
+
+## Team
+
+Misha Lubich, Joseph Heupler, and Yuvaraj Tankala.
+
 ## Pages
 
-- [Home](https://teregonlabs.com/): Overview of Teregon Labs and its environmental intelligence work.
+- [Home](https://teregonlabs.com/): Overview of Teregon Labs, selected systems, and case studies.
 - [What we do](https://teregonlabs.com/work.html): Landscape intelligence, watershed systems, and climate resilience.
 - [Approach](https://teregonlabs.com/approach.html): How Teregon connects environmental observations to clear next steps.
-- [About](https://teregonlabs.com/about.html): Mission, perspective, and working principles.
+- [About](https://teregonlabs.com/about.html): Mission, perspective, working principles, and team.
 
 ## Contact
 
