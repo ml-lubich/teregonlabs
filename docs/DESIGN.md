@@ -13,6 +13,7 @@ Use confident editorial hierarchy, strong project proof, composed photography or
 - The homepage identifies applied AI and software work in direct language, gives concrete examples, and distinguishes live client builds from prior team experience and illustrative concepts.
 - The six service offerings explain their use cases and typical deliverables. Each card has its own accessible, simple SVG mark and restrained hover/reveal motion.
 - `/work.html` capability panels use actual local visual assets with descriptive alt text and an explicit illustrative label when artwork is conceptual. Never leave pale blank art panels.
+- Scenario and service-flow sections use a deliberate desktop content grid, readable step copy, and a stacked mobile layout; their active Next stylesheet must own the styles.
 - The homepage hero headline wraps inside the viewport at desktop and mobile sizes. Its rotating final word has a calm cadence and a stable reduced-motion fallback. Pointer parallax runs only on desktop fine pointers with motion enabled.
 - Navigation remains compact, keyboard accessible, and touch friendly. Content order and legibility take priority over decorative composition on small screens.
 - Small labels and footer text on pale backgrounds must retain readable text contrast.

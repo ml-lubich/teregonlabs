@@ -67,3 +67,22 @@ The visual reference is Flock Safety’s clarity and confidence. Teregon must re
 - Root HTML and Next route files may diverge; deploy edits to the active Next route implementation only.
 - HTML-to-PDF export can introduce print-specific scaling and page-break defects; treat both output formats as first-class deliverables.
 - Guide 429s are unresolved provider/deployment evidence, not a reason to alter API limits or claim verified working chat.
+
+## Follow-up: restore water scenario layout
+
+### Bug and cause
+
+The `/water.html` illustrative service-flow section renders as plain stacked text. `WaterPage` uses `.outcomes`, `.outcomes-heading`, `.outcome-list`, and `.outcome-measures`; their layout rules exist only in legacy root `styles.css`. The active Next app imports `app/globals.css` and `app/theme-subpages.css`, and neither currently supplies those selectors. The green text blocks in the user screenshot are native text selection, not a page highlight state; the Products menu is simply open/hovered.
+
+### Work split
+
+- CSS implementation: `app/theme-subpages.css` — add responsive editorial two-column layout for `.outcomes.water-example`, stacked mobile layout, readable scenario copy, spacing, separators, and sticky heading only on desktop. Reuse the existing palette, type, and spacing conventions; do not import legacy global styles.
+- Regression test: `tests/hero-motion.test.js` — assert the active theme stylesheet owns the outcomes layout and mobile breakpoint, so the section cannot silently lose styling again.
+- Spec owner: this file; design intent remains in `docs/DESIGN.md`.
+
+### Acceptance criteria
+
+- At desktop widths the heading and three scenario steps render in a balanced two-column section, with the measures note clearly separated.
+- At widths ≤860px the section becomes one column, the heading is not sticky, and all copy remains legible without horizontal overflow.
+- The live stylesheet is the active Next stylesheet; no dependency or legacy stylesheet import is added.
+- The regression test fails against the current missing selectors and passes after the fix; `bun run ci` passes before deployment.

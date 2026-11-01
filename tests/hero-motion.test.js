@@ -2,11 +2,21 @@ const { describe, expect, test } = require('bun:test');
 const { readFileSync } = require('node:fs');
 
 const home = readFileSync(require.resolve('../components/pages/home-page.tsx'), 'utf8');
+const water = readFileSync(require.resolve('../components/pages/water-page.tsx'), 'utf8');
 const styles = readFileSync(require.resolve('../app/globals.css'), 'utf8');
 const theme = readFileSync(require.resolve('../app/theme-subpages.css'), 'utf8');
 const guide = readFileSync(require.resolve('../components/site-guide.tsx'), 'utf8');
 
 describe('active Next.js homepage motion and controls', () => {
+  test('water service-flow scenario owns responsive layout in the active stylesheet', () => {
+    expect(water).toContain('className="outcomes section-pad water-example"');
+    expect(theme).toMatch(/\.outcomes\.water-example\s*\{[^}]*display:\s*grid/);
+    expect(theme).toMatch(/\.water-example \.outcomes-heading\s*\{[^}]*position:\s*sticky/);
+    expect(theme).toMatch(/\.water-example \.outcome-list article\s*\{[^}]*border-bottom:/);
+    expect(theme).toMatch(/\.water-example \.outcome-list article p\s*\{[^}]*font-size:\s*(1[4-9]|[2-9]\d)px/);
+    expect(theme).toMatch(/@media\s*\(max-width:\s*860px\)[\s\S]*?\.outcomes\.water-example\s*\{[^}]*grid-template-columns:\s*1fr/);
+  });
+
   test('hero pointer parallax is gated to wide fine-pointer, hover-capable, motion-enabled devices', () => {
     expect(home).toContain('window.matchMedia("(min-width: 801px) and (hover: hover) and (pointer: fine)")');
     expect(home).toMatch(/const reducedMotion = window\.matchMedia\("\(prefers-reduced-motion: reduce\)"\)\.matches;[\s\S]*?if \(reducedMotion \|\| !desktopPointer\.matches\) return/);
