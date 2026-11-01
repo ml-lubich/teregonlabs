@@ -248,7 +248,7 @@ export function HomePage() {
             </svg>
           </div>
           <div className="visual-shade" />
-          <div className="visual-note">WATER SYSTEMS / CONCEPT</div>
+          
         </div>
 
         <div className="hero-copy">
@@ -409,15 +409,33 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="contact" className="scroll-mt-24 bg-[var(--paper-muted)] px-5 py-16 sm:px-8 md:py-24 lg:px-[8vw]">
-        <Reveal className="mx-auto max-w-[1320px]">
-          <p className="font-mono text-[10px] uppercase tracking-[.16em] text-[var(--muted)]">START WITH A REAL WORKFLOW</p>
-          <div className="mt-5 flex flex-col justify-between gap-7 md:flex-row md:items-end">
-            <div><h2 className="max-w-[13ch] text-5xl font-medium leading-[.96] tracking-[-.08em] sm:text-6xl md:text-7xl">What should work better?</h2><p className="mt-5 max-w-[55ch] text-sm leading-7 text-[var(--muted)]">Tell us what your team is trying to automate, connect, or improve. We’ll start with the workflow and its constraints.</p></div>
-            <a className="inline-flex min-h-14 items-center justify-between gap-8 rounded-md bg-[#1b3026] px-5 text-sm text-[#f1f4eb] transition hover:-translate-y-0.5 hover:bg-[#26483a]" href="mailto:hello@teregonlabs.com?subject=Talk%20with%20Teregon">hello@teregonlabs.com <span aria-hidden="true">↗</span></a>
+      <section id="contact" className="closing section-pad">
+        <p className="eyebrow">TEREGON / START WITH THE DECISION</p>
+        <div className="closing-row">
+          <h2>Bring us<br />the messy part.</h2>
+          <a className="button button-dark" href="mailto:hello@teregonlabs.com?subject=I%20have%20a%20problem%20for%20Teregon">
+            Tell us what is stuck <span>↗</span>
+          </a>
+        </div>
+        <div className="contact-panel">
+          <div>
+            <h3>What are you trying to move forward?</h3>
+            <p>Share the business workflow, AI opportunity, or software problem you want to move forward. Water-product and watershed work has its own focused practice.</p>
           </div>
-          <div className="mt-12 flex flex-wrap justify-between gap-4 border-t border-[var(--line)] pt-4 font-mono text-[9px] uppercase tracking-[.13em] text-[var(--muted)]"><span>APPLIED AI · CUSTOM SOFTWARE</span><span>TEREGON LABS / 2026</span></div>
-        </Reveal>
+          <form id="teregon-contact" className="contact-form" action="mailto:hello@teregonlabs.com" method="GET">
+            <div className="contact-fields">
+              <label htmlFor="contact-name">Name<input id="contact-name" name="name" autoComplete="name" required /></label>
+              <label htmlFor="contact-email">Email<input id="contact-email" name="email" type="email" autoComplete="email" required /></label>
+              <label htmlFor="contact-project">Project summary<textarea id="contact-project" name="body" rows={4} required /></label>
+            </div>
+            <p className="contact-help" id="contact-help">This opens an email draft in your mail app. The site does not store your message.</p>
+            <button className="button button-light" type="submit">Open email draft <span>↗</span></button>
+          </form>
+        </div>
+        <div className="closing-foot">
+          <span>AI + SOFTWARE · BUILT AROUND REAL WORK</span>
+          <span>WATER · WATERSHEDS · FLOW</span>
+        </div>
       </section>
     </div>
   );

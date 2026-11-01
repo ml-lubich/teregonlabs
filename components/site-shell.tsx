@@ -28,7 +28,7 @@ export function SiteHeader({ active }: { active?: string }) {
       <div className="site-header-inner">
         <Link className="site-brand" href="/" aria-label="Teregon Labs home">
           <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
-          <span><strong>Teregon</strong><small>LABS</small></span>
+          <span>teregon<small>LABS</small></span>
         </Link>
 
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -67,16 +67,17 @@ export function SiteFooter() {
       <div className="site-footer-inner">
         <Link className="site-brand footer-brand" href="/" aria-label="Teregon Labs home">
           <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
-          <span><strong>Teregon</strong><small>LABS</small></span>
+          <span>teregon<small>LABS</small></span>
         </Link>
         <nav aria-label="Footer navigation">
           <Link href="/work.html">Work</Link>
           <Link href="/approach.html">Approach</Link>
-          <Link href="/about.html">About</Link>
-          <Link href="/water.html">Aqua</Link>
+          <Link href="/about.html">About Teregon</Link>
+          <Link href="/water.html">Water</Link>
         </nav>
-        <a className="footer-email" href="mailto:hello@teregonlabs.com">hello@teregonlabs.com ↗</a>
-        <small className="copyright">© 2026 TEREGON LABS</small>
+        <span className="footer-copyright">© 2026 TEREGON LABS</span>
+        <a className="footer-email" href="mailto:hello@teregonlabs.com">EMAIL HELLO@TEREGONLABS.COM ↗</a>
+        <a className="site-credit" href="https://www.mishalubich.com/" target="_blank" rel="noreferrer">DESIGN &amp; ENGINEERING BY MISHA LUBICH ↗</a>
       </div>
     </footer>
   );
