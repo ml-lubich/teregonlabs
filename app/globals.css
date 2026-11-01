@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./theme-subpages.css";
 
 :root {
   color-scheme: light;
@@ -59,11 +60,11 @@ img, svg { max-width: 100%; }
 .products-dropdown>summary::-webkit-details-marker,.mobile-nav>summary::-webkit-details-marker { display: none; }
 .products-dropdown>summary span { color: #9cac8c; font-size: 13px; transition: transform .2s ease; }
 .products-dropdown[open]>summary span { transform: rotate(180deg); }
-.products-menu { position: absolute; top: calc(100% + 1px); left: -24px; display: grid; grid-template-columns: 1fr 1fr; width: min(480px, 90vw); padding: 12px; border: 1px solid #ffffff1b; border-radius: 12px; background: #182b22; box-shadow: 0 22px 64px #07120d66; }
-.product-menu-link { display: grid; gap: 4px; padding: 13px 12px; border-radius: 7px; color: #eef2e8; text-decoration: none; transition: background .2s ease, color .2s ease; }
-.product-menu-link:hover,.product-menu-link:focus-visible { background: #ffffff0b; color: #c7daa3; }
-.product-menu-link span { font-size: 14px; font-weight: 550; }
-.product-menu-link small { color: #afbaad; font-size: 11px; line-height: 1.4; }
+.products-menu { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); display: grid; grid-template-columns: 1fr 1fr; width: min(520px, 92vw); padding: 14px; border: 1px solid #ffffff24; border-radius: 14px; background: #13241d; box-shadow: 0 24px 64px #07130df0, 0 0 0 1px #ffffff0a; backdrop-filter: blur(20px); }
+.product-menu-link { display: grid; gap: 4px; padding: 12px 14px; border-radius: 8px; border: 1px solid transparent; color: #eef2e8; text-decoration: none; transition: background .18s ease, border-color .18s ease, color .18s ease; }
+.product-menu-link:hover,.product-menu-link:focus-visible { background: #1f372c; border-color: #9eb48333; color: #cde3ab; }
+.product-menu-link span { font-size: 14px; font-weight: 550; color: #f2f5ed; }
+.product-menu-link small { color: #9bb097; font-size: 11px; line-height: 1.4; }
 .header-cta { display: inline-flex; flex: none; align-items: center; gap: 17px; min-height: 42px; padding: 0 0 0 18px; border-left: 1px solid #d7e1cc42; color: #eef2e8; font-size: 13px; text-decoration: none; transition: color .2s ease; }
 .header-cta:hover { color: #c7daa3; }
 .header-cta span,.mobile-menu-panel a span { color: #a9c18b; }

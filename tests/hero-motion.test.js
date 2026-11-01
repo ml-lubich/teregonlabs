@@ -24,9 +24,13 @@ describe('active Next.js homepage motion and controls', () => {
     expect(home).toContain('mesh.style.translate = "0 0"');
   });
 
-  test('hero headline is plain static copy instead of the retired cycling headline', () => {
-    expect(home).toMatch(/Software<br\s*\/>that <em[^>]*>flows\.<\/em>/);
-    expect(home).not.toContain('hero-word-cycle');
+  test('hero headline has rotating shifting verb cycle with accessible label', () => {
+    expect(home).toContain('aria-label="Software that flows."');
+    expect(home).toContain('hero-word-cycle');
+    expect(home).toContain('<span>flows.</span>');
+    expect(home).toContain('<span>connects.</span>');
+    expect(home).toContain('<span>adapts.</span>');
+    expect(home).toContain('<span>works.</span>');
   });
 
   test('Guide and contact controls retain legible, touch-sized targets', () => {

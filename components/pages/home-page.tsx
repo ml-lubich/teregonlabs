@@ -146,9 +146,9 @@ function WaterDropMotion() {
   return (
     <div ref={stageRef} className="relative min-h-[300px] overflow-hidden rounded-[1.4rem] border border-white/15 shadow-[0_25px_70px_#07120e55] sm:min-h-[400px]">
       <Image src="/assets/water-droplet-pond.webp" alt="A water droplet falling into a forest pond and forming ripples" fill sizes="(max-width: 767px) 100vw, 52vw" className="object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0d1d1acc] via-transparent to-[#10221d22]" />
-      <span ref={dropRef} aria-hidden="true" className="absolute left-[52%] top-[18%] z-10 h-6 w-6 rounded-bl-[70%] rounded-br-[50%] rounded-tl-[50%] rounded-tr-[8%] border border-[#e5f0d7] bg-[#d6edb8]/90 shadow-[0_0_26px_#d8f4c799]" />
-      {Array.from({ length: 3 }, (_, index) => <span key={index} ref={(element) => { if (element) ringsRef.current[index] = element; }} aria-hidden="true" className="absolute left-[52%] top-[61%] z-10 h-14 w-28 rounded-[50%] border border-[#dcf1cf]/70 shadow-[0_0_18px_#c2e8b155]" />)}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#091b17e6] via-transparent to-[#0a181633]" />
+      <span ref={dropRef} aria-hidden="true" className="absolute left-1/2 top-[18%] z-10 h-6 w-6 rounded-bl-[70%] rounded-br-[50%] rounded-tl-[50%] rounded-tr-[8%] border border-[#c4e9f2] bg-[#7ac4d6]/90 shadow-[0_0_28px_#60b8cbcc]" />
+      {Array.from({ length: 3 }, (_, index) => <span key={index} ref={(element) => { if (element) ringsRef.current[index] = element; }} aria-hidden="true" className="absolute left-1/2 top-[61%] z-10 h-14 w-28 rounded-[50%] border border-[#a6dfec]/75 shadow-[0_0_20px_#55b0c766]" />)}
       <span className="absolute bottom-5 left-5 z-20 font-mono text-[10px] uppercase tracking-[.15em] text-white/90 sm:bottom-7 sm:left-7">WATER / SERVICE SYSTEMS</span>
       <span className="sr-only">The droplet falls, lands on the pond, and sends expanding ripples across the surface.</span>
     </div>
@@ -253,8 +253,14 @@ export function HomePage() {
 
         <div className="hero-copy">
           <p className="eyebrow mb-7">APPLIED AI / SOFTWARE STUDIO</p>
-          <h1 className="max-w-[12ch] text-[clamp(3.5rem,7.8vw,7.4rem)] font-medium leading-[.91] tracking-[-.085em]">
-            Software<br />that <em className="font-serif font-normal text-[#c5d89e]">flows.</em>
+          <h1 className="max-w-[12ch] text-[clamp(3.5rem,7.8vw,7.4rem)] font-medium leading-[.91] tracking-[-.085em]" aria-label="Software that flows.">
+            <span className="hero-prefix block whitespace-nowrap">Software that</span>
+            <span className="hero-word-cycle" aria-hidden="true">
+              <span>flows.</span>
+              <span>connects.</span>
+              <span>adapts.</span>
+              <span>works.</span>
+            </span>
           </h1>
           <p className="lede mt-7 max-w-[45ch] text-base leading-7 text-[#d2ddd4] sm:text-lg sm:leading-8">
             Teregon Labs builds custom AI and software for business workflows: support assistants, workflow automation, data tools, integrations, and production software. Teregon Aqua is our focused practice for water-product service.
