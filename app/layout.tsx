@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Mono, Manrope } from "next/font/google";
+import { DM_Mono, Space_Grotesk, Inter } from "next/font/google";
 import { GuideWidget, SiteFooter, SiteHeader } from "@/components/site-shell";
 import "./globals.css";
 import "../briopedia.css";
 
-const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], display: "swap" });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
+const spaceGrotesk = Space_Grotesk({ variable: "--font-space-grotesk", subsets: ["latin"], display: "swap" });
 const dmMono = DM_Mono({ variable: "--font-dm-mono", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
 const siteUrl = new URL("https://teregonlabs.com");
 
@@ -46,7 +47,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${dmMono.variable}`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${dmMono.variable}`}>
         <SiteHeader />
         <main id="main-content" tabIndex={-1}>{children}</main>
         <SiteFooter />
