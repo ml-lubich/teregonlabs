@@ -31,4 +31,4 @@ Run the production build with `bun run build`. Run the full local CI suite with 
 
 ## Deploy
 
-The repository is connected to the `teregonlabs-site` Vercel project on `main`. Vercel uses the Next.js build (`bun run build`) and serves static media from `public/`. After configuring the two server environment variables above, deploy to the production Vercel project and check both the home page and `/api/guide` from a browser. Without those variables, the site remains available and the Guide responds with a generic unavailable state.
+The repository is connected to the `teregonlabs-site` Vercel project on `main`. `vercel.json` pins the deployment framework to Next.js so Vercel serves the generated application routes; static media is served from `public/`. After configuring the two server environment variables above, deploy to the production Vercel project and check both the home page and `/api/guide` from a browser. Without those variables, the site remains available and the Guide responds with a generic unavailable state.

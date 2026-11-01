@@ -46,6 +46,10 @@ def image_dimensions(data):
 
 
 class TeregonSiteContract(unittest.TestCase):
+    def test_vercel_uses_nextjs_framework_instead_of_public_static_output(self):
+        config = source("vercel.json")
+        self.assertIn('"framework": "nextjs"', config)
+
     def test_next_routes_export_canonical_open_graph_and_twitter_metadata(self):
         layout = source("app/layout.tsx")
         self.assertIn('new URL("https://teregonlabs.com")', layout)
