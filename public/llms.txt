@@ -10,7 +10,7 @@
 
 ## Live client website builds
 
-- **ERIA Events** — https://www.eria.co/ — a Bay Area venue and events site with discovery, event stories, and private-event and corporate inquiry. Built with Next.js 16, React 19, and Sanity CMS.
+- **ERIA Events** — https://www.eria.co/ — a Bay Area venue and events site with discovery, event stories, and private-event and corporate inquiry. Built with Next.js 16, React 19, and Sanity CMS. [Case study](https://teregonlabs.com/eria.html).
 - **W3 Sourcing** — https://www.w3sourcing.com/ — an executive-search site explaining technology, legal, and finance practices, methodology, results, leadership, and inquiry. Built with Next.js 16, React 19, and TypeScript.
 
 These are Teregon website builds, not water or AI product deployments.
@@ -20,7 +20,8 @@ These are Teregon website builds, not water or AI product deployments.
 These describe prior Brio product experience by team members, not Teregon client engagements:
 
 - **BrioBot** — e-commerce Salesforce case triage with LangGraph, retrieval, image reading, deterministic Python write gates, dry-run/safe-stop paths, and Langfuse tracing.
-- **Briopedia** — Next.js and FastAPI support knowledge system with a git-backed wiki, FAISS retrieval, and local or cloud LLM chat. See the [Briopedia case study](https://teregonlabs.com/briopedia.html).
+- **BrioBot presentation** — [on-page case-study deck](https://teregonlabs.com/brio-bot-deck.html) and [downloadable PDF](https://teregonlabs.com/assets/case-studies/teregon-brio-bot-case-study.pdf).
+- **Briopedia** — Next.js and FastAPI support knowledge system with a git-backed wiki, FAISS retrieval, and local or cloud LLM chat. See the [Briopedia case study](https://teregonlabs.com/briopedia.html), [on-page presentation](https://teregonlabs.com/briopedia-deck.html), or [downloadable PDF](https://teregonlabs.com/assets/case-studies/teregon-briopedia-case-study.pdf).
 - **BrioScope** — support analytics for recurring issues and service signals.
 - **Sales Navigator** — read-only Salesforce forecasting and customer analytics with SARIMAX, XGBoost, DuckDB, and Parquet.
 
@@ -33,12 +34,15 @@ Teregon Aqua can build or configure grounded support assistants for approved man
 ## Pages
 
 - [Home](https://teregonlabs.com/): Teregon, Teregon Labs, Teregon Aqua, live client websites, and prior team systems.
+- [ERIA Events case study](https://teregonlabs.com/eria.html): live client website build.
 - [What we build](https://teregonlabs.com/work.html): Applied AI, connected data systems, software engineering, and Teregon Aqua.
 - [Teregon Aqua](https://teregonlabs.com/water.html): Water filtration and appliance workflows, service systems, and watershed context.
 - [Approach](https://teregonlabs.com/approach.html): How Teregon scopes, builds, and measures useful systems.
 - [About](https://teregonlabs.com/about.html): Parent point of view, practices, principles, and team.
 - [Briopedia case study](https://teregonlabs.com/briopedia.html): Prior Brio team knowledge-system work.
 - [BrioBot case study](https://teregonlabs.com/briobot.html): Prior Brio team Salesforce support triage work.
+- [BrioBot presentation](https://teregonlabs.com/brio-bot-deck.html): on-page case-study deck with a downloadable PDF.
+- [Briopedia presentation](https://teregonlabs.com/briopedia-deck.html): on-page case-study deck with a downloadable PDF.
 - [Studio deck](https://teregonlabs.com/pitch-deck.html): On-page presentation and downloadable PDF.
 
 ## Guide and contact

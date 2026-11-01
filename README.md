@@ -4,10 +4,14 @@ A responsive site for Teregon Labs, a broad applied AI and custom software consu
 
 ## Pages and discovery
 
+The canonical positioning, visual, responsive, and motion requirements are in [`docs/DESIGN.md`](docs/DESIGN.md).
+
 - `/` — studio overview, selected systems, and case studies
 - `/pitch-deck.html` — on-page studio presentation with downloadable PDF
+- `/eria.html` — live ERIA Events website build case study
 - `/briopedia.html` — prior Brio team knowledge-system case study
 - `/briobot.html` — prior Brio team support automation case study
+- `/briopedia-deck.html` and `/brio-bot-deck.html` — visual case-study presentations with downloadable PDFs
 - `/water.html` — Teregon Aqua services for filtration/appliance support, service operations, and watershed systems
 - `/work.html` — applied AI, data and decision systems, software engineering, and water systems
 - `/approach.html` — the observation-to-action process
@@ -17,7 +21,7 @@ A responsive site for Teregon Labs, a broad applied AI and custom software consu
 - `/robots.txt` — crawler access and sitemap location
 - `/llms.txt` and `/llms-full.txt` — concise and detailed site context for language models
 
-Teregon Labs is a broad applied AI and custom software consultancy. Teregon Aqua is its focused water practice for filtration and appliance support, service operations, and watershed systems. Five configurable services organize its product and workflow work: Teregon Oasis for water and product support automation; Teregon Aquifer for grounded search across manuals, policies, and case history; Teregon Zephyr for workflow agents; Teregon Equinox for forecasting and planning; and Teregon Terra for land and watershed systems. These are services configured around each team, not standalone off-the-shelf products. Selected work includes live website builds for ERIA Events and W3 Sourcing, plus prior Brio team work on BrioBot and Briopedia. Those Brio products are not Teregon client engagements, and company-level revenue context shown on their case studies is not attributed to either product. The water photography and watershed studies are illustrative, not live monitoring or deployed Teregon products. The About page introduces the team and links to each member’s public website. The studio deck is available on-page and as a downloadable PDF. Contact links open a mail draft without storing submissions. The Guide sends prompts to OpenRouter and does not store chat history. Desktop pointer motion is disabled on touch-first devices and reduced for visitors who request it.
+Teregon Labs is a broad applied AI and custom software consultancy. Teregon Aqua is its focused water practice for filtration and appliance support, service operations, and watershed systems. Five configurable services organize its product and workflow work: Teregon Oasis for water and product support automation; Teregon Aquifer for grounded search across manuals, policies, and case history; Teregon Zephyr for workflow agents; Teregon Equinox for forecasting and planning; and Teregon Terra for land and watershed systems. These are services configured around each team, not standalone off-the-shelf products. Selected work includes live website builds for ERIA Events and W3 Sourcing, plus prior Brio team work on BrioBot and Briopedia. ERIA has a dedicated case study at `/eria.html`; BrioBot and Briopedia have on-page presentations and downloadable PDFs at `/brio-bot-deck.html` and `/briopedia-deck.html` (PDFs: `/assets/case-studies/teregon-brio-bot-case-study.pdf` and `/assets/case-studies/teregon-briopedia-case-study.pdf`). Those Brio products are not Teregon client engagements, and company-level revenue context shown on their case studies is not attributed to either product. The water photography and watershed studies are illustrative, not live monitoring or deployed Teregon products. The About page introduces the team and links to each member’s public website. The studio deck is available on-page and as a downloadable PDF. Contact links open a mail draft without storing submissions. The Guide sends prompts to OpenRouter and does not store chat history. Desktop pointer motion is disabled on touch-first devices and reduced for visitors who request it.
 
 ## Teregon Guide
 
@@ -27,7 +31,7 @@ The endpoint is `/api/guide`, handled by the Next.js Pages API route at `pages/a
 
 ## Verify
 
-Run the production build with `bun run build`. Run the full local CI suite with `bun run ci`; this runs Guide API/client/widget tests, site contract checks, the scroll-stack viewport check, TypeScript validation, and the Next.js production build. Tests use provider stubs and need no secrets.
+Run the production build with `bun run build`. Run the full local CI suite with `bun run ci`; this runs Guide API/client/widget tests, site contract checks, the scroll-stack viewport check, TypeScript validation, and the Next.js production build. Run `bun test --coverage tests/service-offerings.test.js` to verify the service-rendering module meets its 90% line-coverage target. Tests use provider stubs and need no secrets.
 
 ## Deploy
 

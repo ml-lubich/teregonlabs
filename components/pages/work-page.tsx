@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const capabilities = [
   {
@@ -8,6 +9,9 @@ const capabilities = [
     title: "Build assistants and agents for business workflows.",
     copy: "We design and build grounded knowledge search, bounded agents, case triage, and summarization. Each system is fitted to its sources, decision owners, and review requirements.",
     points: ["Grounded knowledge search", "Support and operations automation", "Human review and evidence gates"],
+    image: "/assets/mesh/ai-workflow.webp",
+    alt: "Illustrative three-dimensional mesh showing source records feeding a reviewed AI workflow",
+    visualLabel: "ILLUSTRATIVE / GROUNDED AI WORKFLOW",
   },
   {
     id: "data",
@@ -16,6 +20,9 @@ const capabilities = [
     title: "Connect business data.",
     copy: "Connect CRM, product, support, and operational data into dependable views, forecasts, and decision tools shaped around a business question.",
     points: ["Data integration and modeling", "Forecasts from customer and product data", "Decision dashboards and tools"],
+    image: "/assets/mesh/brioscope.webp",
+    alt: "Illustrative three-dimensional mesh grouping customer events into recurring service patterns",
+    visualLabel: "ILLUSTRATIVE / SERVICE DATA",
   },
   {
     id: "build",
@@ -24,6 +31,9 @@ const capabilities = [
     title: "Build and ship custom software.",
     copy: "Build applications, internal tools, and integrations around existing workflows, with reliable data paths and AI features bounded by clear checks.",
     points: ["Product prototyping and delivery", "Integrations and internal tools", "Evaluation, observability, and iteration"],
+    image: "/assets/project-w3sourcing.jpg",
+    alt: "Screenshot of the live W3 Sourcing website built for a client",
+    visualLabel: "LIVE CLIENT BUILD / W3 SOURCING",
   },
   {
     id: "nature",
@@ -32,6 +42,9 @@ const capabilities = [
     title: "Apply software to water operations.",
     copy: "Teregon Aqua is our focused water practice. We configure tools for filtration and appliance businesses, service teams, and watershed planning using the records and observations available.",
     points: ["Product support and knowledge search", "Evidence-gated service triage", "Watershed context and planning views"],
+    image: "/assets/water-droplet-pond.webp",
+    alt: "Illustrative water droplet striking a forest pool and sending out ripples",
+    visualLabel: "ILLUSTRATIVE / WATER SYSTEMS",
   },
 ];
 
@@ -61,10 +74,10 @@ export function WorkPage() {
               <ul>{item.points.map((point) => <li key={point}>{point}</li>)}</ul>
               {item.id === "nature" && <Link className="arrow-link" href="/water.html">Explore Teregon Aqua <span>↗</span></Link>}
             </div>
-            {item.id === "ai" && <div className="service-art art-land" aria-hidden="true"><span className="mini-contour" /><span className="mini-contour" /><span className="mini-contour" /></div>}
-            {item.id === "data" && <div className="service-art art-water" aria-hidden="true"><span /><span /><span /><span /></div>}
-            {item.id === "build" && <div className="service-art art-change" aria-hidden="true"><span /><span /><span /></div>}
-            {item.id === "nature" && <div className="service-art art-land" aria-hidden="true"><span className="mini-contour" /><span className="mini-contour" /><span className="mini-contour" /></div>}
+            <div className="service-art">
+              <Image src={item.image} alt={item.alt} fill sizes="(max-width: 860px) 100vw, 34vw" className="service-art-image" />
+              <span className="service-art-label">{item.visualLabel}</span>
+            </div>
           </article>
         ))}
       </section>

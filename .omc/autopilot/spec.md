@@ -1,101 +1,69 @@
-# Teregon Labs AI story and pitch deck spec
-
-Baseline: deployed commit `ab2d59f`. Current static site is HTML/CSS with small optional WebGL terrain layer and no runtime/build dependencies. Keep the forest/terrain palette, SEO, current live ERIA and W3 screenshots, and existing mobile/reduced-motion behavior.
+# Teregon Labs: human-curated work and case-study decks
 
 ## Goal
 
-Make Teregon feel like a polished AI/software studio: change the hero phrase through real use cases, describe BrioBot and Briopedia as substantive prior team work, add more purposeful 3D mesh/motion, and give visitors a Teregon-branded presentation they can preview on-site and download as a PDF.
+Refine the live Teregon site into a more human-curated, polished AI/software studio presence: specific proof and workflow detail first, with restrained green/blue depth and motion. Reduce generic AI language and unused vertical space. Produce Teregon-themed HTML presentations and downloadable PDFs for BrioBot and Briopedia, while presenting ERIA as a real, live client website build.
 
-## Grounded project evidence
+The visual reference is Flock Safety’s clarity and confidence. Teregon must retain its own nature-and-water identity, copy, layout, palette, and assets; do not reproduce Flock branding or composition.
 
-- Portfolio source: `local portfolio repo/data/projects.ts` entries `briopedia` (lines 567–600) and `brio-bot` (lines 603–635).
-- Briopedia: internal support knowledge base; Next.js UI, FastAPI async backend, git-backed wiki corpus, FAISS retrieval, provider-agnostic local/cloud LLM chat, Docker Compose. Content is maintained in version history; chat uses retrieved source context.
-- BrioBot / Case Triage Agent: e-commerce Salesforce support case triage; LangGraph gather/retrieve/image-read/plan/tools/extract flow; deterministic Python evidence gates decide writable fields; optional Salesforce write with dry-run/safe-stop path; Langfuse traces. Do not expose the portfolio's test-count metric as product impact.
-- Both Brio examples are prior team product experience, not Teregon client engagements. Keep that label adjacent to the cards and in the PDF.
-- ERIA and W3 Sourcing are live website builds already documented on Teregon; do not relabel them as AI deployments. Nature concepts stay explicitly illustrative.
+## Source of truth
 
-## Guardrails
+- Production is Next.js App Router. Update the route components below, not legacy root HTML (`index.html`, `briobot.html`, `briopedia.html`, `pitch-deck.html`) unless the implementation proves those files are actively served.
+- Homepage and current selected-work cards: `components/pages/home-page.tsx`.
+- BrioBot case study: `components/pages/briobot-page.tsx`.
+- Briopedia case study: `components/pages/briopedia-page.tsx` and `briopedia.css`.
+- Studio presentation: `components/pages/pitch-deck-page.tsx`; generated PDF currently served from `public/assets/teregon-labs-pitch-deck.pdf`.
+- Shared visual system/motion: `app/globals.css`, `app/theme-subpages.css`.
+- Current assets: `public/assets/mesh/{briobot,briopedia,brioscope,ai-workflow}.webp`, `public/assets/briopedia/*`, and `public/assets/project-eria.jpg`.
+- ERIA is already a live-site case in the homepage and studio deck. Its published site is `https://www.eria.co/`; current copy describes a responsive venue/event site, inquiry paths, and Next.js/React/Sanity. Preserve its actual-site screenshot and link.
+- W3 Sourcing is also an existing live client site. Preserve its card and attribution.
+- BrioBot and Briopedia are prior Brio team product experience, not Teregon client engagements. The case pages document their architecture and safeguards. Do not state product revenue, customer, or performance outcomes. Existing ARR copy is explicitly company-level and separated from product attribution; do not amplify or misattribute it.
+- BrioBot source presentation: `~/Downloads/Organized/PDFs/brio-bot-presentation.pdf`, 3.8 MB / 43 pages, rendered slide deck with little/no extractable text. Use it as visual/content reference and verify slide claims against the repo case page or source materials; do not copy its original identity into Teregon collateral.
+- Briopedia currently has branded illustrations and explicitly illustrative workflow diagrams, not signed-in product screenshots. Own-Chrome CDP check failed at port 9222. Do not alter browser settings or capture confidential/authenticated UI. Use existing approved assets unless a public, authorized screenshot becomes available.
+- T-001 is marked blocked only on confirming a successful production Guide response after two rate-limited attempts; the rest of the rebuild, CI, push, deployment, and route checks are recorded complete. Do not weaken limits or add paid fallback as part of visual work.
 
-- No invented revenue, conversion, customer, speed, or accuracy outcomes. The site can explain how outcomes will be measured against an agreed baseline.
-- Do not publish internal secrets, customer records, or unnecessary private details. Keep personal websites linked only where already intended; no GitHub links.
-- No new runtime dependencies. Preserve the static site path and accessibility, metadata, canonical/OG/Twitter cards, keyboard access, reduced motion, and mobile layout.
-- Do not change ERIA or W3 external sites.
+## Non-goals / constraints
 
-## Design and implementation
+- No changes to ERIA or W3 external sites.
+- No invented metrics, outcomes, customer evidence, or claims that Brio products were Teregon projects.
+- No confidential application screenshots; no Chrome/CDP configuration changes.
+- No copying Flock Safety’s brand, layout, or text. No new animation/library dependency unless required by measured need.
+- Keep reduced-motion behavior, keyboard accessibility, responsive presentation, SEO metadata, canonical URLs, sitemap, and current Guide privacy/rate-limit contract.
 
-1. Hero: concise brand line around “software that flows” or “AI for a world in motion,” with a restrained text cycle across concrete system contexts (e.g. grounded search, support workflows, forecasts, living landscapes). Keep a static accessible phrase for assistive tech; pause/settle under reduced motion. Avoid implying the concept mesh is live data.
-2. Case studies: add detailed Briopedia and BrioBot cards with problem/context, system design, workflow, guardrails, and the decision each supports. Use labels/tags and concise architecture diagrams; accurately mark these as prior Brio team experience. Avoid unsourced impact metrics.
-3. Motion/mesh: carry a clear terrain-to-data-to-model-to-human-decision visual through the page. Add depth using inline SVG/CSS/WebGL already in repo, not a library. Animate transform/opacity where feasible; stop under reduced motion and keep mobile GPU cost low.
-4. Presentation: create an accessible Teregon-themed slide deck source (`pitch-deck.html`) covering studio, services, verified client website builds, Brio team experience, illustrative nature concepts, approach/engagement, and how outcomes are measured. Include an on-page deck preview entry point and a direct PDF download. Render a real PDF at `assets/teregon-labs-pitch-deck.pdf`, using self-contained print CSS and local assets; 16:9 landscape slides with explicit page breaks. Do not rely on downloading a JavaScript slide framework at runtime.
-5. Keep the deck content aligned with the website but do not duplicate unsupported claims. Add the deck route/link to navigation or a compact homepage callout; do not create a long embedded viewer that makes the homepage feel sparse or bloated.
+## Current follow-up scope (canonical details: `docs/DESIGN.md`)
 
-## Disjoint work packages
+- Expand all six named service offerings with grounded use cases and typical deliverables, using accessible original SVG marks and restrained motion. Preserve the distinction between a general AI/software consultancy, Teregon Aqua as the water practice, and configurable services rather than standalone products.
+- Replace blank `/work.html` service-art panels with existing local visual assets, descriptive alternatives, and concept labels.
+- Fix desktop hero headline clipping, slow the rotating word cycle, and remove the visible seam at the visual boundary without causing mobile overflow.
+- Add regression coverage; measure at least 90% line coverage for new service-rendering logic with installed tooling. The repository verification gate remains `bun run ci`.
+- Treat the public Flock Safety site only as inspiration for general hierarchy, rhythm, and interaction. Keep Teregon's own copy, visual compositions, identity, and local artwork.
 
-- Package A — `index.html`, `README.md`: animated hero copy markup, BrioBot/Briopedia case studies and pitch-deck entry point; preserve metadata and truthful attribution.
-- Package B — `styles.css`, `terrain.js` only if necessary: refined motion/mesh and responsive/reduced-motion states. Do not edit content markup files.
-- Package C — new `pitch-deck.html` and generated `assets/teregon-labs-pitch-deck.pdf` (plus temporary rendering files outside repo): branded presentation source and PDF preview/download. Use verified evidence above and existing local screenshots only.
-- Reviewer — fresh-context check of accuracy, PDF page count/readability, desktop/mobile, motion/reduced-motion, SEO, and clean deployment. No overlapping edits.
+## Work packages (one writer per package)
 
-## Acceptance
+1. **Studio homepage / selected work** — `components/pages/home-page.tsx` only. Replace generic studio statements with curated, specific service explanations and concrete work context; reduce oversized gaps; strengthen ERIA as the real live-site case while keeping W3 and Brio status distinctions clear. Any homepage wording changes that affect crawl text must be reflected by the metadata owner.
+2. **Case-study presentations** — new BrioBot/Briopedia presentation route components and their unique route files; add print styles in a new presentation-specific stylesheet and downloadable PDFs under `public/assets/case-studies/`. HTML presentation is the editable source; PDF is generated from that source. Each deck should have a purposeful narrative (problem/context → system/workflow → architecture and controls → limits/what is known → Teregon relevance), responsive on screen and cleanly paginated in print. Do not rewrite the existing detail pages unless the deck and page need a shared factual correction; coordinate if so.
+3. **Shared visual language / motion** — `app/globals.css` and `app/theme-subpages.css` only. Introduce a deliberate green/blue range, higher contrast/depth, and restrained compositional motion on transform/opacity; consolidate or replace whitespace-heavy reveal/pointer behavior where it currently harms content pacing. Ensure motion pauses or resolves under reduced motion and mobile remains legible.
+4. **Discovery docs and deck links** — `components/pages/pitch-deck-page.tsx`, `README.md`, `public/llms.txt`, `public/llms-full.txt`, `public/sitemap.xml` only. Link the Brio PDFs and live ERIA case appropriately; keep descriptions and route inventory aligned. Do not duplicate long narrative across pages.
+5. **ERIA case study** — new `components/pages/eria-case-study.tsx`, `app/eria.html/page.tsx`, `app/eria-case-study.css`, plus new local assets only. Use real public `https://www.eria.co/` screenshots; cover the live marketing site, private admin/content system, and workflow automation without exposing private portal URLs or screens. The user reports about $10M ARR; if used, mark it as company context and say it is not attributed to the website or automation. Do not imply causal impact.
+6. **Fresh-context reviewer** — inspect diffs and rendered desktop/mobile/print output against criteria; no overlapping implementation edits unless assigned a concrete fix.
 
-- Hero cycles through recognizable AI/software/nature contexts and retains a static accessible description; motion settles when reduced motion is requested.
-- Briopedia and BrioBot each have clear, technically specific problem → system → decision narratives and are not described as Teregon client deployments.
-- Mesh motion looks intentional, retains the nature theme, and supports the AI workflow without false “live” telemetry.
-- A Teregon-branded PDF opens in standard readers, has correct slide breaks and no clipped content; visitors can preview it on-site and download it directly.
-- Mobile case cards and pitch preview work without horizontal overflow; no new runtime dependency or unsupported outcome claim.
-- Commit is pushed, Vercel production deployment is Ready, `teregonlabs.com` serves the revision and PDF, and working tree is clean.
+## Acceptance criteria
 
-## User steering added during implementation (2026-10-31)
+- Homepage quickly communicates what Teregon builds and who benefits, in concrete language; no generic AI filler or unsupported promises.
+- Strong, obvious project proof: ERIA is identified as live client website work and links to the working public site; W3 remains a live client build; BrioBot/Briopedia remain prior-team experience; nature visuals are identified as concepts where applicable.
+- ERIA has a separate, responsive case-study page showing the public site and describing admin/content tooling and automation without private URLs or captured portal content; company-scale context is not presented as an outcome.
+- Separate, polished HTML presentations exist for BrioBot and Briopedia; each has a working PDF download generated from the HTML source. PDFs have no clipping, broken fonts/images, awkward page splits, or blank pages. HTML remains accessible and readable on mobile.
+- Decks explain technical architecture at the level supported by current source: BrioBot Salesforce case context, LangGraph retrieval/proposal, deterministic Python write checks, dry-run/safe-stop, human review and Langfuse traces; Briopedia git-backed wiki, FAISS retrieval, local/cloud LLM layer, Next.js/FastAPI/Docker Compose. Do not imply every answer is complete/correct or that the flow has verified impact metrics.
+- Visual system is distinctly Teregon: polished green/blue/nature signal language, purposeful depth and restrained animation; not a Flock Safety clone.
+- Remove avoidable blank runway while preserving enough breathing room around the hero, project proof, and narrative sections. Check phone layouts at narrow and standard widths.
+- Reduced-motion, keyboard focus, contrast, alt text, and document reading order remain sound; no horizontal overflow.
+- Existing routes, SEO metadata, ERIA/W3 external links, and Guide disclosure/rate limits are preserved.
+- Run the repo’s documented `bun run ci`, inspect generated PDFs and rendered desktop/mobile pages, deploy to production, and check live routes/PDF responses. Update T-001 only with fresh deployment and Guide evidence.
 
-Retain the current hero/cases/deck work, and expand the public positioning into three clear layers:
+## Risks
 
-1. **Teregon** — parent point of view: systems that connect people, software, and the living world.
-2. **Teregon Labs** — applied AI and software delivery.
-3. **Teregon Water** (recommended descriptive division name; use “water intelligence” and “watershed systems” in headings/body for SEO) — water, flow, watershed observations, and practical decision tools. Avoid the standalone names FlowAI/H2OAI: web search found many existing unrelated FlowAI products and an established FlowAI agent platform, making those names crowded and hard to own in search.
-
-Replace generic “environmental/geospatial intelligence” positioning in prominent copy with water, watershed, water systems, river, flow, and landscape signals. Keep watershed/climate product scenarios honestly labeled illustrative unless backed by an actual water client deployment. Do not imply sensors or live monitoring exist.
-
-Add a compact, accessible contact form that works without a backend: collect only name, email, and project summary, then open a `mailto:hello@teregonlabs.com` draft with the values encoded. Label the action as opening an email draft; do not imply the form submits/stores data server-side. A real submission endpoint would need a configured, privacy-reviewed service.
-
-Add a bottom-right “Teregon Guide” chat panel for factual questions about services, case studies, water work, and contact. Vercel production currently has **no environment variables**, so there is no configured model API key. Implement the immediate version as a first-party, content-grounded site guide with a small curated answer corpus / topic matching, suggested prompts, and relevant links; do not call it model-powered AI or imply open-ended capability. Keep it local and do not send visitor prompts to a third party. If a model-backed assistant is later enabled, use a server-side function and configured secret only—never expose an API key in browser code. (The user called this an AI chat; communicate the current limitation directly and avoid claiming generation in the UI.)
-
-## Added packages (disjoint from the initial site/deck packages)
-
-- Package D — contact + guide runtime: new `contact.js` / `site-guide.js` and required lightweight markup in `index.html` owned by the content worker only after coordinating with Package A. Do not edit `styles.css`; motion worker owns it. If adding server functions, stop: no model/provider credentials are configured, so keep this release first-party and local.
-- Package E — brand architecture / SEO: revise `index.html`, `work.html`, `about.html`, `llms.txt`, `llms-full.txt`, `sitemap.xml`, and `README.md` to name Teregon / Teregon Labs / Teregon Water consistently and emphasize water/watersheds/flow. Keep metadata, links, and sitemap accurate. One writer owns these content/discovery files.
-
-## Additional acceptance
-
-- A visitor can distinguish parent Teregon, Teregon Labs, and Teregon Water at a glance; water language is prominent and searchable.
-- The contact form opens a correctly populated mail draft and does not claim submission or storage.
-- The floating guide opens/closes accessibly, answers only from curated current site facts, links to relevant pages/contact, handles unknown questions honestly, and sends no prompts to an external service.
-- The guide is accurately described as a site guide, not generative AI, until server-side model credentials are configured.
-
-## User-provided company context figures (2026-10-31)
-
-
-## Latest user steering — simplify the first screen (2026-10-31)
-
-The current hero is too busy. Replace the rotating multi-phrase headline with the single visible headline **“Software that flows.”** Add one short supporting sentence that says Teregon builds applied AI and software for water systems and real operational workflows; do not restate the headline. Fix the duplicate accessible/visual headline text: screen-reader copy must use a real visually-hidden utility or an appropriate accessible name, never render as a second visible paragraph. Prefer a static semantic H1 over hidden duplicate copy.
-
-Keep the water/nature mesh visual, but remove hero telemetry clutter (model-to-decision tags, coordinates, sequence numbers, and redundant study notes). Retain at most one quiet label, such as **“WATER SYSTEMS / CONCEPT”**. Simplify the header to a small set of primary links while preserving direct access to Work, Water, About, and one clear contact action. Preserve SEO metadata, responsive behavior, and reduced-motion support.
-
-### Acceptance
-
-- First viewport reads as one headline, one concise supporting line, one primary path to work, and one secondary contact path.
-- No duplicate headline text appears visually or to assistive technology.
-- Water/nature mesh remains the visual anchor; no more than one small hero label remains.
-- Header exposes Work, Water, About, and contact without the current crowded menu.
-
-## Positioning and founder credibility (verified local sources, 2026-10-31)
-
-Keep Teregon a broad applied-AI and software studio serving real business workflows. Water is a focused specialization under Teregon Water: water filtration and appliance customer service, plus watershed systems and related water decision tools. Do not position water as the company's only market, and do not invent another brand or product name.
-
-Founder credibility can be stated accurately and compactly: **Misha Lubich, CEO of Teregon Labs; machine-learning research with the U.S. Geological Survey (USGS) and Lawrence Berkeley National Laboratory (LBNL); six peer-reviewed publications in machine learning for hydrology and environmental science.** Verified local evidence:
-
-- `local portfolio repo/data/experiences.ts` — experience entries, including the Lawrence Berkeley National Laboratory role; inspect the USGS entry before tying USGS to a specific employer title.
-- `local portfolio repo/data/publications.ts` — publication records and USGS gauge/modeling details.
-- `local portfolio repo/components/sections/publications.tsx` — explicit “6 peer-reviewed publications” summary.
-- `local portfolio repo/lib/seo.ts` and `local portfolio repo/public/llms.txt` — current professional bio and LBNL affiliation.
-
-Do not claim USGS was an employer or that all six papers were authored with both USGS and LBNL unless the underlying experience/publication records support that specific phrasing. Use “machine-learning research involving USGS data and LBNL experience” if the distinction needs to stay explicit. CEO title is user-provided company context; keep it as the requested founder title, not as independently verified portfolio evidence.
+- The BrioBot source PDF has no useful text extraction; claims must be cross-checked against source repo/docs, not inferred from slide artwork.
+- ARR language may suggest a product result if layout/captions are careless; omit it from new decks unless source-verified and prominently labeled as company context.
+- Root HTML and Next route files may diverge; deploy edits to the active Next route implementation only.
+- HTML-to-PDF export can introduce print-specific scaling and page-break defects; treat both output formats as first-class deliverables.
+- Guide 429s are unresolved provider/deployment evidence, not a reason to alter API limits or claim verified working chat.

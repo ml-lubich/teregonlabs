@@ -4,72 +4,64 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
+import { ServiceOfferings } from "../service-offerings";
 
 const capabilities = [
   {
     number: "01",
-    label: "APPLIED AI",
-    title: "Assistants grounded in your work",
-    copy: "Search approved knowledge, summarize records, and prepare answers or actions for review.",
+    label: "SUPPORT ASSISTANTS",
+    title: "Find the answer in the source",
+    copy: "Search manuals, policies, and case history. Give the team a sourced answer and a draft to review.",
     image: "/assets/mesh/ai-workflow.webp",
     alt: "Three-dimensional mesh with luminous points moving across a flowing information landscape",
   },
   {
     number: "02",
     label: "WORKFLOW AUTOMATION",
-    title: "Less manual handoff",
-    copy: "Connect CRM, support, product, and operating records to repeatable team workflows.",
+    title: "Move a case through its checks",
+    copy: "Gather records, read attachments, validate fields, and send uncertain cases to a person.",
     image: "/assets/mesh/briobot.webp",
     alt: "Abstract three-dimensional mesh representing a checked workflow",
   },
   {
     number: "03",
     label: "CUSTOM SOFTWARE",
-    title: "Tools that fit the process",
-    copy: "Build internal tools, integrations, and production web software around how a team works.",
+    title: "Build around the way work happens",
+    copy: "Connect the existing systems with internal tools, integrations, and production software.",
     image: "/assets/mesh/briopedia.webp",
     alt: "Abstract three-dimensional mesh representing connected knowledge",
   },
 ];
 
-const offers = [
-  ["Teregon Aqua", "Water filtration and appliance support, service operations, and watershed systems."],
-  ["Teregon Oasis", "Support automation configured for water and product teams."],
-  ["Teregon Aquifer", "Grounded search across manuals, policies, and case history."],
-  ["Teregon Zephyr", "Agents for repeatable service and business operations workflows."],
-  ["Teregon Equinox", "Forecasting and planning from CRM, product, and service data."],
-  ["Teregon Terra", "Land and watershed systems for exploring connected conditions."],
-];
-
 const caseStudies = [
   {
-    title: "BrioScope",
-    category: "PRIOR BRIO TEAM EXPERIENCE / CUSTOMER OPERATIONS",
-    summary: "A shared view of recurring customer support issues.",
-    detail: "BrioScope brings support events together so teams can compare issue patterns over time and see what customers are reporting.",
-    image: "/assets/mesh/brioscope.webp",
-    alt: "Three-dimensional mesh grouping customer support events into issue patterns",
-    href: "mailto:hello@teregonlabs.com?subject=Discuss%20BrioScope",
-  },
-  {
     title: "BrioBot",
-    category: "PRIOR BRIO TEAM EXPERIENCE / SUPPORT OPERATIONS",
-    summary: "Salesforce case context, evidence retrieval, and a draft action.",
-    detail: "A support workflow gathers the case, retrieves product and policy evidence, reads attached images, then drafts structured actions for review.",
+    category: "BRIO TEAM / SUPPORT AUTOMATION",
+    summary: "Turn a Salesforce case into a checked draft.",
+    detail: "The agent gathers case details, retrieves product and policy evidence, reads attachments, and proposes structured fields. Deterministic checks and human review bound the write path.",
     image: "/assets/mesh/briobot.webp",
-    alt: "Three-dimensional workflow mesh for support evidence checks and human review",
+    alt: "Illustrative workflow mesh for support case evidence checks and human review",
     href: "/briobot.html",
-    note: "Company-level ARR was reported at approximately $240K at the time. This revenue is not attributed to BrioBot.",
+    deckHref: "/brio-bot-deck.html",
   },
   {
     title: "Briopedia",
-    category: "PRIOR BRIO TEAM EXPERIENCE / KNOWLEDGE SYSTEMS",
-    summary: "A git-backed support library with search and grounded chat.",
-    detail: "A support wiki paired editable source material with FAISS retrieval and local or cloud LLM chat. Answers used retrieved material; the wiki kept a reviewable history.",
+    category: "BRIO TEAM / SUPPORT KNOWLEDGE",
+    summary: "Keep support knowledge editable, searchable, and sourced.",
+    detail: "A git-backed wiki holds maintained guidance; FAISS retrieval brings relevant passages into a support chat with local or cloud model options.",
     image: "/assets/mesh/briopedia.webp",
-    alt: "Three-dimensional knowledge mesh representing a support library and source links",
+    alt: "Illustrative knowledge mesh representing a maintained support library and source links",
     href: "/briopedia.html",
-    note: "Company-level ARR is reported by the team at approximately $2M now. This revenue is not attributed to Briopedia.",
+    deckHref: "/briopedia-deck.html",
+  },
+  {
+    title: "BrioScope",
+    category: "BRIO TEAM / CUSTOMER OPERATIONS",
+    summary: "See recurring support issues across customer conversations.",
+    detail: "BrioScope groups support events into a shared view so teams can follow what customers are reporting over time.",
+    image: "/assets/mesh/brioscope.webp",
+    alt: "Illustrative mesh grouping customer support events into issue patterns",
+    href: "mailto:hello@teregonlabs.com?subject=Discuss%20BrioScope",
   },
 ];
 
@@ -253,7 +245,7 @@ export function HomePage() {
 
         <div className="hero-copy">
           <p className="eyebrow mb-7">APPLIED AI / SOFTWARE STUDIO</p>
-          <h1 className="max-w-[12ch] text-[clamp(3.5rem,7.8vw,7.4rem)] font-medium leading-[.91] tracking-[-.085em]" aria-label="Software that flows.">
+          <h1 className="max-w-[16ch] text-[clamp(2.75rem,6vw,6.5rem)] font-medium leading-[.96] tracking-[-.075em]" aria-label="Software that flows.">
             <span className="hero-prefix block">Software that</span>
             <span className="hero-word-cycle" aria-hidden="true">
               <span>flows.</span>
@@ -263,24 +255,24 @@ export function HomePage() {
             </span>
           </h1>
           <p className="lede mt-7 max-w-[45ch] text-base leading-7 text-[#d2ddd4] sm:text-lg sm:leading-8">
-            Teregon Labs builds custom AI and software for business workflows: support assistants, workflow automation, data tools, integrations, and production software. Teregon Aqua is our focused practice for water-product service.
+            We build support assistants, case automation, data tools, integrations, and production software for the work teams already do. Teregon Aqua focuses that work on water filtration and appliance service.
           </p>
           <div className="hero-actions mt-8 flex flex-wrap items-center gap-5">
             <Link className="inline-flex min-h-14 items-center justify-between gap-8 rounded-md bg-[#e4ebdc] px-5 text-sm font-medium text-[#17271f] transition hover:-translate-y-0.5 hover:bg-white" href="#selected-work">Selected work <span aria-hidden="true">↘</span></Link>
             <a className="inline-flex min-h-12 items-center gap-3 text-sm text-[#e3e9df] transition hover:text-[#c5d89e]" href="mailto:hello@teregonlabs.com?subject=Talk%20with%20Teregon">Start a conversation <span aria-hidden="true">↗</span></a>
           </div>
-          <p className="mt-12 font-mono text-[10px] uppercase tracking-[.14em] text-[#aab9aa]">AI ASSISTANTS · AUTOMATION · CUSTOM SOFTWARE</p>
+          <p className="mt-12 font-mono text-[10px] uppercase tracking-[.14em] text-[#aab9aa]">SUPPORT · OPERATIONS · SOFTWARE</p>
         </div>
       </section>
 
-      <section className="bg-[var(--paper)] px-5 py-16 sm:px-8 md:py-24 lg:px-[8vw]">
+      <section className="bg-[var(--paper)] px-5 py-12 sm:px-8 md:py-16 lg:px-[8vw]">
         <Reveal>
           <div className="mx-auto grid max-w-[1320px] gap-8 md:grid-cols-[.65fr_1.35fr] md:gap-12">
             <p className="font-mono text-[10px] uppercase tracking-[.16em] text-[var(--muted)]">WHAT WE BUILD</p>
             <div>
-              <h2 className="max-w-[16ch] text-4xl font-medium leading-[1.02] tracking-[-.07em] sm:text-5xl md:text-6xl">Custom AI and business software.</h2>
+              <h2 className="max-w-[16ch] text-4xl font-medium leading-[1.02] tracking-[-.07em] sm:text-5xl md:text-6xl">Put repeat work in software.</h2>
               <div className="mt-6 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-                <p className="max-w-[68ch] text-[15px] leading-7 text-[var(--muted)]">We connect models, company knowledge, and existing systems to specific tasks: customer support, internal search, case handling, forecasts, and the software around them.</p>
+                <p className="max-w-[68ch] text-[15px] leading-7 text-[var(--muted)]">From product questions to Salesforce cases, we connect the source material, business rules, and systems a team needs to finish the job.</p>
                 <Link className="shrink-0 border-b border-[var(--line)] pb-2 text-sm hover:text-[var(--water-deep)]" href="/approach.html">How we work <span className="ml-3 text-[var(--moss)]">↗</span></Link>
               </div>
             </div>
@@ -288,10 +280,10 @@ export function HomePage() {
         </Reveal>
       </section>
 
-      <section className="bg-[#e9ede4] px-5 py-16 sm:px-8 md:py-24 lg:px-[8vw]" aria-labelledby="capabilities-title">
+      <section className="bg-[#e9ede4] px-5 py-12 sm:px-8 md:py-16 lg:px-[8vw]" aria-labelledby="capabilities-title">
         <div className="mx-auto max-w-[1320px]">
           <Reveal className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div><p className="mb-4 font-mono text-[10px] uppercase tracking-[.16em] text-[var(--muted)]">CAPABILITIES</p><h2 id="capabilities-title" className="max-w-[18ch] text-4xl font-medium leading-[1.02] tracking-[-.07em] sm:text-5xl">Build, connect, and put AI to work.</h2></div>
+            <div><p className="mb-4 font-mono text-[10px] uppercase tracking-[.16em] text-[var(--muted)]">WHAT WE BUILD</p><h2 id="capabilities-title" className="max-w-[18ch] text-4xl font-medium leading-[1.02] tracking-[-.07em] sm:text-5xl">AI inside the workflow.</h2></div>
             <Link className="border-b border-[var(--line)] pb-2 text-sm" href="/work.html">All capabilities <span className="ml-3 text-[var(--moss)]">↗</span></Link>
           </Reveal>
           <div className="grid gap-4 md:grid-cols-3">
@@ -314,42 +306,33 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="offerings" className="scroll-mt-24 bg-[linear-gradient(120deg,#142820_0%,#183438_100%)] px-5 py-16 text-[#f2f4ec] sm:px-8 md:py-24 lg:px-[8vw]" aria-labelledby="offerings-title">
+      <section id="offerings" className="scroll-mt-24 bg-[linear-gradient(120deg,#142820_0%,#183438_100%)] px-5 py-12 text-[#f2f4ec] sm:px-8 md:py-16 lg:px-[8vw]" aria-labelledby="offerings-title">
         <div className="mx-auto max-w-[1320px]">
           <Reveal className="mb-9 grid gap-6 md:grid-cols-[1fr_.7fr] md:items-end">
-            <div><p className="mb-4 font-mono text-[10px] uppercase tracking-[.16em] text-[#c5d5ab]">TEREGON LABS / SERVICE OFFERINGS</p><h2 id="offerings-title" className="max-w-[16ch] text-4xl font-medium leading-[1.02] tracking-[-.07em] sm:text-5xl md:text-6xl">Configured for a team’s tools and work.</h2></div>
+            <div><p className="mb-4 font-mono text-[10px] uppercase tracking-[.16em] text-[#c5d5ab]">SERVICES</p><h2 id="offerings-title" className="max-w-[16ch] text-4xl font-medium leading-[1.02] tracking-[-.07em] sm:text-5xl md:text-6xl">A starting point, shaped to your team.</h2></div>
             <p className="max-w-[50ch] text-sm leading-7 text-[#c6d2c5]">These are named services we configure and build with each team. They are not standalone off-the-shelf products. Teregon Aqua is our focused water practice.</p>
           </Reveal>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {offers.map(([name, copy], index) => (
-              <Reveal key={name} className="h-full">
-                <article className="flex h-full min-h-44 flex-col rounded-xl border border-white/15 bg-white/[.035] p-5 transition duration-500 hover:-translate-y-1 hover:border-[#bdd2ad66] hover:bg-white/[.07] sm:p-6">
-                  <p className="font-mono text-[9px] uppercase tracking-[.15em] text-[#bed0a3]">0{index + 1} / {index === 0 ? "PRACTICE" : "CONFIGURABLE OFFERING"}</p>
-                  <h3 className="mt-5 text-2xl font-medium tracking-[-.05em]">{name}</h3>
-                  <p className="mt-2 max-w-[38ch] text-sm leading-6 text-[#c3d0c3]">{copy}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal><ServiceOfferings /></Reveal>
         </div>
       </section>
 
-      <section id="selected-work" className="scroll-mt-24 bg-[var(--paper)] px-5 py-16 sm:px-8 md:py-24 lg:px-[8vw]" aria-labelledby="projects-title">
+      <section id="selected-work" className="scroll-mt-24 bg-[var(--paper)] px-5 py-12 sm:px-8 md:py-16 lg:px-[8vw]" aria-labelledby="projects-title">
         <div className="mx-auto max-w-[1320px]">
           <Reveal className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div><p className="mb-4 font-mono text-[10px] uppercase tracking-[.16em] text-[var(--muted)]">LIVE CLIENT WEBSITE BUILDS</p><h2 id="projects-title" className="max-w-[15ch] text-4xl font-medium leading-[1.02] tracking-[-.07em] sm:text-5xl md:text-6xl">Recent work in production.</h2></div>
-            <p className="max-w-[40ch] text-sm leading-6 text-[var(--muted)]">Two live websites for different businesses, each built around its content and inquiry path.</p>
+            <div><p className="mb-4 font-mono text-[10px] uppercase tracking-[.16em] text-[var(--muted)]">LIVE CLIENT BUILDS</p><h2 id="projects-title" className="max-w-[15ch] text-4xl font-medium leading-[1.02] tracking-[-.07em] sm:text-5xl md:text-6xl">Websites built for the business behind them.</h2></div>
+            <p className="max-w-[40ch] text-sm leading-6 text-[var(--muted)]">ERIA Events and W3 Sourcing are live builds. Each has its own case study and public site.</p>
           </Reveal>
           <div className="grid gap-5 lg:grid-cols-2">
             <Reveal className="h-full">
               <ProjectCard
                 title="ERIA Events"
                 url="https://www.eria.co/"
+                caseHref="/eria.html"
                 image="/assets/project-eria.jpg"
                 alt="Screenshot of the live ERIA Events website"
-                eyebrow="HOSPITALITY / EVENTS · CLIENT BUILD"
-                body="Built and deployed a responsive, Sanity-backed site for ERIA’s Bay Area venues and experiences. Venue discovery, event stories, and press context lead to private-event and corporate inquiries."
-                tags={["VENUE DISCOVERY", "EVENT STORIES", "INQUIRY JOURNEY"]}
+                eyebrow="HOSPITALITY & EVENTS / LIVE CLIENT BUILD"
+                body="Built ERIA’s public site for Bay Area venues, experiences, and events. A private admin portal and workflow automations support the team behind the site; venue stories lead visitors to event inquiries."
+                tags={["VENUE & EVENT PAGES", "PRIVATE ADMIN TOOLS", "WORKFLOW AUTOMATION"]}
                 stack="NEXT.JS · REACT · SANITY CMS"
               />
             </Reveal>
@@ -359,7 +342,7 @@ export function HomePage() {
                 url="https://www.w3sourcing.com/"
                 image="/assets/project-w3sourcing.jpg"
                 alt="Screenshot of the live W3 Sourcing website"
-                eyebrow="EXECUTIVE SEARCH · CLIENT WEBSITE"
+                eyebrow="EXECUTIVE SEARCH / LIVE CLIENT BUILD"
                 body="Built and deployed a responsive site for a principal-led search firm. Practice pages connect its methodology, results, and leadership context to a direct inquiry path."
                 tags={["PRACTICE PAGES", "METHODOLOGY + RESULTS", "DIRECT INQUIRY"]}
                 stack="NEXT.JS · REACT · TYPESCRIPT"
@@ -369,11 +352,11 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#e8ede4] px-5 py-16 sm:px-8 md:py-24 lg:px-[8vw]" aria-labelledby="brio-title">
+      <section className="bg-[#e8ede4] px-5 py-12 sm:px-8 md:py-16 lg:px-[8vw]" aria-labelledby="brio-title">
         <div className="mx-auto max-w-[1320px]">
           <Reveal className="mb-8 grid gap-5 md:grid-cols-[1fr_.65fr] md:items-end">
             <div><p className="mb-4 font-mono text-[10px] uppercase tracking-[.16em] text-[var(--muted)]">PRIOR BRIO TEAM PRODUCT EXPERIENCE</p><h2 id="brio-title" className="max-w-[16ch] text-4xl font-medium leading-[1.02] tracking-[-.07em] sm:text-5xl">Support and knowledge systems.</h2></div>
-            <p className="text-sm leading-6 text-[var(--muted)]">BrioBot and Briopedia are prior Brio team work, not Teregon client engagements. Company revenue figures below are not attributed to either product.</p>
+            <p className="text-sm leading-6 text-[var(--muted)]">These are systems built with the Brio team before Teregon Labs. They show our team’s experience; they are not Teregon client engagements.</p>
           </Reveal>
           <div className="grid gap-4 lg:grid-cols-3">
             {caseStudies.map((study) => (
@@ -387,8 +370,10 @@ export function HomePage() {
                     <h3 className="text-2xl font-medium tracking-[-.05em]">{study.title}</h3>
                     <p className="mt-2 font-medium leading-6 text-[var(--ink)]">{study.summary}</p>
                     <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{study.detail}</p>
-                    {study.note && <p className="mt-4 border-l-2 border-[#9caf81] bg-[#edf0e7] p-3 text-xs leading-5 text-[var(--muted)]">{study.note}</p>}
-                    <Link className="mt-auto self-start border-b border-[var(--line)] pb-2 pt-5 text-sm" href={study.href}>{study.title === "Briopedia" ? "Read the case study" : study.title === "BrioBot" ? "Read the case study" : "Discuss a similar system"} <span className="ml-2 text-[var(--moss)]">↗</span></Link>
+                    <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-5">
+                      <Link className="border-b border-[var(--line)] pb-2 text-sm" href={study.href}>{study.title === "BrioScope" ? "Discuss a similar system" : "Read the case study"} <span className="ml-2 text-[var(--moss)]">↗</span></Link>
+                      {study.deckHref && <Link className="border-b border-[var(--line)] pb-2 text-sm" href={study.deckHref}>View presentation <span className="ml-2 text-[var(--moss)]">↗</span></Link>}
+                    </div>
                   </div>
                 </article>
               </Reveal>
@@ -397,7 +382,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="overflow-hidden bg-[linear-gradient(120deg,#16271f_0%,#173238_100%)] px-5 py-16 text-[#f1f3ea] sm:px-8 md:py-24 lg:px-[8vw]" aria-labelledby="aqua-title">
+      <section className="overflow-hidden bg-[linear-gradient(120deg,#16271f_0%,#173238_100%)] px-5 py-12 text-[#f1f3ea] sm:px-8 md:py-16 lg:px-[8vw]" aria-labelledby="aqua-title">
         <div className="mx-auto grid max-w-[1320px] items-center gap-8 md:grid-cols-[.9fr_1.1fr] md:gap-14">
           <Reveal>
             <p className="mb-4 font-mono text-[10px] uppercase tracking-[.16em] text-[#c3d5a8]">TEREGON AQUA / WATER PRACTICE</p>
@@ -441,9 +426,10 @@ export function HomePage() {
   );
 }
 
-function ProjectCard({ title, url, image, alt, eyebrow, body, tags, stack }: {
+function ProjectCard({ title, url, caseHref, image, alt, eyebrow, body, tags, stack }: {
   title: string;
   url: string;
+  caseHref?: string;
   image: string;
   alt: string;
   eyebrow: string;
@@ -465,7 +451,10 @@ function ProjectCard({ title, url, image, alt, eyebrow, body, tags, stack }: {
           {tags.map((tag) => <li key={tag} className="rounded-sm border border-[var(--line)] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[.08em] text-[var(--muted)]">{tag}</li>)}
         </ul>
         <p className="mt-4 font-mono text-[10px] uppercase tracking-[.08em] text-[var(--muted)]">BUILD / {stack}</p>
-        <a className="mt-5 inline-flex border-b border-[var(--line)] pb-2 text-sm" href={url} target="_blank" rel="noreferrer">Visit {title} <span className="ml-3 text-[var(--moss)]">↗</span></a>
+        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+          {caseHref && <Link className="inline-flex border-b border-[var(--line)] pb-2 text-sm" href={caseHref}>Read the case study <span className="ml-3 text-[var(--moss)]">↗</span></Link>}
+          <a className="inline-flex border-b border-[var(--line)] pb-2 text-sm" href={url} target="_blank" rel="noreferrer">Visit live site <span className="ml-3 text-[var(--moss)]">↗</span></a>
+        </div>
       </div>
     </article>
   );

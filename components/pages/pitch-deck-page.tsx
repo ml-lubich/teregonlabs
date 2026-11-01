@@ -32,7 +32,14 @@ export function PitchDeckPage() {
     <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-5 px-4 py-6 md:gap-8 md:px-8 md:py-10" aria-label="Teregon Labs studio deck">
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-[var(--dark)] px-5 py-4 text-[var(--paper-light)]">
         <p className="font-mono text-xs uppercase tracking-[.14em]">TEREGON LABS / STUDIO DECK</p>
-        <a className="button button-light" href="/assets/teregon-labs-pitch-deck.pdf" download>Download PDF <span aria-hidden="true">↗</span></a>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <nav aria-label="Case-study presentations" className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-white/75">
+            <Link href="/eria.html">ERIA case study</Link>
+            <Link href="/brio-bot-deck.html">BrioBot presentation</Link>
+            <Link href="/briopedia-deck.html">Briopedia presentation</Link>
+          </nav>
+          <a className="button button-light" href="/assets/teregon-labs-pitch-deck.pdf" download>Download PDF <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
 
       <Slide number="01" eyebrow="APPLIED AI / CUSTOM SOFTWARE" dark title={<>Software<br />that <em className="font-serif text-[var(--green)]">flows.</em></>}>
@@ -62,7 +69,7 @@ export function PitchDeckPage() {
         <div className="mt-7 grid gap-5 md:grid-cols-2">
           <article className="overflow-hidden rounded-2xl border border-[var(--line)] bg-white/60">
             <a href="https://www.eria.co/" target="_blank" rel="noreferrer"><Image className="aspect-[1.8] w-full object-cover" src="/assets/project-eria.jpg" width={1440} height={960} alt="Current ERIA Events website homepage" /></a>
-            <div className="p-5"><p className="eyebrow">HOSPITALITY / EVENTS · LIVE</p><h3 className="mt-3 text-2xl">ERIA Events</h3><p className="mt-2 leading-7 text-[var(--muted)]">Venue discovery, event stories, and press context lead to private-event and corporate inquiries.</p><p className="mt-4 font-mono text-xs text-[var(--muted)]">NEXT.JS · REACT · SANITY CMS</p><a className="mt-4 inline-block underline underline-offset-4" href="https://www.eria.co/" target="_blank" rel="noreferrer">Visit eria.co ↗</a></div>
+            <div className="p-5"><p className="eyebrow">HOSPITALITY / EVENTS · LIVE</p><h3 className="mt-3 text-2xl">ERIA Events</h3><p className="mt-2 leading-7 text-[var(--muted)]">Venue discovery, event stories, and press context lead to private-event and corporate inquiries.</p><p className="mt-4 font-mono text-xs text-[var(--muted)]">NEXT.JS · REACT · SANITY CMS</p><div className="mt-4 flex flex-wrap gap-x-5 gap-y-2"><Link className="underline underline-offset-4" href="/eria.html">Read the case study ↗</Link><a className="underline underline-offset-4" href="https://www.eria.co/" target="_blank" rel="noreferrer">Visit live site ↗</a></div></div>
           </article>
           <article className="overflow-hidden rounded-2xl border border-[var(--line)] bg-white/60">
             <a href="https://www.w3sourcing.com/" target="_blank" rel="noreferrer"><Image className="aspect-[1.8] w-full object-cover" src="/assets/project-w3sourcing.jpg" width={1440} height={960} alt="Current W3 Sourcing website homepage" /></a>
@@ -76,6 +83,7 @@ export function PitchDeckPage() {
           <Image className="w-full rounded-2xl border border-white/15 object-cover" src="/assets/mesh/briobot.webp" width={1200} height={900} alt="Three-dimensional workflow path through support evidence checks and human review" />
           <div><p className="leading-7 text-white/75">A Salesforce e-commerce support workflow gathers case context, retrieves product and policy evidence, reads attached images, and drafts structured actions.</p><ul className="mt-5 space-y-2 text-sm leading-6 text-white/75"><li>LangGraph gathers context, retrieves evidence, and proposes updates.</li><li>Deterministic Python checks validate writable fields.</li><li>Dry-run, safe-stop, and Langfuse traces support human review.</li></ul><p className="mt-5 rounded-xl border border-white/20 bg-white/5 p-4 text-sm leading-6"><b>Company-level context:</b> approximately $240K ARR at the time, as reported by the team. This revenue is not attributed to BrioBot.</p></div>
         </div>
+        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm"><Link className="underline underline-offset-4" href="/brio-bot-deck.html">Open BrioBot presentation ↗</Link><a className="underline underline-offset-4" href="/assets/case-studies/teregon-brio-bot-case-study.pdf" download>Download BrioBot PDF ↗</a></div>
         <p className="mt-5 font-mono text-[10px] uppercase tracking-wider text-white/60">PRIOR BRIO TEAM PRODUCT EXPERIENCE · NOT A TEREGON CLIENT ENGAGEMENT</p>
       </Slide>
 
@@ -84,6 +92,7 @@ export function PitchDeckPage() {
           <Image className="w-full rounded-2xl border border-[var(--line)] object-cover" src="/assets/mesh/briopedia.webp" width={1200} height={900} alt="Three-dimensional knowledge book and source links for grounded support answers" />
           <div><p className="leading-7 text-[var(--muted)]">An internal knowledge system paired a git-backed wiki with FAISS retrieval and local or cloud LLM chat. Answers used retrieved source material; the wiki kept editable history.</p><div className="mt-5 grid gap-3 sm:grid-cols-3"><span className="rounded-xl border border-[var(--line)] p-3 text-sm">Git-backed source</span><span className="rounded-xl border border-[var(--line)] p-3 text-sm">FAISS retrieval</span><span className="rounded-xl border border-[var(--line)] p-3 text-sm">Local + cloud LLM</span></div><p className="mt-5 rounded-xl border border-[var(--line)] bg-white/50 p-4 text-sm leading-6 text-[var(--muted)]"><b>Company-level context:</b> approximately $2M ARR now, as reported by the team. This revenue is not attributed to Briopedia.</p></div>
         </div>
+        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm"><Link className="underline underline-offset-4" href="/briopedia-deck.html">Open Briopedia presentation ↗</Link><a className="underline underline-offset-4" href="/assets/case-studies/teregon-briopedia-case-study.pdf" download>Download Briopedia PDF ↗</a></div>
         <p className="mt-5 font-mono text-[10px] uppercase tracking-wider text-[var(--muted)]">PRIOR BRIO TEAM PRODUCT EXPERIENCE · NOT A TEREGON CLIENT ENGAGEMENT</p>
       </Slide>
 

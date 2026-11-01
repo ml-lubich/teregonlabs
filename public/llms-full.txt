@@ -33,6 +33,8 @@ Illustrative low-flow service scenario: a case arrives with a product model and 
 
 A deployed site for ERIA’s Bay Area venues and event experiences. It connects venue discovery, event stories, press context, and private-event or corporate inquiries. Built with Next.js 16, React 19, and Sanity CMS. The current public site lists Forbes among its press features. This is a website build, not an AI or water-system deployment.
 
+Case study: https://teregonlabs.com/eria.html
+
 ### W3 Sourcing — https://www.w3sourcing.com/
 
 A deployed public website for a principal-led executive search firm. It explains technology, legal, and finance practices, methodology, results, leadership, and inquiry. Built with Next.js 16, React 19, and TypeScript. W3’s AI-assisted search is its own service description, not an AI system delivered by Teregon.
@@ -77,6 +79,11 @@ The Teregon Guide is a bounded, model-backed assistant for Teregon Labs, its pub
 - About: https://teregonlabs.com/about.html
 - Briopedia case study (prior Brio team work): https://teregonlabs.com/briopedia.html
 - BrioBot case study (prior Brio team work): https://teregonlabs.com/briobot.html
+- ERIA Events case study (live client website build): https://teregonlabs.com/eria.html
+- BrioBot presentation: https://teregonlabs.com/brio-bot-deck.html
+- BrioBot downloadable PDF: https://teregonlabs.com/assets/case-studies/teregon-brio-bot-case-study.pdf
+- Briopedia presentation: https://teregonlabs.com/briopedia-deck.html
+- Briopedia downloadable PDF: https://teregonlabs.com/assets/case-studies/teregon-briopedia-case-study.pdf
 - Studio deck and PDF: https://teregonlabs.com/pitch-deck.html
 
 General studio inquiries: hello@teregonlabs.com

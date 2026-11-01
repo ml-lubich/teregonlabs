@@ -32,16 +32,19 @@ describe('active Next.js homepage motion and controls', () => {
     expect(home).toContain('<span>connects.</span>');
     expect(home).toContain('<span>adapts.</span>');
     expect(home).toContain('<span>works.</span>');
-    expect(theme).toMatch(/animation-delay: -1\.5s/);
-    expect(theme).toMatch(/nth-child\(2\) \{ animation-delay: -10\.5s/);
-    expect(theme).toMatch(/nth-child\(3\) \{ animation-delay: -7\.5s/);
-    expect(theme).toMatch(/nth-child\(4\) \{ animation-delay: -4\.5s/);
-    expect(theme).toMatch(/0%, 1% \{ opacity: 0;[\s\S]*?2%, 27% \{ opacity: 1;[\s\S]*?28%, 100% \{ opacity: 0;/);
+    expect(theme).toMatch(/animation: hero-word-turn 20s/);
+    expect(theme).toMatch(/animation-delay: -2\.5s/);
+    expect(theme).toMatch(/nth-child\(2\) \{ animation-delay: -17\.5s/);
+    expect(theme).toMatch(/nth-child\(3\) \{ animation-delay: -12\.5s/);
+    expect(theme).toMatch(/nth-child\(4\) \{ animation-delay: -7\.5s/);
+    expect(theme).toMatch(/0%, 1% \{ opacity: 0;[\s\S]*?2%, 22% \{ opacity: 1;[\s\S]*?24%, 100% \{ opacity: 0;/);
   });
 
   test('hero headline can wrap within the viewport on narrow screens', () => {
     expect(theme).toMatch(/\.hero-copy h1 \.hero-prefix\s*\{[^}]*white-space:\s*normal/);
-    expect(theme).toMatch(/@media \(min-width: 640px\)\s*\{[^}]*\.hero-copy h1 \.hero-prefix\s*\{[^}]*white-space:\s*nowrap/);
+    expect(theme).not.toMatch(/\.hero-copy h1 \.hero-prefix\s*\{[^}]*white-space:\s*nowrap/);
+    expect(home).toContain('max-w-[16ch] text-[clamp(2.75rem,6vw,6.5rem)]');
+    expect(styles).toMatch(/@media \(min-width: 900px\)\s*\{[^}]*\.hero-copy\s*\{[^}]*width:\s*min\(980px, 92%\)/);
   });
 
   test('scroll reveals begin as soon as the section peeks into view', () => {

@@ -16,6 +16,9 @@ ROUTES = {
     "/briobot.html": "app/briobot.html/page.tsx",
     "/briopedia.html": "app/briopedia.html/page.tsx",
     "/pitch-deck.html": "app/pitch-deck.html/page.tsx",
+    "/eria.html": "app/eria.html/page.tsx",
+    "/brio-bot-deck.html": "app/brio-bot-deck.html/page.tsx",
+    "/briopedia-deck.html": "app/briopedia-deck.html/page.tsx",
 }
 
 
@@ -87,33 +90,55 @@ class TeregonSiteContract(unittest.TestCase):
 
     def test_homepage_has_plain_service_copy_and_named_offerings(self):
         home = source("components/pages/home-page.tsx").lower()
+        offerings = source("components/service-offerings.tsx").lower()
         for phrase in (
             "applied ai / software studio",
-            "custom ai and software for business workflows",
+            "we build support assistants, case automation, data tools, integrations, and production software",
             "support assistants",
             "workflow automation",
-            "teregon aqua is our focused practice for water-product service",
+            "teregon aqua focuses that work on water filtration and appliance service",
         ):
             self.assertIn(phrase, home)
         for offering in ("teregon aqua", "teregon oasis", "teregon aquifer", "teregon zephyr", "teregon equinox", "teregon terra"):
             with self.subTest(offering=offering):
-                self.assertIn(offering, home)
+                self.assertIn(offering, offerings)
         shell = source("components/site-shell.tsx")
         for offering in ("Teregon Aqua", "Teregon Oasis", "Teregon Aquifer", "Teregon Zephyr", "Teregon Equinox", "Teregon Terra"):
             self.assertIn(offering, shell)
         self.assertIn("these are named services", home)
         self.assertIn("not standalone off-the-shelf products", home)
 
+    def test_service_offerings_explain_concrete_deliverables(self):
+        home = source("components/service-offerings.tsx").lower()
+        for phrase in (
+            "manual-grounded troubleshooting",
+            "warranty workflows",
+            "drafts replies from approved product and policy material",
+            "versioned knowledge base",
+            "deterministic checks",
+            "service demand",
+            "field records",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, home)
+        self.assertIn("aria-hidden=\"true\"", home)
+
+    def test_work_capability_panels_use_real_local_images_and_descriptive_alts(self):
+        work = source("components/pages/work-page.tsx")
+        for asset in ("/assets/mesh/ai-workflow.webp", "/assets/mesh/brioscope.webp", "/assets/project-w3sourcing.jpg", "/assets/water-droplet-pond.webp"):
+            with self.subTest(asset=asset):
+                self.assertIn(asset, work)
+        self.assertIn("Illustrative", work)
+        self.assertNotIn("className=\"service-art art-land\"", work)
+
     def test_prior_brio_cases_are_attributed_and_company_arr_is_not_credited(self):
         home = source("components/pages/home-page.tsx")
         for project in ("BrioScope", "BrioBot", "Briopedia"):
             self.assertIn(project, home)
-        self.assertIn("PRIOR BRIO TEAM EXPERIENCE", home)
+        self.assertIn("PRIOR BRIO TEAM PRODUCT EXPERIENCE", home)
         self.assertIn("not Teregon client engagements", home)
-        self.assertIn("approximately $240K", home)
-        self.assertIn("not attributed to BrioBot", home)
-        self.assertIn("approximately $2M", home)
-        self.assertIn("not attributed to Briopedia", home)
+        self.assertNotIn("approximately $240K", home)
+        self.assertNotIn("approximately $2M", home)
         self.assertIn("/briobot.html", home)
         self.assertIn("/briopedia.html", home)
         for route, evidence in (
@@ -128,9 +153,9 @@ class TeregonSiteContract(unittest.TestCase):
         home = source("components/pages/home-page.tsx")
         for asset, alt in (
             ("/assets/mesh/ai-workflow.webp", "luminous points moving across a flowing information landscape"),
-            ("/assets/mesh/brioscope.webp", "three-dimensional mesh grouping customer support events"),
-            ("/assets/mesh/briobot.webp", "three-dimensional workflow mesh for support evidence checks"),
-            ("/assets/mesh/briopedia.webp", "three-dimensional knowledge mesh representing a support library"),
+            ("/assets/mesh/brioscope.webp", "illustrative mesh grouping customer support events"),
+            ("/assets/mesh/briobot.webp", "illustrative workflow mesh for support case evidence checks"),
+            ("/assets/mesh/briopedia.webp", "illustrative knowledge mesh representing a maintained support library"),
             ("/assets/water-droplet-pond.webp", "water droplet falling into a forest pond"),
         ):
             with self.subTest(asset=asset):
@@ -157,7 +182,7 @@ class TeregonSiteContract(unittest.TestCase):
                 self.assertIn(name, home)
                 self.assertIn(alt, home)
                 self.assertTrue((ROOT / "public" / asset.lstrip("/")).is_file())
-        self.assertIn("Sanity", home)
+        self.assertIn("sanity", home.lower())
         self.assertIn("methodology", home.lower())
 
     def test_team_profiles_link_to_personal_sites_use_local_photos_and_avoid_github(self):
@@ -242,6 +267,21 @@ class TeregonSiteContract(unittest.TestCase):
             content = source(file)
             for project in ("Briopedia", "BrioScope", "Sales Navigator"):
                 self.assertIn(project, content)
+
+    def test_case_study_presentations_have_downloadable_pdf_assets(self):
+        component = source("components/pages/case-study-decks.tsx")
+        for route, asset in (
+            ("app/brio-bot-deck.html/page.tsx", "public/assets/case-studies/teregon-brio-bot-case-study.pdf"),
+            ("app/briopedia-deck.html/page.tsx", "public/assets/case-studies/teregon-briopedia-case-study.pdf"),
+        ):
+            with self.subTest(asset=asset):
+                self.assertTrue((ROOT / route).is_file())
+                expected_url = "/assets/case-studies/" + Path(asset).name
+                self.assertIn(expected_url, component)
+                self.assertTrue((ROOT / asset).is_file(), f"download linked from {route} must ship")
+                pdf = (ROOT / asset).read_bytes()
+                self.assertTrue(pdf.startswith(b"%PDF-"))
+                self.assertGreater(len(pdf), 20_000)
 
 
 if __name__ == "__main__":

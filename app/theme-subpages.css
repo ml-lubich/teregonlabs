@@ -4,7 +4,7 @@
 .eyebrow {
   font: 9px/1.4 var(--mono);
   letter-spacing: 1.5px;
-  color: #7a8876;
+  color: #53644f;
   margin: 0;
   text-transform: uppercase;
 }
@@ -17,7 +17,7 @@
 }
 
 .section-pad {
-  padding: clamp(70px, 9vw, 110px) clamp(20px, 7vw, 12.5%);
+  padding: clamp(56px, 7vw, 88px) clamp(20px, 7vw, 12.5%);
 }
 
 .section-head {
@@ -25,7 +25,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 25px;
-  margin-bottom: 42px;
+  margin-bottom: 34px;
 }
 
 .section-head .eyebrow {
@@ -46,10 +46,6 @@
   white-space: normal;
 }
 
-@media (min-width: 640px) {
-  .hero-copy h1 .hero-prefix { white-space: nowrap; }
-}
-
 .hero-word-cycle {
   display: grid;
   grid-template-areas: "word";
@@ -67,18 +63,18 @@
   opacity: 0;
   transform: translate3d(0, 42%, 0) rotateX(-58deg);
   transform-origin: 50% 70%;
-  animation: hero-word-turn 12s cubic-bezier(.23, 1, .32, 1) infinite;
+  animation: hero-word-turn 20s cubic-bezier(.23, 1, .32, 1) infinite;
 }
 
-.hero-word-cycle > span:first-child { animation-delay: -1.5s; }
-.hero-word-cycle > span:nth-child(2) { animation-delay: -10.5s; }
-.hero-word-cycle > span:nth-child(3) { animation-delay: -7.5s; }
-.hero-word-cycle > span:nth-child(4) { animation-delay: -4.5s; }
+.hero-word-cycle > span:first-child { animation-delay: -2.5s; }
+.hero-word-cycle > span:nth-child(2) { animation-delay: -17.5s; }
+.hero-word-cycle > span:nth-child(3) { animation-delay: -12.5s; }
+.hero-word-cycle > span:nth-child(4) { animation-delay: -7.5s; }
 
 @keyframes hero-word-turn {
   0%, 1% { opacity: 0; transform: translate3d(0, 42%, 0) rotateX(-58deg); }
-  2%, 27% { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0); }
-  28%, 100% { opacity: 0; transform: translate3d(0, -38%, 0) rotateX(48deg); }
+  2%, 22% { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0); }
+  24%, 100% { opacity: 0; transform: translate3d(0, -38%, 0) rotateX(48deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -90,14 +86,14 @@
 /* Page Hero across /approach.html, /work.html, /water.html, /about.html */
 .page-hero {
   position: relative;
-  padding: 94px clamp(20px, 7vw, 12.5%) 72px;
-  background: #f5f6ef;
+  padding: clamp(64px, 7vw, 88px) clamp(20px, 7vw, 12.5%) 58px;
+  background: linear-gradient(118deg, #f2f5ef 0 68%, #e4eeea 100%);
   color: var(--ink);
   overflow: hidden;
 }
 
 .page-hero .eyebrow {
-  color: #72806e;
+  color: #52634e;
 }
 
 .page-hero h1 {
@@ -129,11 +125,11 @@
 }
 
 .page-hero-image {
-  height: min(38vw, 430px);
+  height: min(34vw, 390px);
   min-height: 220px;
   position: relative;
-  margin: 52px 0 0;
-  border-radius: 12px;
+  margin: 40px 0 0;
+  border-radius: 28px 2px 28px 2px;
   overflow: hidden;
   background-color: #23382d;
   box-shadow: 0 16px 48px #10201918;
@@ -147,7 +143,10 @@
   background-position: center 52%;
   background-size: cover;
   filter: saturate(.75) brightness(.78);
+  transition: transform 900ms cubic-bezier(.2,.75,.2,1);
 }
+
+.page-hero-image:hover:before { transform: scale(1.035); }
 
 .approach-image:before {
   background-image: linear-gradient(90deg, #18231d45, #101a1645), url('/assets/highlands.jpg');
@@ -180,8 +179,8 @@
 
 /* Process Section */
 .process {
-  background: #f5f6ef;
-  padding: 85px clamp(20px, 7vw, 12.5%);
+  background: #f2f5ef;
+  padding: 68px clamp(20px, 7vw, 12.5%);
 }
 
 .process .section-head {
@@ -235,10 +234,10 @@
 
 /* Principle Band (Quotes) */
 .principle-band {
-  padding: 90px clamp(20px, 12vw, 18%);
+  padding: 72px clamp(20px, 12vw, 18%);
   text-align: center;
-  background: #e2e8db;
-  color: #273628;
+  background: linear-gradient(120deg, #e3ece4, #dfe9e8 66%, #e7eee2);
+  color: #203631;
 }
 
 .principle-band .quote-mark {
@@ -266,8 +265,8 @@
 
 /* Page Callout */
 .page-callout {
-  padding: clamp(75px, 8vw, 105px) clamp(20px, 7vw, 13%);
-  background: #111d17;
+  padding: clamp(62px, 7vw, 88px) clamp(20px, 7vw, 13%);
+  background: radial-gradient(ellipse at 88% 22%, #20525a99, transparent 34%), linear-gradient(112deg, #102620, #132d32 74%, #16444c);
   color: #eff2e8;
   border-top: 1px solid #ffffff12;
 }
@@ -371,15 +370,15 @@
 
 /* Service List (/work.html) */
 .service-list {
-  padding: 40px clamp(20px, 7vw, 12.5%) 65px;
-  background: #f5f6ef;
+  padding: 32px clamp(20px, 7vw, 12.5%) 56px;
+  background: #f2f5ef;
 }
 
 .service-list article {
   display: grid;
   grid-template-columns: 50px minmax(0, 1.2fr) minmax(200px, .6fr);
   gap: 32px;
-  padding: 58px 0;
+  padding: 46px 0;
   border-bottom: 1px solid var(--line);
   scroll-margin-top: 30px;
 }
@@ -430,12 +429,63 @@
 }
 
 .service-art {
-  height: 240px;
-  border-radius: 8px;
+  min-height: 240px;
+  border-radius: 24px 2px 24px 2px;
   overflow: hidden;
   position: relative;
   border: 1px solid #cbd4c3;
-  background: #e8eee2;
+  background: linear-gradient(135deg, #172d25, #17383d);
+  isolation: isolate;
+}
+
+.service-art:after {
+  content: "";
+  position: absolute;
+  inset: 35% 0 0;
+  z-index: 1;
+  background: linear-gradient(0deg, #0c1b17c9, transparent);
+  pointer-events: none;
+}
+
+.service-art-image {
+  object-fit: cover;
+  transition: transform 800ms cubic-bezier(.2,.75,.2,1), filter 800ms ease;
+  filter: saturate(.86) contrast(1.02);
+}
+
+.service-list article:hover .service-art-image {
+  transform: scale(1.035);
+}
+
+.service-art-label {
+  position: absolute;
+  z-index: 2;
+  left: 17px;
+  bottom: 15px;
+  color: #eff3e9;
+  font: 9px/1.4 var(--mono);
+  letter-spacing: 1.15px;
+  text-shadow: 0 2px 12px #07130d99;
+}
+
+.service-offering-mark {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #c5d89e66;
+  border-radius: 50%;
+  background: linear-gradient(140deg, #b5d28a1c, #66b6c51c);
+}
+
+.service-offering-mark svg {
+  width: 25px;
+  height: 25px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* About Page Sections (/about.html) */
@@ -443,8 +493,8 @@
   display: grid;
   grid-template-columns: .6fr 1.4fr;
   gap: 8%;
-  padding: clamp(70px, 8vw, 110px) clamp(20px, 7vw, 12.5%);
-  background: #f5f6ef;
+  padding: clamp(58px, 7vw, 88px) clamp(20px, 7vw, 12.5%);
+  background: #f2f5ef;
 }
 
 .about-statement > .eyebrow {
@@ -559,7 +609,7 @@
   }
   .service-art {
     grid-column: 2;
-    height: 180px;
+    min-height: 180px;
     margin-top: 14px;
   }
   .about-statement {
