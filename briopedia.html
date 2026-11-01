@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07182c">
+  <meta name="description" content="A prior Brio team product: Briopedia connects a git-backed support wiki, FAISS retrieval, and local or cloud LLM chat in one internal knowledge system.">
+  <link rel="canonical" href="https://teregonlabs.com/briopedia.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Teregon Labs">
+  <meta property="og:title" content="Briopedia — a grounded support knowledge system">
+  <meta property="og:description" content="How a prior Brio team product connected a versioned support wiki, retrieval, and source-grounded chat.">
+  <meta property="og:url" content="https://teregonlabs.com/briopedia.html">
+  <meta property="og:image" content="https://teregonlabs.com/assets/briopedia/briopedia_infographic_dark.webp">
+  <meta property="og:image:alt" content="Briopedia brand illustration showing a water dispenser, knowledge book, and support symbols">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Briopedia — a grounded support knowledge system">
+  <meta name="twitter:description" content="A prior Brio team product connecting maintained support knowledge with source-grounded chat.">
+  <meta name="twitter:image" content="https://teregonlabs.com/assets/briopedia/briopedia_infographic_dark.webp">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/briopedia.css">
+  <title>Briopedia — a grounded support knowledge system | Teregon Labs</title>
+</head>
+<body class="briopedia-page">
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Teregon Labs home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>teregon<small>LABS</small></span></a>
+    <nav aria-label="Main navigation"><a href="/work.html">Work</a><a href="/water.html">Water</a><a href="/about.html">About</a></nav>
+    <a class="nav-cta" href="/#contact">Contact <span>↗</span></a>
+  </header>
+  <main>
+    <section class="bp-hero">
+      <div class="bp-hero-copy">
+        <a class="bp-back" href="/#team-systems">← Back to team systems</a>
+        <p class="bp-kicker">PRIOR BRIO TEAM PRODUCT / KNOWLEDGE SYSTEMS</p>
+        <img class="bp-wordmark" src="/assets/briopedia/briopedia-logo.png" width="658" height="236" alt="Briopedia">
+        <h1>Support knowledge,<br><em>connected to its source.</em></h1>
+        <p class="bp-lede">A support library that brings maintained product knowledge and conversational search into one place—so answers can point back to the material behind them.</p>
+        <a class="bp-primary" href="#system">Follow the system <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="bp-hero-art" aria-label="Briopedia product brand illustration">
+        <div class="bp-orbit bp-orbit-a"></div><div class="bp-orbit bp-orbit-b"></div>
+        <img src="/assets/briopedia/briopedia_infographic_dark.webp" width="880" height="791" alt="Illustration of a water dispenser, support knowledge book, and connected service symbols">
+        <span class="bp-art-caption">PRODUCT BRAND ART / NOT A SCREENSHOT</span>
+      </div>
+      <span class="bp-hero-index" aria-hidden="true">BRIO / 02</span>
+    </section>
+
+    <section class="bp-intro bp-reveal" aria-labelledby="bp-context-title">
+      <div><p class="bp-kicker">THE CONTEXT</p><h2 id="bp-context-title">Good support depends on knowledge people can find—and keep current.</h2></div>
+      <div class="bp-intro-body"><p>Support teams work across manuals, troubleshooting notes, and product guidance. Briopedia was built as an internal knowledge system: a versioned wiki for maintaining material, plus retrieval and chat for bringing relevant sources into a question.</p><p class="bp-attribution">This is prior Brio team product experience. It is not a Teregon client engagement, and no business outcome is attributed here.</p></div>
+    </section>
+
+    <section class="bp-system" id="system" aria-labelledby="bp-system-title">
+      <div class="bp-section-head bp-reveal"><p class="bp-kicker">01 / THE SYSTEM</p><h2 id="bp-system-title">A maintained source.<br><em>A grounded answer.</em></h2><p>Each layer has a distinct job: keep knowledge editable, find relevant passages, then use those sources to inform a response.</p></div>
+      <div class="bp-flow" aria-label="Briopedia system architecture">
+        <article class="bp-flow-card bp-reveal"><span class="bp-step">01</span><div class="bp-flow-icon bp-icon-wiki" aria-hidden="true"><i></i><i></i><i></i></div><p class="bp-kicker">KNOWLEDGE</p><h3>Git-backed wiki</h3><p>Support material stays editable with a reviewable version history.</p><span class="bp-flow-tech">MAINTAINED CONTENT</span></article>
+        <span class="bp-flow-link" aria-hidden="true"><i></i></span>
+        <article class="bp-flow-card bp-reveal"><span class="bp-step">02</span><div class="bp-flow-icon bp-icon-index" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="bp-kicker">RETRIEVAL</p><h3>FAISS index</h3><p>Relevant passages are retrieved from the knowledge corpus for a question.</p><span class="bp-flow-tech">SOURCE CONTEXT</span></article>
+        <span class="bp-flow-link" aria-hidden="true"><i></i></span>
+        <article class="bp-flow-card bp-reveal"><span class="bp-step">03</span><div class="bp-flow-icon bp-icon-chat" aria-hidden="true"><i></i><i></i></div><p class="bp-kicker">RESPONSE</p><h3>LLM chat layer</h3><p>A provider-agnostic layer can use local or cloud models with retrieved context.</p><span class="bp-flow-tech">LOCAL OR CLOUD</span></article>
+      </div>
+      <div class="bp-architecture-note bp-reveal"><span>IMPLEMENTATION</span><p><b>Next.js</b> interface · <b>FastAPI</b> async backend · <b>FAISS</b> retrieval · <b>Docker Compose</b> deployment</p></div>
+    </section>
+
+    <section class="bp-visual-story" aria-labelledby="bp-visual-title">
+      <div class="bp-visual-copy bp-reveal"><p class="bp-kicker">02 / THE EXPERIENCE</p><h2 id="bp-visual-title">From a question<br>to useful context.</h2><p>The system is designed to connect a support question with material the team maintains. These interface sketches explain the workflow; they are illustrative diagrams, not captures of the signed-in application.</p><div class="bp-visual-legend"><span><i></i>Illustrative workflow visual</span><span>Not live product UI</span></div></div>
+      <div class="bp-ui-stack">
+        <figure class="bp-ui-card bp-ui-search bp-reveal">
+          <figcaption><span>ILLUSTRATIVE WORKFLOW / 01</span><b>Find a source</b></figcaption>
+          <div class="bp-ui-window">
+            <div class="bp-ui-topline"><span class="bp-ui-dot"></span><span>Knowledge library</span><span class="bp-ui-status">SEARCH CONCEPT</span></div>
+            <div class="bp-ui-searchbox"><span aria-hidden="true">⌕</span>Search maintained support knowledge<span class="bp-ui-key">↵</span></div>
+            <div class="bp-ui-result"><span class="bp-file-icon">DOC</span><div><b>Product guidance</b><small>Maintained support article · source passage</small></div><span class="bp-result-arrow">↗</span></div>
+            <div class="bp-ui-result"><span class="bp-file-icon">WIKI</span><div><b>Service knowledge</b><small>Versioned wiki material · source passage</small></div><span class="bp-result-arrow">↗</span></div>
+            <div class="bp-ui-footnote">Example labels only · no customer or product records shown</div>
+          </div>
+        </figure>
+        <figure class="bp-ui-card bp-ui-answer bp-reveal">
+          <figcaption><span>ILLUSTRATIVE WORKFLOW / 02</span><b>Answer with context</b></figcaption>
+          <div class="bp-ui-window">
+            <div class="bp-ui-topline"><span class="bp-ui-avatar">B</span><span>Briopedia / support chat concept</span><span class="bp-ui-status">ILLUSTRATIVE</span></div>
+            <div class="bp-chat-question">Can you help me find the relevant guidance?</div>
+            <div class="bp-chat-answer"><span class="bp-chat-mark">B</span><div><b>Here is the matching support material.</b><p>The response is informed by retrieved passages from the maintained knowledge base.</p><span class="bp-source-chip">SOURCE · KNOWLEDGE ARTICLE</span></div></div>
+            <div class="bp-chat-compose"><span>Ask about support knowledge…</span><i aria-hidden="true">↑</i></div>
+            <div class="bp-ui-footnote">Diagram illustrates the source-grounded interaction pattern</div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="bp-guardrails bp-reveal" aria-labelledby="bp-guardrails-title">
+      <div><p class="bp-kicker">03 / WHY THE ARCHITECTURE MATTERS</p><h2 id="bp-guardrails-title">Knowledge can change.<br><em>Its history stays visible.</em></h2></div>
+      <div class="bp-guardrail-list"><article><span>01</span><div><h3>Maintain the source</h3><p>Support material lives in a wiki that can be edited and reviewed over time.</p></div></article><article><span>02</span><div><h3>Retrieve before responding</h3><p>FAISS search finds relevant corpus material to provide context to the chat layer.</p></div></article><article><span>03</span><div><h3>Choose the model environment</h3><p>The provider-agnostic design supports local or cloud model options behind the backend.</p></div></article></div>
+    </section>
+
+    <section class="bp-build bp-reveal" aria-labelledby="bp-build-title">
+      <div class="bp-build-art"><img src="/assets/briopedia/briopedia_infographic_light.webp" width="880" height="770" loading="lazy" decoding="async" alt="Briopedia illustration of a product guide, water dispenser, and connected support tools"><span>BRIOPEDIA BRAND ILLUSTRATION</span></div>
+      <div class="bp-build-copy"><p class="bp-kicker">04 / BUILD NOTES</p><h2 id="bp-build-title">A practical stack for an internal tool.</h2><p>The interface, API, searchable knowledge, and model connection are packaged as a Docker Compose deployment. The architecture keeps the library and answer workflow connected while leaving the model provider replaceable.</p><div class="bp-tech-list"><span>Next.js</span><span>FastAPI</span><span>Git-backed wiki</span><span>FAISS</span><span>Local + cloud LLM</span><span>Docker Compose</span></div><p class="bp-smallprint">Architecture summary from verified project documentation. No performance, revenue, or customer-impact figures are claimed.</p></div>
+    </section>
+
+    <section class="bp-next"><p class="bp-kicker">T E R E G O N  /  APPLIED AI + SOFTWARE</p><h2>Build systems that<br><em>keep the source close.</em></h2><p>We bring this experience into new conversations about grounded search, support workflows, and software built around real operations.</p><div><a class="bp-primary" href="/#contact">Talk through a workflow <span aria-hidden="true">↗</span></a><a class="bp-secondary" href="/#team-systems">Explore related team systems <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer><a class="brand footer-brand" href="/" aria-label="Teregon Labs home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>teregon<small>LABS</small></span></a><nav aria-label="Footer navigation"><a href="/work.html">Work</a><a href="/water.html">Water</a><a href="/about.html">About</a></nav><span>© 2026 TEREGON LABS</span><a href="mailto:hello@teregonlabs.com">HELLO@TEREGONLABS.COM ↗</a><a class="site-credit" href="https://www.mishalubich.com/" target="_blank" rel="noreferrer">DESIGN &amp; ENGINEERING BY MISHA LUBICH ↗</a></footer>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "teregonlabs-site",
+  "private": true,
+  "scripts": {
+    "test": "bun test",
+    "test:python": "python3 -m unittest discover -s tests -v",
+    "test:scroll": "node --test tests/scroll-stack.test.cjs",
+    "test:ci": "bun run test && bun run test:python && bun run test:scroll",
+    "ci": "bun run test:ci"
+  }
+}

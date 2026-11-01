@@ -1,186 +1,331 @@
-(() => {
-  const node = (tag, className, text, attrs = {}) => {
-    const element = document.createElement(tag);
-    if (className) element.className = className;
-    if (text) element.textContent = text;
-    for (const [name, value] of Object.entries(attrs)) element.setAttribute(name, value);
-    return element;
-  };
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.TeregonGuide = api;
+  if (root && root.document) api.mount(root.document);
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  const APPROVED_EXTERNAL = new Set([
+    'https://teregonlabs.com',
+    'https://www.teregonlabs.com',
+    'https://www.eria.co',
+    'https://eria.co',
+    'https://www.w3sourcing.com',
+    'https://w3sourcing.com',
+    'https://openrouter.ai'
+  ]);
+  const MAX_HISTORY = 8;
 
-  let opener = document.querySelector('#guide-open');
-  let dialog = document.querySelector('#teregon-guide');
-  if (!opener) {
-    opener = node('button', 'guide-open', 'Teregon Guide ', { id: 'guide-open', type: 'button', 'aria-controls': 'teregon-guide', 'aria-expanded': 'false' });
-    opener.append(node('span', '', '⌁', { 'aria-hidden': 'true' }));
-    document.body.append(opener);
-  }
-  if (!dialog) {
-    dialog = node('dialog', '', '', { id: 'teregon-guide', 'aria-labelledby': 'teregon-guide-title' });
-    const panel = node('div', 'guide-panel');
-    const header = node('header', 'guide-header');
-    const intro = node('div');
-    intro.append(
-      node('p', 'eyebrow', 'SITE GUIDE / GROUNDED IN THIS SITE'),
-      node('h2', '', 'Teregon Guide', { id: 'teregon-guide-title' }),
-      node('p', '', 'Quick answers about the studio, our work, and water systems. This guide uses site content; it is not a generative AI chat.')
-    );
-    header.append(intro, node('button', '', '×', { id: 'guide-close', type: 'button', 'aria-label': 'Close Teregon Guide' }));
-    const messageLog = node('div', 'guide-messages', '', { id: 'guide-messages', role: 'log', 'aria-live': 'polite', 'aria-relevant': 'additions' });
-    const prompts = node('div', 'guide-prompts', '', { 'aria-label': 'Suggested questions' });
-    for (const prompt of ['What does Teregon Labs build?', 'What is Teregon Water?', 'Tell me about BrioBot and Briopedia', 'How do I start a project?']) {
-      prompts.append(node('button', '', prompt, { type: 'button', 'data-guide-prompt': prompt }));
-    }
-    const form = node('form', 'guide-form', '', { id: 'guide-form' });
-    const label = node('label', '', 'Ask about Teregon', { for: 'guide-input' });
-    const inputRow = node('div');
-    inputRow.append(node('input', '', '', { id: 'guide-input', name: 'question', autocomplete: 'off', required: '' }));
-    const ask = node('button', '', 'Ask ↗', { type: 'submit' });
-    inputRow.append(ask);
-    form.append(label, inputRow);
-    panel.append(header, messageLog, prompts, form, node('p', 'guide-answer', 'Answers come from this website. Questions are not sent to an AI service.'));
-    dialog.append(panel);
-    document.body.append(dialog);
+  function safeHref(raw) {
+    if (!raw || /[\\\u0000-\u001f]/.test(raw)) return null;
+    if (raw.startsWith('/') && !raw.startsWith('//')) return raw;
+    if (raw.startsWith('#')) return raw;
+    try {
+      const url = new URL(raw);
+      if (url.protocol !== 'https:') return null;
+      if (url.origin === 'https://openrouter.ai' && url.pathname === '/privacy') return url.href;
+      if (APPROVED_EXTERNAL.has(url.origin)) return url.href;
+    } catch (_) { return null; }
+    return null;
   }
 
-  const closer = dialog.querySelector('#guide-close');
-  const messages = dialog.querySelector('#guide-messages');
-  const form = dialog.querySelector('#guide-form');
-  const input = dialog.querySelector('#guide-input');
-  if (!closer || !messages || !form || !input || opener.dataset.guideBound === 'true') return;
-  opener.dataset.guideBound = 'true';
-
-  const contactForm = document.querySelector('#teregon-contact');
-  const contactSection = contactForm?.closest('section');
-  if (contactSection && !contactSection.id) contactSection.id = 'contact';
-
-  const topics = [
-    {
-      keys: ['what is teregon water', 'water filtration', 'water filter', 'water appliance', 'filter manual', 'water business', 'water support', 'watershed', 'river', 'water systems', 'teregon water', 'flow'],
-      answer: 'Teregon Water is our water-focused product direction. We can build support assistants grounded in filter and appliance manuals, service-case triage with deterministic review, and support analytics that surface repeat issues. These are offerings to scope with a water business, not water-sector deployments or proven results yet.',
-      links: [['Explore Teregon Water', '/water.html'], ['Start a conversation', '#contact']]
-    },
-    {
-      keys: ['briopedia', 'brio pedia', 'knowledge base', 'wiki', 'faiss'],
-      answer: 'Briopedia is prior Brio team experience: a Next.js knowledge interface over a FastAPI service, a git-backed support wiki, FAISS retrieval, and local or cloud LLM chat grounded in retrieved material. It is not a Teregon client engagement.',
-      links: [['See the team case studies', '/#team-systems'], ['View the studio deck', '/pitch-deck.html']]
-    },
-    {
-      keys: ['briobot', 'brio bot', 'case triage', 'salesforce support', 'langgraph'],
-      answer: 'BrioBot is prior Brio team experience for e-commerce support cases. A LangGraph workflow gathers case context, retrieves policy and product evidence, and drafts a next step; deterministic Python checks gate writable fields, with dry-run and safe-stop paths. It is not a Teregon client engagement.',
-      links: [['See the team case studies', '/#team-systems'], ['View the studio deck', '/pitch-deck.html']]
-    },
-    {
-      keys: ['eria', 'events website', 'hospitality website'],
-      answer: 'ERIA Events is a live client website build for Bay Area venues and experiences, with venue discovery, event stories, and private or corporate inquiry paths. The build uses Next.js and Sanity CMS.',
-      links: [['Visit ERIA', 'https://www.eria.co/'], ['See the project', '/#selected-work']]
-    },
-    {
-      keys: ['w3 sourcing', 'w3sourcing', 'executive search'],
-      answer: 'W3 Sourcing is a live client website build for a principal-led executive search firm. The site connects its practices, methodology, results, leadership, and inquiry path.',
-      links: [['Visit W3 Sourcing', 'https://www.w3sourcing.com/'], ['See the project', '/#selected-work']]
-    },
-    {
-      keys: ['what does teregon labs do', 'what does labs do', 'what does teregon build', 'what do you build', 'services', 'applied ai', 'ai agent', 'software studio'],
-      answer: 'Teregon is the parent studio. Teregon Labs builds applied AI and software: grounded search, bounded support agents, forecasting and decision tools, and production web apps. Teregon Water focuses that systems work on water filtration, appliance support, and watershed questions.',
-      links: [['Explore what we build', '/work.html'], ['Explore Teregon Water', '/water.html']]
-    },
-    {
-      keys: ['how do you work', 'approach', 'start a project', 'engagement', 'process'],
-      answer: 'We start with the decision and current workflow, map the relevant sources and constraints, build the smallest useful system, then compare it with an agreed baseline. A first conversation can help scope a focused project.',
-      links: [['Our approach', '/approach.html'], ['Start a conversation', '#contact']]
-    },
-    {
-      keys: ['price', 'pricing', 'cost', 'revenue', 'earnings', 'how much'],
-      answer: 'The company context shared for this work is roughly $240K ARR during the BrioBot work and about $2M ARR now for Briopedia’s company. Those are company-level figures, not revenue attributed to BrioBot, Briopedia, or Teregon. No system-specific outcome figures or rate card have been verified for publication. Project scope and cost depend on the workflow, data sources, and deployment needs; contact Teregon to discuss a specific problem.',
-      links: [['Start a conversation', '#contact']]
-    },
-    {
-      keys: ['pitch deck', 'pdf', 'presentation', 'deck'],
-      answer: 'The studio presentation covers Teregon, Teregon Labs, Teregon Water, live website builds, prior Brio team systems, and how we measure outcomes.',
-      links: [['Preview the deck', '/pitch-deck.html'], ['Download the PDF', '/assets/teregon-labs-pitch-deck.pdf']]
-    },
-    {
-      keys: ['contact', 'email', 'talk', 'reach you', 'get in touch'],
-      answer: 'Use the contact form at the bottom of this page. It opens a prefilled email draft in your mail app; this site does not store or send your message.',
-      links: [['Go to the contact form', '#contact'], ['Email Teregon', 'mailto:hello@teregonlabs.com']]
+  // Parse only simple Markdown links; untrusted HTML and unapproved URLs remain text.
+  function safeGuideLinks(text) {
+    const source = String(text || '');
+    const parts = [];
+    const pattern = /\[([^\]\n]{1,160})\]\(([^\s)]+)\)|(https:\/\/[^\s<>()]+|\/(?!\/)[A-Za-z0-9._~!$&'()*+,;=:@%/?#-]*|#[A-Za-z0-9_-]+)/g;
+    let cursor = 0;
+    let match;
+    while ((match = pattern.exec(source))) {
+      if (match.index > cursor) parts.push({ text: source.slice(cursor, match.index) });
+      const markdown = Boolean(match[1]);
+      const raw = markdown ? match[2] : match[3];
+      const trailing = raw.match(/[.,!?;:]+$/)?.[0] || '';
+      const candidate = trailing ? raw.slice(0, -trailing.length) : raw;
+      const href = safeHref(candidate);
+      if (href) parts.push({ text: markdown ? match[1] : candidate, href });
+      else parts.push({ text: markdown ? match[0] : candidate });
+      if (trailing) parts.push({ text: trailing });
+      cursor = pattern.lastIndex;
     }
-  ];
+    if (cursor < source.length) parts.push({ text: source.slice(cursor) });
+    return parts;
+  }
 
-  const normalize = (value) => value.toLocaleLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
-  const answerFor = (question) => {
-    const query = normalize(question);
-    const words = new Set(query.split(' ').filter((word) => word.length > 2));
-    let best = null;
-    let bestScore = 0;
-    for (const topic of topics) {
-      let score = 0;
-      for (const key of topic.keys) {
-        const phrase = normalize(key);
-        if (phrase && (` ${query} `).includes(` ${phrase} `)) score += 4 + phrase.split(' ').length;
-        else {
-          const matches = phrase.split(' ').filter((word) => words.has(word)).length;
-          if (matches) score += matches / phrase.split(' ').length;
+  async function parseGuideStream(stream, options = {}) {
+    const { onDelta = () => {}, onDone = () => {}, onError = () => {}, signal } = options;
+    const reader = stream && typeof stream.getReader === 'function' ? stream.getReader() : stream;
+    if (!reader || typeof reader.read !== 'function') throw new TypeError('Expected a readable SSE stream');
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let text = '';
+    let complete = false;
+    const abortReader = () => { void reader.cancel?.(new DOMException('The operation was aborted.', 'AbortError')); };
+    signal?.addEventListener('abort', abortReader, { once: true });
+    const processFrame = (frame) => {
+      const data = frame.split(/\r?\n/).filter((line) => line.startsWith('data:')).map((line) => line.slice(5).replace(/^ /, '')).join('\n');
+      if (!data) return;
+      if (data.trim() === '[DONE]') {
+        complete = true;
+        onDone(text);
+        return;
+      }
+      let payload;
+      try { payload = JSON.parse(data); }
+      catch (_) { return; }
+      if (payload && payload.error) {
+        const error = new Error('The guide could not complete that response. Please try again.');
+        error.code = typeof payload.error === 'string' ? payload.error : 'unavailable';
+        throw error;
+      }
+      const delta = payload?.choices?.[0]?.delta?.content;
+      if (typeof delta === 'string' && delta) {
+        text += delta;
+        onDelta(delta, text);
+      }
+    };
+    try {
+      if (signal?.aborted) throw new DOMException('The operation was aborted.', 'AbortError');
+      while (!complete) {
+        const { value, done } = await reader.read();
+        if (signal?.aborted) throw new DOMException('The operation was aborted.', 'AbortError');
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        let boundary;
+        while ((boundary = buffer.search(/\r?\n\r?\n/)) !== -1) {
+          const frame = buffer.slice(0, boundary);
+          const separator = buffer.slice(boundary).match(/^\r?\n\r?\n/)[0];
+          buffer = buffer.slice(boundary + separator.length);
+          processFrame(frame);
+          if (complete) break;
         }
       }
-      if (score > bestScore) { best = topic; bestScore = score; }
-    }
-    return bestScore >= 1.5 ? best : {
-      answer: 'I can answer from the information on this site about Teregon Labs, Teregon Water, our project examples, and how to start. I do not have an answer for that yet; send the question through the contact form and the team can follow up.',
-      links: [['Explore the work', '/work.html'], ['Contact Teregon', '#contact']]
-    };
-  };
-
-  const addMessage = (text, role, links = []) => {
-    const item = document.createElement('div');
-    item.className = role === 'user' ? 'guide-user' : 'guide-assistant';
-    item.dataset.role = role;
-    item.textContent = text;
-    if (links.length) {
-      const list = document.createElement('div');
-      list.className = 'guide-links';
-      for (const [label, href] of links) {
-        const link = document.createElement('a');
-        link.href = href === '#contact' && !document.querySelector('#contact') ? '/#contact' : href;
-        link.textContent = label;
-        if (href.startsWith('https://')) { link.target = '_blank'; link.rel = 'noreferrer'; }
-        list.append(link);
+      buffer += decoder.decode();
+      if (!complete && buffer.trim()) processFrame(buffer);
+      if (!complete) {
+        throw new Error('The guide response ended before completion.');
       }
-      item.append(list);
+      return text;
+    } catch (error) {
+      if (error?.name !== 'AbortError') onError(error);
+      throw error;
+    } finally {
+      try { reader.releaseLock?.(); } catch (_) { /* reader already released */ }
+      signal?.removeEventListener('abort', abortReader);
     }
-    messages.append(item);
-    messages.scrollTop = messages.scrollHeight;
+  }
+
+  const makeNode = (doc, tag, className, text, attrs = {}) => {
+    const el = doc.createElement(tag);
+    if (className) el.className = className;
+    if (text !== undefined && text !== null) el.textContent = text;
+    for (const [key, value] of Object.entries(attrs)) el.setAttribute(key, value);
+    return el;
   };
 
-  const ask = (question) => {
-    const clean = question.trim().slice(0, 500);
-    if (!clean) return;
-    addMessage(clean, 'user');
-    const result = answerFor(clean);
-    addMessage(result.answer, 'assistant', result.links);
-  };
+  function mount(doc) {
+    if (!doc || doc.documentElement.dataset.guideMounted === 'true') return;
+    let opener = doc.querySelector('#guide-open');
+    let dialog = doc.querySelector('#teregon-guide');
+    if (!opener) {
+      opener = makeNode(doc, 'button', 'guide-open', 'Teregon Guide ', { id: 'guide-open', type: 'button', 'aria-controls': 'teregon-guide', 'aria-expanded': 'false' });
+      opener.append(makeNode(doc, 'span', '', '⌁', { 'aria-hidden': 'true' }));
+      doc.body.append(opener);
+    }
+    if (!dialog) {
+      dialog = makeNode(doc, 'dialog', '', '', { id: 'teregon-guide', 'aria-labelledby': 'teregon-guide-title' });
+      const panel = makeNode(doc, 'div', 'guide-panel');
+      const header = makeNode(doc, 'header', 'guide-header');
+      const intro = makeNode(doc, 'div');
+      intro.append(
+        makeNode(doc, 'p', 'eyebrow', 'SITE GUIDE / GROUNDED IN THIS SITE'),
+        makeNode(doc, 'h2', '', 'Teregon Guide', { id: 'teregon-guide-title' }),
+        makeNode(doc, 'p', '', 'Ask about Teregon Labs, our work, or Teregon Water. Answers use this site’s information; the guide may not know every detail.')
+      );
+      header.append(intro, makeNode(doc, 'button', '', '×', { id: 'guide-close', type: 'button', 'aria-label': 'Close Teregon Guide' }));
+      const messageLog = makeNode(doc, 'div', 'guide-messages', '', { id: 'guide-messages', role: 'log', 'aria-live': 'polite', 'aria-relevant': 'additions' });
+      const prompts = makeNode(doc, 'div', 'guide-prompts', '', { 'aria-label': 'Suggested questions' });
+      for (const prompt of ['What does Teregon Labs build?', 'What is Teregon Water?', 'Tell me about BrioBot and Briopedia', 'How do I start a project?']) {
+        prompts.append(makeNode(doc, 'button', '', prompt, { type: 'button', 'data-guide-prompt': prompt }));
+      }
+      const form = makeNode(doc, 'form', 'guide-form', '', { id: 'guide-form' });
+      form.noValidate = true;
+      form.append(makeNode(doc, 'label', '', 'Ask about Teregon', { for: 'guide-input' }));
+      const inputRow = makeNode(doc, 'div');
+      inputRow.append(makeNode(doc, 'input', '', '', { id: 'guide-input', name: 'question', autocomplete: 'off', maxlength: '1200', 'aria-label': 'Ask a question about Teregon' }));
+      inputRow.append(makeNode(doc, 'button', '', 'Ask ↗', { type: 'submit' }));
+      form.append(inputRow);
+      panel.append(header, messageLog, prompts, form, makeNode(doc, 'p', 'guide-answer', 'Messages and conversation context are sent to OpenRouter to generate answers. Teregon does not store chat history. See the OpenRouter privacy policy.', { id: 'guide-disclosure' }));
+      dialog.append(panel);
+      doc.body.append(dialog);
+    }
 
-  opener.addEventListener('click', () => {
-    if (!dialog.open) dialog.showModal();
-    opener.setAttribute('aria-expanded', 'true');
-    input.focus();
-  });
-  closer.addEventListener('click', () => dialog.close());
-  dialog.addEventListener('close', () => {
-    opener.setAttribute('aria-expanded', 'false');
-    opener.focus();
-  });
-  dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
-  });
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    ask(input.value);
-    input.value = '';
-    input.focus();
-  });
-  document.querySelectorAll('[data-guide-prompt]').forEach((button) => {
-    button.addEventListener('click', () => ask(button.dataset.guidePrompt || ''));
-  });
+    const closer = dialog.querySelector('#guide-close');
+    const messages = dialog.querySelector('#guide-messages');
+    const form = dialog.querySelector('#guide-form');
+    const input = dialog.querySelector('#guide-input');
+    const submit = form?.querySelector('button[type="submit"]');
+    if (!closer || !messages || !form || !input || !submit || opener.dataset.guideBound === 'true') return;
+    doc.documentElement.dataset.guideMounted = 'true';
+    opener.dataset.guideBound = 'true';
 
-  addMessage('Hi. I can help you explore Teregon, our software work, water-focused offerings, and project examples. My answers are grounded in this site.', 'assistant', [['Explore the work', '/work.html']]);
-})();
+    // Ensure disclosure is present for both server-rendered and fallback markup.
+    const disclosure = dialog.querySelector('#guide-disclosure') || dialog.querySelector('.guide-answer');
+    if (disclosure) {
+      disclosure.replaceChildren(doc.createTextNode('Messages and conversation context are sent to OpenRouter to generate answers. Teregon does not store chat history. '));
+      const privacy = makeNode(doc, 'a', '', 'OpenRouter privacy policy', { href: 'https://openrouter.ai/privacy', target: '_blank', rel: 'noopener noreferrer' });
+      disclosure.append(privacy, doc.createTextNode('.'));
+      disclosure.setAttribute('aria-label', 'Privacy disclosure');
+    }
+
+    const contactForm = doc.querySelector('#teregon-contact');
+    const contactSection = contactForm?.closest('section');
+    if (contactSection && !contactSection.id) contactSection.id = 'contact';
+    const conversation = [];
+    let activeController = null;
+    let activeBubble = null;
+
+    const scrollLog = () => { messages.scrollTop = messages.scrollHeight; };
+    const addBubble = (text, role) => {
+      const bubble = makeNode(doc, 'div', role === 'user' ? 'guide-user' : 'guide-assistant', text, { 'data-role': role });
+      messages.append(bubble);
+      scrollLog();
+      return bubble;
+    };
+    const renderAnswer = (bubble, text) => {
+      bubble.classList.remove('guide-thinking', 'guide-streaming');
+      bubble.replaceChildren();
+      for (const segment of safeGuideLinks(text)) {
+        if (segment.href) {
+          const a = makeNode(doc, 'a', '', segment.text, { href: segment.href });
+          if (segment.href.startsWith('https://') && !segment.href.startsWith('https://teregonlabs.com')) {
+            a.target = '_blank'; a.rel = 'noopener noreferrer';
+          }
+          bubble.append(a);
+        } else bubble.append(doc.createTextNode(segment.text));
+      }
+      scrollLog();
+    };
+    const showNotice = (bubble, text) => {
+      if (!bubble) return;
+      bubble.classList.remove('guide-thinking', 'guide-streaming');
+      bubble.textContent = text;
+    };
+    const messageText = (kind, fallback) => {
+      if (kind === 'rate_limited') return `${fallback} Please wait a little and try again.`;
+      if (kind === 'invalid_request') return 'Please shorten that question and try again.';
+      return fallback;
+    };
+    const resetPending = () => {
+      activeController = null;
+      activeBubble = null;
+      input.disabled = false;
+      submit.disabled = false;
+      submit.textContent = 'Ask ↗';
+      form.removeAttribute('aria-busy');
+    };
+    const cancel = () => {
+      if (activeController) activeController.abort();
+    };
+    const ask = async (question) => {
+      const clean = String(question || '').trim().slice(0, 1200);
+      if (!clean) return;
+      if (activeController) { cancel(); return; }
+      addBubble(clean, 'user');
+      activeBubble = addBubble('', 'assistant');
+      activeBubble.classList.add('guide-thinking');
+      const typing = makeNode(doc, 'span', 'guide-typing', '', { role: 'status', 'aria-label': 'Teregon Guide is thinking' });
+      typing.append(makeNode(doc, 'span', 'guide-typing-label', 'Thinking'));
+      for (let index = 0; index < 3; index += 1) typing.append(makeNode(doc, 'i', '', '•', { 'aria-hidden': 'true' }));
+      activeBubble.append(typing);
+      activeController = new AbortController();
+      const controller = activeController;
+      input.disabled = true;
+      submit.disabled = false;
+      submit.textContent = 'Stop';
+      form.setAttribute('aria-busy', 'true');
+      try {
+        const messagesToSend = [...conversation, { role: 'user', content: clean }].slice(-MAX_HISTORY);
+        const response = await fetch('/api/guide', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
+          body: JSON.stringify({ messages: messagesToSend }),
+          signal: controller.signal
+        });
+        if (!response.ok) {
+          let payload = {};
+          try { payload = await response.json(); } catch (_) { /* use generic status */ }
+          const retry = response.headers.get('Retry-After');
+          let notice = messageText(payload.error, 'I can’t answer just now. Please try again shortly.');
+          if (response.status === 429 && retry && /^\d+$/.test(retry)) notice += ` Retry in about ${retry} seconds.`;
+          showNotice(activeBubble, notice);
+          input.value = clean;
+          return;
+        }
+        if (!response.body) throw new Error('stream unavailable');
+        const answer = await parseGuideStream(response.body, {
+          signal: controller.signal,
+          onDelta: (_delta, accumulated) => {
+            if (activeBubble) {
+              activeBubble.classList.remove('guide-thinking');
+              activeBubble.classList.add('guide-streaming');
+              activeBubble.textContent = accumulated;
+            }
+            scrollLog();
+          }
+        });
+        if (answer.trim()) {
+          renderAnswer(activeBubble, answer);
+          conversation.push({ role: 'user', content: clean }, { role: 'assistant', content: answer });
+          conversation.splice(0, Math.max(0, conversation.length - MAX_HISTORY));
+          input.value = '';
+        } else {
+          showNotice(activeBubble, 'I could not form an answer from the available site information. Please try a more specific question or contact the team.');
+          input.value = clean;
+        }
+      } catch (error) {
+        if (error?.name === 'AbortError') {
+          if (activeBubble) showNotice(activeBubble, 'Response stopped.');
+          else addBubble('Response stopped.', 'assistant');
+          input.value = clean;
+        } else {
+          if (activeBubble) showNotice(activeBubble, 'The guide is temporarily unavailable. Please try again in a moment.');
+          input.value = clean;
+        }
+      } finally {
+        if (activeController === controller) resetPending();
+        activeBubble = null;
+        scrollLog();
+      }
+    };
+
+    opener.addEventListener('click', () => {
+      if (!dialog.open) dialog.showModal();
+      opener.setAttribute('aria-expanded', 'true');
+      input.focus();
+    });
+    closer.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => {
+      cancel();
+      opener.setAttribute('aria-expanded', 'false');
+      opener.focus();
+    });
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (activeController) { cancel(); return; }
+      const question = input.value;
+      if (!question.trim()) { input.focus(); return; }
+      void ask(question);
+    });
+    doc.querySelectorAll('[data-guide-prompt]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!dialog.open) dialog.showModal();
+        input.value = button.dataset.guidePrompt || '';
+        void ask(input.value);
+      });
+    });
+    addBubble('Hi. I can help you explore Teregon Labs, our software work, Teregon Water, and project examples. Ask me about what we build or how to start.', 'assistant');
+  }
+
+  return { mount, parseGuideStream, safeGuideLinks };
+});

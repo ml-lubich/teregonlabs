@@ -63,7 +63,7 @@ class TeregonSiteContract(unittest.TestCase):
         self.assertIn("BrioScope", home)
         self.assertIn("An illustrative Teregon concept", home)
         self.assertIn("From ridge to river", home)
-        self.assertIn("Where heat settles", home)
+        self.assertIn("Briopedia", home)
         for person in ("Misha Lubich", "Joseph Heupler", "Yuvaraj Tankala"):
             self.assertIn(person, about)
 
@@ -93,9 +93,29 @@ class TeregonSiteContract(unittest.TestCase):
     def test_homepage_uses_a_clear_ai_and_nature_positioning(self):
         home = (ROOT / "index.html").read_text().lower()
         self.assertIn("applied ai / software studio", home)
-        self.assertIn("messy data", home)
-        self.assertIn("living world", home)
-        self.assertIn("bring us a problem", home)
+        self.assertIn("custom ai solutions", home)
+        self.assertIn("teregon water is our focused water-industry specialization", home)
+        self.assertIn("tell us what is stuck", home)
+
+    def test_crawler_guides_disclose_model_backed_site_guide(self):
+        for filename in ("llms.txt", "llms-full.txt"):
+            with self.subTest(filename=filename):
+                content = (ROOT / filename).read_text().lower()
+                self.assertIn("openrouter", content)
+                self.assertIn("does not store chat history", content)
+                self.assertNotIn("not generative ai", content)
+                self.assertNotIn("prompts stay in the browser", content)
+
+    def test_every_page_guide_discloses_openrouter_processing(self):
+        for page in ROOT.glob("*.html"):
+            content = page.read_text().lower()
+            if 'id="teregon-guide"' not in content:
+                continue
+            with self.subTest(page=page.name):
+                self.assertIn("openrouter", content)
+                self.assertIn("openrouter.ai/privacy", content)
+                self.assertNotIn("not a generative ai chat", content)
+                self.assertNotIn("questions are not sent to an ai service", content)
 
     def test_selected_work_has_one_desktop_scroll_stack_and_compact_fallback(self):
         home = (ROOT / "index.html").read_text()

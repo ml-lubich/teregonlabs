@@ -1,4 +1,60 @@
+function normalizeHeroPointer(clientX, clientY, rect) {
+  if (!rect || rect.width <= 0 || rect.height <= 0) return { x: 0, y: 0 };
+  const clamp = value => Math.max(-1, Math.min(1, value));
+  return {
+    x: clamp(((clientX - rect.left) / rect.width) * 2 - 1),
+    y: clamp(((clientY - rect.top) / rect.height) * 2 - 1)
+  };
+}
+
+function shouldEnableHeroPointer({ innerWidth, finePointer, hover, reducedMotion }) {
+  return innerWidth > 800 && finePointer && hover && !reducedMotion;
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { normalizeHeroPointer, shouldEnableHeroPointer };
+}
+
 (() => {
+  if (typeof document === 'undefined') return;
+  const hero = document.querySelector('.hero-home');
+  const pointerMedia = matchMedia('(min-width: 801px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+
+  if (hero && shouldEnableHeroPointer({
+    innerWidth,
+    finePointer: matchMedia('(pointer: fine)').matches,
+    hover: matchMedia('(hover: hover)').matches,
+    reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches
+  })) {
+    let rect = hero.getBoundingClientRect();
+    let targetX = 0, targetY = 0, currentX = 0, currentY = 0, pointerFrame = 0;
+    const paint = () => {
+      pointerFrame = 0;
+      currentX += (targetX - currentX) * .14;
+      currentY += (targetY - currentY) * .14;
+      hero.style.setProperty('--hero-shift-x', `${(-currentX * 9).toFixed(2)}px`);
+      hero.style.setProperty('--hero-shift-y', `${(-currentY * 7).toFixed(2)}px`);
+      hero.style.setProperty('--mesh-shift-x', `${(currentX * 12).toFixed(2)}px`);
+      hero.style.setProperty('--mesh-shift-y', `${(currentY * 10).toFixed(2)}px`);
+      if (Math.abs(targetX - currentX) + Math.abs(targetY - currentY) > .002) pointerFrame = requestAnimationFrame(paint);
+    };
+    const schedule = () => { if (!pointerFrame) pointerFrame = requestAnimationFrame(paint); };
+    hero.addEventListener('pointerenter', () => { rect = hero.getBoundingClientRect(); }, { passive: true });
+    hero.addEventListener('pointermove', event => {
+      const point = normalizeHeroPointer(event.clientX, event.clientY, rect);
+      targetX = point.x;
+      targetY = point.y;
+      schedule();
+    }, { passive: true });
+    const reset = () => { targetX = 0; targetY = 0; schedule(); };
+    hero.addEventListener('pointerleave', reset, { passive: true });
+    addEventListener('blur', reset, { passive: true });
+    addEventListener('resize', () => { rect = hero.getBoundingClientRect(); }, { passive: true });
+    pointerMedia.addEventListener?.('change', event => {
+      if (!event.matches) reset();
+    });
+  }
+
   const canvas = document.querySelector('#terrain');
   if (!canvas || matchMedia('(max-width: 800px), (prefers-reduced-motion: reduce)').matches) return;
   const gl = canvas.getContext('webgl', { alpha: true, antialias: false });

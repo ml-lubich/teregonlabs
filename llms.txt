@@ -1,11 +1,11 @@
 # Teregon
 
-> Teregon Labs is a broad applied AI and software studio for customer workflows, business operations, and complex software problems. Teregon Water is a focused vertical for water filtration and appliance customer service, plus watershed systems.
+> Teregon Labs is a broad applied AI and custom software consultancy building custom AI solutions for business workflows, business operations, and complex software problems. Teregon Water is a focused water-industry specialization for filtration and appliance support, service operations, and watershed planning.
 
-## The three roles
+## The studio and two practices
 
 - **Teregon** — the parent point of view: systems that connect people, software, and the living world.
-- **Teregon Labs** — the broad applied AI and software studio, building decision systems and production software for real business workflows.
+- **Teregon Labs** — the broad applied AI and custom software consultancy, building custom AI solutions for business workflows, decision systems, integrations, and production software.
 - **Teregon Water** — a focused specialization offering configurable AI and software for water filtration/appliance customer service, water operations, and watershed decisions. Offerings are not presented as deployed water products or live monitoring.
 
 ## Live client website builds
@@ -20,7 +20,7 @@ These are Teregon website builds, not water or AI product deployments.
 These describe prior Brio product experience by team members, not Teregon client engagements:
 
 - **BrioBot** — e-commerce Salesforce case triage with LangGraph, retrieval, image reading, deterministic Python write gates, dry-run/safe-stop paths, and Langfuse tracing.
-- **Briopedia** — Next.js and FastAPI support knowledge system with a git-backed wiki, FAISS retrieval, and local or cloud LLM chat.
+- **Briopedia** — Next.js and FastAPI support knowledge system with a git-backed wiki, FAISS retrieval, and local or cloud LLM chat. See the [Briopedia case study](https://teregonlabs.com/briopedia.html).
 - **BrioScope** — support analytics for recurring issues and service signals.
 - **Sales Navigator** — read-only Salesforce forecasting and customer analytics with SARIMAX, XGBoost, DuckDB, and Parquet.
 
@@ -37,10 +37,12 @@ Teregon Water can build or configure grounded support assistants for approved ma
 - [Teregon Water](https://teregonlabs.com/water.html): Water filtration and appliance workflows, service systems, and watershed context.
 - [Approach](https://teregonlabs.com/approach.html): How Teregon scopes, builds, and measures useful systems.
 - [About](https://teregonlabs.com/about.html): Parent point of view, practices, principles, and team.
+- [Briopedia case study](https://teregonlabs.com/briopedia.html): Prior Brio team knowledge-system work.
 - [Studio deck](https://teregonlabs.com/pitch-deck.html): On-page presentation and downloadable PDF.
 
 ## Guide and contact
 
-The Teregon Guide answers a small set of questions from current site content. It is not generative AI; visitor prompts stay in the browser and are not sent to a model service. Contact forms open an email draft and do not store submissions.
+The Teregon Guide is a site-scoped, model-backed assistant for Teregon Labs, published work, Teregon Water, and starting a project. It sends visitor questions and recent conversation context to OpenRouter using the fixed free `nvidia/nemotron-3.5-super-vl:free` route. Teregon does not store chat history; OpenRouter may apply its own privacy and retention practices (https://openrouter.ai/privacy). The Guide may not know every detail. Contact forms open an email draft and do not store submissions.
 
-- Email: hello@teregonlabs.com
+- General studio inquiries: hello@teregonlabs.com
+Water-industry projects: hello@teregonlabs.com
