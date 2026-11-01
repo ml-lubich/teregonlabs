@@ -206,3 +206,26 @@ html{scroll-behavior:smooth}
 .service-number{color:#526a49}
 .service-list article>div>p:not(.eyebrow){color:#596355}
 .water-contact .contact-form label,.water-contact .contact-help{color:#c5d0c0}
+
+/* Keep the studio phrase fixed while the verb turns beneath it. */
+.hero-copy h1 .hero-prefix{display:block;white-space:nowrap}
+.hero-word-cycle{display:grid;grid-template-areas:"word";align-items:start;min-height:1em;overflow:hidden;perspective:800px;color:#b6ca91}
+.hero-word-cycle>span{grid-area:word;display:block;backface-visibility:hidden;opacity:0;transform:translate3d(0,42%,0) rotateX(-58deg);transform-origin:50% 70%;animation:hero-word-turn 12s var(--ease) infinite}
+.hero-word-cycle>span:first-child{animation-delay:-1.2s}.hero-word-cycle>span:nth-child(2){animation-delay:1.8s}.hero-word-cycle>span:nth-child(3){animation-delay:4.8s}.hero-word-cycle>span:nth-child(4){animation-delay:7.8s}
+@keyframes hero-word-turn{0%,2%{opacity:0;transform:translate3d(0,42%,0) rotateX(-58deg)}7%,22%{opacity:1;transform:translate3d(0,0,0) rotateX(0)}27%,100%{opacity:0;transform:translate3d(0,-38%,0) rotateX(48deg)}}
+.water-story-stage{background:#13251e;isolation:isolate}
+.water-footage,.water-scene-shade,.water-relief{position:absolute;inset:0;width:100%;height:100%}
+.water-footage{object-fit:cover;object-position:center 54%;transform:scale(1.04);animation:pond-camera-drift 14s ease-in-out infinite alternate}
+.water-scene-shade{z-index:1;background:linear-gradient(180deg,#0c171244 0%,transparent 38%,#0b171344 100%);pointer-events:none}
+.water-relief{z-index:2;opacity:.3;mix-blend-mode:screen;mask-image:linear-gradient(transparent 28%,#000 46%,#000 72%,transparent 86%);transform:perspective(760px) rotateX(54deg) scale(1.12);transform-origin:50% 61%;animation:relief-drift 9s ease-in-out infinite alternate}
+.water-drop-loop{position:absolute;z-index:3;left:calc(50% - 23px);top:31%;width:46px;height:59px;filter:drop-shadow(0 7px 13px #c6e7aa88);transform-origin:center;animation:pond-drop 5.4s linear infinite}
+.water-drop-loop svg{display:block;width:100%;height:100%;overflow:visible}
+.water-impact-ring{position:absolute;z-index:3;left:50%;top:55%;width:18%;height:5%;border:1px solid #ecffd69e;border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.18,.24);box-shadow:0 0 12px #ddf6bd55,inset 0 0 8px #ddf6bd30;animation:pond-ripple 5.4s ease-out infinite}
+.water-impact-ring.ring-two{width:29%;height:8%;animation-delay:.12s}.water-impact-ring.ring-three{width:42%;height:12%;animation-delay:.24s;opacity:.42}
+.water-scene-label{z-index:4}
+@keyframes pond-camera-drift{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.1) translate3d(0,-1.2%,0)}}
+@keyframes relief-drift{from{transform:perspective(760px) rotateX(54deg) rotateZ(-3deg) scale(1.12)}to{transform:perspective(760px) rotateX(58deg) rotateZ(2deg) scale(1.14)}}
+@keyframes pond-drop{0%,5%{opacity:0;transform:translate3d(0,-16px,0) scale(.72)}9%{opacity:1}33%{opacity:1;transform:translate3d(0,96px,0) scale(.9)}36%,100%{opacity:0;transform:translate3d(0,112px,0) scale(.56)}}
+@keyframes pond-ripple{0%,34%{opacity:0;transform:translate(-50%,-50%) scale(.18,.24)}39%{opacity:.86}64%{opacity:0;transform:translate(-50%,-50%) scale(4.4,2.9)}100%{opacity:0;transform:translate(-50%,-50%) scale(4.4,2.9)}}
+@media(max-width:560px){.hero-word-cycle{min-height:1em}.water-drop-loop{top:31%;width:39px;height:51px;left:calc(50% - 19px)}.water-impact-ring{top:55%}}
+@media(prefers-reduced-motion:reduce){.hero-word-cycle>span,.water-footage,.water-relief,.water-drop-loop,.water-impact-ring{animation:none!important}.hero-word-cycle>span{display:none;opacity:0;transform:none}.hero-word-cycle>span:first-child{display:block;opacity:1}.water-footage{transform:none}.water-drop-loop{opacity:.85;transform:translateY(58px) scale(.8)}.water-impact-ring{opacity:.55;transform:translate(-50%,-50%) scale(1.8,1.2)}}
