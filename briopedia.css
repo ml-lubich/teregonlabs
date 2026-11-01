@@ -174,6 +174,26 @@
 .briopedia-page .bp-next .bp-primary { background: #dff4ff; }
 .briopedia-page .bp-next .bp-secondary { color: #d6e9f6; }
 .briopedia-page .bp-reveal { opacity: 1; transform: none; }
+.briopedia-page .bp-path { position: relative; overflow: hidden; padding: 37px clamp(26px, 8vw, 128px) 42px; color: #e7f7ff; background: linear-gradient(105deg, #0876b7, #0b9ccc 52%, #0872af); isolation: isolate; }
+.briopedia-page .bp-path::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .15; background: repeating-linear-gradient(135deg, transparent 0 46px, rgba(255,255,255,.45) 47px, transparent 48px 94px); mask-image: linear-gradient(90deg, transparent, #000 35%, #000 80%, transparent); }
+.briopedia-page .bp-path-head { display: flex; justify-content: space-between; gap: 24px; color: rgba(235,249,255,.78); font: 500 10px/1.5 "DM Mono", monospace; letter-spacing: .14em; }
+.briopedia-page .bp-path-line { position: absolute; inset: 42px 5% auto; width: 90%; height: 132px; overflow: visible; pointer-events: none; }
+.briopedia-page .bp-path-line path { fill: none; vector-effect: non-scaling-stroke; }
+.briopedia-page .bp-path-track { stroke: rgba(223,248,255,.28); stroke-width: 1.5; }
+.briopedia-page .bp-path-glow { stroke: #dffaff; stroke-width: 2; stroke-dasharray: 18 980; stroke-linecap: round; filter: drop-shadow(0 0 7px rgba(224,251,255,.9)); animation: bp-path-travel 5.5s linear infinite; }
+.briopedia-page .bp-path-stops { position: relative; display: grid; grid-template-columns: repeat(3,1fr); gap: 8%; margin-top: 76px; }
+.briopedia-page .bp-path-stops a { position: relative; display: grid; justify-items: start; gap: 5px; width: fit-content; color: inherit; text-decoration: none; transition: transform .25s ease; }
+.briopedia-page .bp-path-stops a:hover { transform: translateY(-4px); }
+.briopedia-page .bp-path-stops a::before { content: ""; position: absolute; top: -25px; left: 0; width: 9px; height: 9px; border: 2px solid #dffaff; border-radius: 50%; background: #0785bc; box-shadow: 0 0 0 6px rgba(223,250,255,.14), 0 0 18px rgba(223,250,255,.7); }
+.briopedia-page .bp-path-stops span { color: rgba(227,248,255,.74); font: 500 10px/1.3 "DM Mono", monospace; letter-spacing: .12em; }
+.briopedia-page .bp-path-stops b { font-size: clamp(20px,2.3vw,29px); letter-spacing: -.045em; }
+.briopedia-page .bp-path-stops small { color: rgba(228,247,255,.78); font-size: 13px; }
+.briopedia-page .bp-flow-card[id] { scroll-margin-top: 110px; }
+.briopedia-page .bp-flow-card { transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+.briopedia-page .bp-flow-card:hover { transform: translateY(-7px); border-color: rgba(22,132,215,.42); box-shadow: 0 28px 65px rgba(14,69,108,.13); }
+.briopedia-page .bp-ui-card { transition: transform .5s cubic-bezier(.2,.75,.25,1), box-shadow .5s ease; }
+.briopedia-page .bp-ui-card:hover { transform: rotateY(0) translateY(-6px); box-shadow: 0 32px 82px rgba(12,53,85,.16); }
+@keyframes bp-path-travel { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
 @keyframes bp-float { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-12px) rotate(1deg); } }
 @keyframes bp-flow { 0% { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
 @supports (animation-timeline: view()) {
@@ -204,6 +224,12 @@
   .briopedia-page .bp-flow-link i { top: 0; left: -3px; animation: bp-flow-vertical 2.4s ease-in-out infinite; }
   .briopedia-page .bp-architecture-note { display: block; }
   .briopedia-page .bp-architecture-note p { margin-top: 9px; }
+  .briopedia-page .bp-path { padding: 27px 25px 31px; }
+  .briopedia-page .bp-path-head { flex-direction: column; gap: 4px; }
+  .briopedia-page .bp-path-line { inset: 68px 4% auto; width: 92%; height: 104px; }
+  .briopedia-page .bp-path-stops { margin-top: 72px; gap: 2%; }
+  .briopedia-page .bp-path-stops b { font-size: clamp(18px,4vw,25px); }
+  .briopedia-page .bp-path-stops small { font-size: 11px; }
   .briopedia-page .bp-visual-story { grid-template-columns: 1fr; }
   .briopedia-page .bp-visual-copy { position: static; }
   .briopedia-page .bp-ui-answer { transform: none; }
@@ -217,6 +243,14 @@
   .briopedia-page .bp-hero h1 { font-size: clamp(40px, 12vw, 58px); }
   .briopedia-page .bp-hero-art { height: 88vw; max-height: 400px; }
   .briopedia-page .bp-intro,.briopedia-page .bp-system,.briopedia-page .bp-visual-story,.briopedia-page .bp-guardrails,.briopedia-page .bp-build { padding-left: 20px; padding-right: 20px; }
+  .briopedia-page .bp-path { padding-left: 20px; padding-right: 20px; }
+  .briopedia-page .bp-path-stops { grid-template-columns: 1fr; gap: 15px; margin: 26px 0 0 6px; }
+  .briopedia-page .bp-path-line { display: none; }
+  .briopedia-page .bp-path-stops a { grid-template-columns: 31px 1fr; column-gap: 8px; align-items: baseline; width: 100%; }
+  .briopedia-page .bp-path-stops a::before { display: none; }
+  .briopedia-page .bp-path-stops span { grid-row: span 2; width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid rgba(223,250,255,.55); border-radius: 50%; color: #fff; }
+  .briopedia-page .bp-path-stops b { font-size: 19px; }
+  .briopedia-page .bp-path-stops small { grid-column: 2; }
   .briopedia-page .bp-ui-card { padding: 13px; }
   .briopedia-page .bp-ui-card figcaption { align-items: flex-start; flex-direction: column; gap: 3px; }
   .briopedia-page .bp-ui-topline { padding: 0 10px; font-size: 10px; }

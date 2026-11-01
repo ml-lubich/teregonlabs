@@ -54,14 +54,20 @@
       <div class="bp-intro-body"><p>Support teams work across manuals, troubleshooting notes, and product guidance. Briopedia was built as an internal knowledge system: a versioned wiki for maintaining material, plus retrieval and chat for bringing relevant sources into a question.</p><p class="bp-attribution">This is prior Brio team product experience. It is not a Teregon client engagement, and no business outcome is attributed here.</p></div>
     </section>
 
+    <section class="bp-path" aria-label="Briopedia knowledge path">
+      <div class="bp-path-head"><span>THE KNOWLEDGE PATH</span><span>ONE QUESTION / THREE CONNECTED LAYERS</span></div>
+      <svg class="bp-path-line" viewBox="0 0 1200 132" preserveAspectRatio="none" aria-hidden="true"><path class="bp-path-track" d="M0 85 C180 85 140 38 330 38 S500 105 630 78 S820 25 930 58 S1080 92 1200 34"/><path class="bp-path-glow" d="M0 85 C180 85 140 38 330 38 S500 105 630 78 S820 25 930 58 S1080 92 1200 34"/></svg>
+      <div class="bp-path-stops"><a href="#bp-source"><span>01</span><b>Maintain</b><small>Editable source</small></a><a href="#bp-retrieval"><span>02</span><b>Retrieve</b><small>Relevant passages</small></a><a href="#bp-response"><span>03</span><b>Respond</b><small>Context in view</small></a></div>
+    </section>
+
     <section class="bp-system" id="system" aria-labelledby="bp-system-title">
       <div class="bp-section-head bp-reveal"><p class="bp-kicker">01 / THE SYSTEM</p><h2 id="bp-system-title">A maintained source.<br><em>A grounded answer.</em></h2><p>Each layer has a distinct job: keep knowledge editable, find relevant passages, then use those sources to inform a response.</p></div>
       <div class="bp-flow" aria-label="Briopedia system architecture">
-        <article class="bp-flow-card bp-reveal"><span class="bp-step">01</span><div class="bp-flow-icon bp-icon-wiki" aria-hidden="true"><i></i><i></i><i></i></div><p class="bp-kicker">KNOWLEDGE</p><h3>Git-backed wiki</h3><p>Support material stays editable with a reviewable version history.</p><span class="bp-flow-tech">MAINTAINED CONTENT</span></article>
+        <article class="bp-flow-card bp-reveal" id="bp-source"><span class="bp-step">01</span><div class="bp-flow-icon bp-icon-wiki" aria-hidden="true"><i></i><i></i><i></i></div><p class="bp-kicker">KNOWLEDGE</p><h3>Git-backed wiki</h3><p>Support material stays editable with a reviewable version history.</p><span class="bp-flow-tech">MAINTAINED CONTENT</span></article>
         <span class="bp-flow-link" aria-hidden="true"><i></i></span>
-        <article class="bp-flow-card bp-reveal"><span class="bp-step">02</span><div class="bp-flow-icon bp-icon-index" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="bp-kicker">RETRIEVAL</p><h3>FAISS index</h3><p>Relevant passages are retrieved from the knowledge corpus for a question.</p><span class="bp-flow-tech">SOURCE CONTEXT</span></article>
+        <article class="bp-flow-card bp-reveal" id="bp-retrieval"><span class="bp-step">02</span><div class="bp-flow-icon bp-icon-index" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="bp-kicker">RETRIEVAL</p><h3>FAISS index</h3><p>Relevant passages are retrieved from the knowledge corpus for a question.</p><span class="bp-flow-tech">SOURCE CONTEXT</span></article>
         <span class="bp-flow-link" aria-hidden="true"><i></i></span>
-        <article class="bp-flow-card bp-reveal"><span class="bp-step">03</span><div class="bp-flow-icon bp-icon-chat" aria-hidden="true"><i></i><i></i></div><p class="bp-kicker">RESPONSE</p><h3>LLM chat layer</h3><p>A provider-agnostic layer can use local or cloud models with retrieved context.</p><span class="bp-flow-tech">LOCAL OR CLOUD</span></article>
+        <article class="bp-flow-card bp-reveal" id="bp-response"><span class="bp-step">03</span><div class="bp-flow-icon bp-icon-chat" aria-hidden="true"><i></i><i></i></div><p class="bp-kicker">RESPONSE</p><h3>LLM chat layer</h3><p>A provider-agnostic layer can use local or cloud models with retrieved context.</p><span class="bp-flow-tech">LOCAL OR CLOUD</span></article>
       </div>
       <div class="bp-architecture-note bp-reveal"><span>IMPLEMENTATION</span><p><b>Next.js</b> interface · <b>FastAPI</b> async backend · <b>FAISS</b> retrieval · <b>Docker Compose</b> deployment</p></div>
     </section>
@@ -83,8 +89,8 @@
           <figcaption><span>ILLUSTRATIVE WORKFLOW / 02</span><b>Answer with context</b></figcaption>
           <div class="bp-ui-window">
             <div class="bp-ui-topline"><span class="bp-ui-avatar">B</span><span>Briopedia / support chat concept</span><span class="bp-ui-status">ILLUSTRATIVE</span></div>
-            <div class="bp-chat-question">Can you help me find the relevant guidance?</div>
-            <div class="bp-chat-answer"><span class="bp-chat-mark">B</span><div><b>Here is the matching support material.</b><p>The response is informed by retrieved passages from the maintained knowledge base.</p><span class="bp-source-chip">SOURCE · KNOWLEDGE ARTICLE</span></div></div>
+            <div class="bp-chat-question">Where is the current guidance for a filter-change question?</div>
+            <div class="bp-chat-answer"><span class="bp-chat-mark">B</span><div><b>Here is the matching support material.</b><p>A response concept grounded in retrieved passages from the maintained knowledge base.</p><span class="bp-source-chip">SOURCE · KNOWLEDGE ARTICLE</span></div></div>
             <div class="bp-chat-compose"><span>Ask about support knowledge…</span><i aria-hidden="true">↑</i></div>
             <div class="bp-ui-footnote">Diagram illustrates the source-grounded interaction pattern</div>
           </div>
