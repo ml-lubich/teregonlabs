@@ -1,6 +1,7 @@
 const { describe, expect, test } = require('bun:test');
-const { createGuideHandler, getClientIp } = require('../api/guide.js');
+const { createGuideHandler, getClientIp, config } = require('../pages/api/guide.js');
 const { createRateLimiter } = require('../lib/guide/rate-limit.js');
+const { Readable } = require('node:stream');
 
 function mockResponse() {
   return {
@@ -23,6 +24,13 @@ function makeRequest(body, headers = {}) {
   };
 }
 
+function makeRawRequest(body, headers = {}) {
+  const req = Readable.from([Buffer.from(body)]);
+  req.method = 'POST';
+  req.headers = { 'content-type': 'application/json', 'x-forwarded-for': '198.51.100.23', ...headers };
+  return req;
+}
+
 const env = {
   OPENROUTER_API_KEY: 'test-only-not-a-real-key',
   GUIDE_RATE_SECRET: 'test-only-rate-signing-secret-long-enough'
@@ -41,6 +49,41 @@ describe('Guide client IP selection', () => {
 });
 
 describe('Teregon Guide API', () => {
+  test('is mounted as a Next Pages API route with body parsing disabled for bounded streaming input', () => {
+    expect(config.api.bodyParser).toBe(false);
+  });
+
+  test('parses bounded raw JSON request bodies and returns the existing event stream', async () => {
+    let calls = 0;
+    const handler = createGuideHandler({
+      env,
+      fetchImpl: async () => {
+        calls += 1;
+        return new Response('data: {"choices":[{"delta":{"content":"Grounded answer."}}]}\n\ndata: [DONE]\n\n', {
+          status: 200,
+          headers: { 'content-type': 'text/event-stream' }
+        });
+      }
+    });
+    const res = mockResponse();
+    await handler(makeRawRequest(JSON.stringify(question)), res);
+    expect(calls).toBe(1);
+    expect(res.statusCode).toBe(200);
+    expect(res.headers['content-type']).toContain('text/event-stream');
+    expect(res.body).toContain('Grounded answer.');
+    expect(res.body).toContain('[DONE]');
+  });
+
+  test('rejects oversized raw request bodies before calling the provider', async () => {
+    let calls = 0;
+    const handler = createGuideHandler({ env, fetchImpl: async () => { calls += 1; } });
+    const res = mockResponse();
+    await handler(makeRawRequest(JSON.stringify({ messages: [{ role: 'user', content: 'x'.repeat(17_000) }] })), res);
+    expect(res.statusCode).toBe(413);
+    expect(JSON.parse(res.body)).toEqual({ error: 'request_too_large' });
+    expect(calls).toBe(0);
+  });
+
   test('fails closed when either server secret is missing without calling the provider', async () => {
     for (const incomplete of [
       { GUIDE_RATE_SECRET: env.GUIDE_RATE_SECRET },

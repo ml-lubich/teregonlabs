@@ -1,6 +1,6 @@
 # Teregon — full site context
 
-Teregon is the parent studio point of view. **Teregon Labs** is a broad applied AI and custom software consultancy building custom AI solutions for business workflows, business operations, and complex software problems. **Teregon Water** is a focused specialization for water filtration and appliance support, service operations, and watershed planning.
+Teregon is the parent studio point of view. **Teregon Labs** is a broad applied AI and custom software consultancy building custom AI solutions for business workflows, business operations, and complex software problems. **Teregon Aqua** is a focused specialization for water filtration and appliance support, service operations, and watershed planning.
 
 ## What Teregon Labs builds
 
@@ -16,9 +16,9 @@ Connect scattered CRM, product, support, and operational data; build forecasts, 
 
 Ship production web applications, internal tools, integrations, evaluation, and observability around existing workflows.
 
-## Teregon Water
+## Teregon Aqua
 
-Teregon Water is a focused specialization that applies software and AI to water filtration and appliance businesses, service operations, and watershed planning. These are configurable offerings—not deployed Teregon Water products or claims of proven impact:
+Teregon Aqua is a focused specialization that applies software and AI to water filtration and appliance businesses, service operations, and watershed planning. These are configurable offerings—not deployed Teregon Aqua products or claims of proven impact:
 
 - **Grounded product support:** search approved product manuals, installation guides, and service policies; draft source-linked answers and escalate when evidence is missing.
 - **Evidence-gated case triage:** classify a service case, retrieve product and policy evidence, draft a next step, then require deterministic checks and human review before consequential record changes.
@@ -48,9 +48,9 @@ These product examples were built by team members in prior Brio work; they are n
 
 The prior Brio work is team experience rather than Teregon client delivery. The team reports company-level ARR context of approximately $240K during BrioBot work and approximately $2M currently for Briopedia's company. These figures describe company scale only; they are not attributed to BrioBot or Briopedia and are not Teregon client results.
 
-## Teregon Water illustrative concepts
+## Teregon Aqua illustrative concepts
 
-Teregon Water concepts include “From ridge to river,” an illustrative watershed view combining land cover, rainfall, stream observations, and nearby assets. “Where water gathers” explores rainfall, slope, land cover, drainage paths, and nearby assets as a hypothetical runoff-planning view. These are illustrative concepts, not completed water client work, live data products, or sensor monitoring deployments.
+Teregon Aqua concepts include “From ridge to river,” an illustrative watershed view combining land cover, rainfall, stream observations, and nearby assets. “Where water gathers” explores rainfall, slope, land cover, drainage paths, and nearby assets as a hypothetical runoff-planning view. These are illustrative concepts, not completed water client work, live data products, or sensor monitoring deployments.
 
 ## How Teregon works
 
@@ -62,20 +62,21 @@ Measures may include handling time, time to detect, repeat issues, exposure redu
 
 ## Founder
 
-Misha Lubich is CEO of Teregon Labs. His background includes machine-learning research using USGS stream data, machine-learning pipeline experience at Lawrence Berkeley National Laboratory (LBNL), and six peer-reviewed publications in machine learning for hydrology and environmental science. This phrasing describes research using USGS data and LBNL experience; it does not imply USGS employment or that the publications were jointly produced with either institution.
+Misha Lubich is CEO of Teregon Labs. His background includes machine-learning research using USGS stream data, machine-learning pipeline experience at Lawrence Berkeley National Laboratory (LBNL), and six research publications in machine learning for hydrology and environmental science. This phrasing describes research using USGS data and LBNL experience; it does not imply USGS employment or that the publications were jointly produced with either institution.
 
 ## Teregon Guide and contact
 
-The Teregon Guide is a bounded, model-backed assistant for Teregon Labs, its published work, Teregon Water, and starting a project. It sends visitor questions and recent conversation context to OpenRouter using the fixed free `nvidia/nemotron-3.5-super-vl:free` route. Teregon does not store chat history; OpenRouter may apply its own privacy and retention practices. Review https://openrouter.ai/privacy. The assistant may not know every detail and directs visitors to the contact page when information is unavailable. Contact forms open a mail draft and do not store submissions.
+The Teregon Guide is a bounded, model-backed assistant for Teregon Labs, its published work, Teregon Aqua, and starting a project. It sends visitor questions and recent conversation context to OpenRouter using the fixed free `nvidia/nemotron-3.5-super-vl:free` route. Teregon does not store chat history; OpenRouter may apply its own privacy and retention practices. Review https://openrouter.ai/privacy. The assistant may not know every detail and directs visitors to the contact page when information is unavailable. Contact forms open a mail draft and do not store submissions.
 
 ## Pages
 
 - Home: https://teregonlabs.com/
 - What we build: https://teregonlabs.com/work.html
-- Teregon Water: https://teregonlabs.com/water.html
+- Teregon Aqua: https://teregonlabs.com/water.html
 - Approach: https://teregonlabs.com/approach.html
 - About: https://teregonlabs.com/about.html
 - Briopedia case study (prior Brio team work): https://teregonlabs.com/briopedia.html
+- BrioBot case study (prior Brio team work): https://teregonlabs.com/briobot.html
 - Studio deck and PDF: https://teregonlabs.com/pitch-deck.html
 
 General studio inquiries: hello@teregonlabs.com

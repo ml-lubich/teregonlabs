@@ -1,5 +1,5 @@
 const { describe, expect, test } = require('bun:test');
-const { parseGuideStream, safeGuideLinks } = require('../site-guide.js');
+const { getGuideErrorMessage, parseGuideStream, safeGuideLinks } = require('../lib/guide/client.js');
 
 function streamOf(chunks, hooks = {}) {
   return new ReadableStream({
@@ -59,5 +59,15 @@ describe('Teregon Guide stream client', () => {
     expect(hrefs).toContain('https://www.eria.co/');
     expect(hrefs).not.toContain('https://evil.example/x');
     expect(hrefs.some((href) => href.startsWith('javascript:'))).toBe(false);
+  });
+
+  test('gives a contextual wait instruction for provider rate limits and preserves retry timing', () => {
+    expect(getGuideErrorMessage('rate_limited', 17)).toBe('The Guide is receiving too many questions. Wait about 17 seconds, then try your question again.');
+    expect(getGuideErrorMessage('rate_limited')).toBe('The Guide is receiving too many questions. Wait a little, then try your question again.');
+  });
+
+  test('explains invalid and oversized requests in terms visitors can fix', () => {
+    expect(getGuideErrorMessage('invalid_request')).toBe('That question could not be sent. Shorten it and try again.');
+    expect(getGuideErrorMessage('request_too_large')).toBe('That question is too long. Shorten it and try again.');
   });
 });

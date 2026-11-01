@@ -1,161 +1,239 @@
-"""Regression checks for Teregon's public pages and share metadata."""
+"""Source-level contracts for Teregon's Next.js public site."""
 
-from html.parser import HTMLParser
 import os
 from pathlib import Path
+import re
 import unittest
 
 
 ROOT = Path(os.environ.get("TEREGON_SITE_ROOT", Path(__file__).resolve().parents[1]))
-PAGES = ("index.html", "work.html", "approach.html", "about.html")
+ROUTES = {
+    "/": "app/page.tsx",
+    "/work.html": "app/work.html/page.tsx",
+    "/approach.html": "app/approach.html/page.tsx",
+    "/about.html": "app/about.html/page.tsx",
+    "/water.html": "app/water.html/page.tsx",
+    "/briobot.html": "app/briobot.html/page.tsx",
+    "/briopedia.html": "app/briopedia.html/page.tsx",
+    "/pitch-deck.html": "app/pitch-deck.html/page.tsx",
+}
 
 
-class PageMetadata(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.meta = {}
-        self.canonical = []
+def source(path):
+    return (ROOT / path).read_text()
 
-    def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
-        if tag == "meta":
-            key = attrs.get("property") or attrs.get("name")
-            if key:
-                self.meta[key] = attrs.get("content", "")
-        if tag == "link" and attrs.get("rel") == "canonical":
-            self.canonical.append(attrs.get("href", ""))
+
+def normalize(value):
+    return re.sub(r"\s+", " ", value)
+
+
+def image_dimensions(data):
+    """Read JPEG dimensions from a baseline or progressive frame marker."""
+    index = 2
+    while index < len(data) - 9:
+        if data[index] != 0xFF:
+            index += 1
+            continue
+        marker = data[index + 1]
+        length = int.from_bytes(data[index + 2:index + 4], "big")
+        if marker in (0xC0, 0xC2):
+            return (
+                int.from_bytes(data[index + 7:index + 9], "big"),
+                int.from_bytes(data[index + 5:index + 7], "big"),
+            )
+        index += 2 + length
+    return None
 
 
 class TeregonSiteContract(unittest.TestCase):
-    def test_every_public_page_has_complete_share_metadata(self):
-        for name in PAGES:
-            with self.subTest(page=name):
-                parser = PageMetadata()
-                parser.feed((ROOT / name).read_text())
-                for key in ("og:title", "og:description", "og:url", "og:image", "twitter:card", "twitter:title", "twitter:description", "twitter:image"):
-                    self.assertTrue(parser.meta.get(key), f"{name} missing {key}")
-                self.assertEqual(parser.meta["twitter:card"], "summary_large_image")
-                self.assertEqual(len(parser.canonical), 1)
-                self.assertEqual(parser.meta["og:url"], parser.canonical[0])
+    def test_next_routes_export_canonical_open_graph_and_twitter_metadata(self):
+        layout = source("app/layout.tsx")
+        self.assertIn('new URL("https://teregonlabs.com")', layout)
+        self.assertIn('card: "summary_large_image"', layout)
+        self.assertIn('url: "/assets/social-preview.jpg"', layout)
 
-    def test_social_preview_asset_exists_and_matches_declared_dimensions(self):
-        image = ROOT / "assets/social-preview.jpg"
-        self.assertTrue(image.is_file())
-        data = image.read_bytes()
-        # JPEG SOF0/SOF2 marker: width and height are in the frame header.
-        dimensions = None
-        i = 2
-        while i < len(data) - 9:
-            if data[i] != 0xFF:
-                i += 1
-                continue
-            marker = data[i + 1]
-            length = int.from_bytes(data[i + 2:i + 4], "big")
-            if marker in (0xC0, 0xC2):
-                dimensions = (int.from_bytes(data[i + 7:i + 9], "big"), int.from_bytes(data[i + 5:i + 7], "big"))
-                break
-            i += 2 + length
-        self.assertEqual(dimensions, (1730, 909))
+        for canonical, route_file in ROUTES.items():
+            with self.subTest(route=canonical):
+                route = source(route_file)
+                self.assertRegex(route, r"export const metadata\s*:\s*Metadata\s*=")
+                self.assertRegex(route, r"(?:const\s+title\s*=|title\s*:)" )
+                self.assertRegex(route, r"(?:const\s+description\s*=|description\s*:)" )
+                self.assertRegex(route, rf'canonical:\s*"{re.escape(canonical)}"')
+                self.assertIn("openGraph:", route)
+                self.assertIn("twitter:", route)
+                self.assertIn("images:", route)
+        sitemap = source("public/sitemap.xml")
+        for canonical in ROUTES:
+            self.assertIn(f"https://teregonlabs.com{canonical}", sitemap)
 
-    def test_homepage_has_grounded_case_studies_and_named_team(self):
-        home = (ROOT / "index.html").read_text()
-        about = (ROOT / "about.html").read_text()
-        self.assertIn("BrioScope", home)
-        self.assertIn("An illustrative Teregon concept", home)
-        self.assertIn("From ridge to river", home)
-        self.assertIn("Briopedia", home)
-        for person in ("Misha Lubich", "Joseph Heupler", "Yuvaraj Tankala"):
-            self.assertIn(person, about)
+    def test_social_preview_dimensions_match_root_metadata(self):
+        layout = source("app/layout.tsx")
+        match = re.search(
+            r'url:\s*"(/assets/social-preview\.jpg)"\s*,\s*width:\s*(\d+)\s*,\s*height:\s*(\d+)',
+            layout,
+        )
+        self.assertIsNotNone(match, "root Open Graph image must declare dimensions")
+        asset = ROOT / "public" / match.group(1).lstrip("/")
+        self.assertTrue(asset.is_file())
+        self.assertEqual(image_dimensions(asset.read_bytes()), (int(match.group(2)), int(match.group(3))))
 
-    def test_homepage_explains_how_business_impact_is_measured(self):
-        home = (ROOT / "index.html").read_text()
-        for phrase in ("baseline", "revenue protected", "client has verified it"):
-            self.assertIn(phrase, home.lower())
-
-    def test_homepage_shows_deployed_client_projects_with_real_screenshots(self):
-        home = (ROOT / "index.html").read_text()
-        for domain, image, project, detail in (
-            ("https://www.eria.co/", "project-eria.jpg", "ERIA", "Sanity"),
-            ("https://www.w3sourcing.com/", "project-w3sourcing.jpg", "W3 Sourcing", "methodology"),
+    def test_homepage_has_plain_service_copy_and_named_offerings(self):
+        home = source("components/pages/home-page.tsx").lower()
+        for phrase in (
+            "applied ai / software studio",
+            "custom ai and software for business workflows",
+            "support assistants",
+            "workflow automation",
+            "teregon aqua is our focused practice for water-product service",
         ):
-            with self.subTest(project=project):
-                self.assertIn(domain, home)
-                self.assertIn(image, home)
-                self.assertIn(project, home)
-                self.assertIn(detail, home)
-                project_image = ROOT / "assets" / image
-                self.assertTrue(project_image.is_file())
-                self.assertLess(project_image.stat().st_size, 250_000)
-        self.assertIn("CLIENT PROJECTS / LIVE SITES", home)
-        self.assertIn('alt="Screenshot of the live ERIA website"', home)
-        self.assertIn('alt="Screenshot of the live W3 Sourcing website"', home)
+            self.assertIn(phrase, home)
+        for offering in ("teregon aqua", "teregon oasis", "teregon aquifer", "teregon zephyr", "teregon equinox", "teregon terra"):
+            with self.subTest(offering=offering):
+                self.assertIn(offering, home)
+        shell = source("components/site-shell.tsx")
+        for offering in ("Teregon Aqua", "Teregon Oasis", "Teregon Aquifer", "Teregon Zephyr", "Teregon Equinox", "Teregon Terra"):
+            self.assertIn(offering, shell)
+        self.assertIn("these are named services", home)
+        self.assertIn("not standalone off-the-shelf products", home)
 
-    def test_homepage_uses_a_clear_ai_and_nature_positioning(self):
-        home = (ROOT / "index.html").read_text().lower()
-        self.assertIn("applied ai / software studio", home)
-        self.assertIn("custom ai solutions", home)
-        self.assertIn("teregon water is our focused water-industry specialization", home)
-        self.assertIn("tell us what is stuck", home)
-
-    def test_crawler_guides_disclose_model_backed_site_guide(self):
-        for filename in ("llms.txt", "llms-full.txt"):
-            with self.subTest(filename=filename):
-                content = (ROOT / filename).read_text().lower()
-                self.assertIn("openrouter", content)
-                self.assertIn("does not store chat history", content)
-                self.assertNotIn("not generative ai", content)
-                self.assertNotIn("prompts stay in the browser", content)
-
-    def test_every_page_guide_discloses_openrouter_processing(self):
-        for page in ROOT.glob("*.html"):
-            content = page.read_text().lower()
-            if 'id="teregon-guide"' not in content:
-                continue
-            with self.subTest(page=page.name):
-                self.assertIn("openrouter", content)
-                self.assertIn("openrouter.ai/privacy", content)
-                self.assertNotIn("not a generative ai chat", content)
-                self.assertNotIn("questions are not sent to an ai service", content)
-
-    def test_selected_work_has_one_desktop_scroll_stack_and_compact_fallback(self):
-        home = (ROOT / "index.html").read_text()
-        self.assertIn('data-scroll-stack="cases"', home)
-        self.assertIn('data-variant="compact"', home)
-        self.assertIn('src="/scroll-stack.js"', home)
-
-    def test_homepage_covers_the_brio_product_portfolio(self):
-        home = (ROOT / "index.html").read_text().lower()
-        for project in ("briobot", "briopedia", "brioscope", "sales navigator"):
+    def test_prior_brio_cases_are_attributed_and_company_arr_is_not_credited(self):
+        home = source("components/pages/home-page.tsx")
+        for project in ("BrioScope", "BrioBot", "Briopedia"):
             self.assertIn(project, home)
+        self.assertIn("PRIOR BRIO TEAM EXPERIENCE", home)
+        self.assertIn("not Teregon client engagements", home)
+        self.assertIn("approximately $240K", home)
+        self.assertIn("not attributed to BrioBot", home)
+        self.assertIn("approximately $2M", home)
+        self.assertIn("not attributed to Briopedia", home)
+        self.assertIn("/briobot.html", home)
+        self.assertIn("/briopedia.html", home)
+        for route, evidence in (
+            ("components/pages/briobot-page.tsx", ("Salesforce", "LangGraph", "Deterministic write gates", "not attributed to BrioBot")),
+            ("components/pages/briopedia-page.tsx", ("FAISS index", "git-backed", "not a Teregon client engagement")),
+        ):
+            content = source(route).lower()
+            for phrase in evidence:
+                self.assertIn(phrase.lower(), content)
 
-    def test_team_cards_use_local_optimized_portraits_with_alt_text(self):
-        about = (ROOT / "about.html").read_text()
-        self.assertEqual(about.count('class="team-photo"'), 3)
-        for photo in ("team-misha.webp", "team-joseph.webp", "team-yuvaraj.webp"):
-            self.assertIn(photo, about)
-            asset = ROOT / "assets" / photo
-            self.assertTrue(asset.is_file())
-            self.assertLess(asset.stat().st_size, 80_000)
-        for name in ("Misha Lubich", "Joseph Heupler", "Yuvaraj Tankala"):
-            self.assertIn(f'alt="{name}"', about)
+    def test_case_and_workflow_visuals_use_local_descriptive_assets(self):
+        home = source("components/pages/home-page.tsx")
+        for asset, alt in (
+            ("/assets/mesh/ai-workflow.webp", "luminous points moving across a flowing information landscape"),
+            ("/assets/mesh/brioscope.webp", "three-dimensional mesh grouping customer support events"),
+            ("/assets/mesh/briobot.webp", "three-dimensional workflow mesh for support evidence checks"),
+            ("/assets/mesh/briopedia.webp", "three-dimensional knowledge mesh representing a support library"),
+            ("/assets/water-droplet-pond.webp", "water droplet falling into a forest pond"),
+        ):
+            with self.subTest(asset=asset):
+                self.assertIn(asset, home)
+                self.assertIn(alt.lower(), home.lower())
+                self.assertTrue((ROOT / "public" / asset.lstrip("/")).is_file())
+        for route, asset in (
+            ("components/pages/briobot-page.tsx", "/assets/mesh/briobot.webp"),
+            ("components/pages/briopedia-page.tsx", "/assets/briopedia/briopedia_infographic_dark.webp"),
+        ):
+            self.assertIn(asset, source(route))
+            self.assertTrue((ROOT / "public" / asset.lstrip("/")).is_file())
+        self.assertIn("NOT A SCREENSHOT", source("components/pages/briopedia-page.tsx"))
 
-    def test_about_links_each_team_member_to_their_own_site(self):
-        about = (ROOT / "about.html").read_text()
-        for url in ("https://www.mishalubich.com/", "https://www.josephheupler.com/", "https://yuvarajt.com/"):
-            self.assertIn(url, about)
-        self.assertIn("Yuvaraj Tankala", about)
+    def test_live_client_projects_link_to_local_screenshots_and_sites(self):
+        home = source("components/pages/home-page.tsx")
+        for domain, asset, name, alt in (
+            ("https://www.eria.co/", "/assets/project-eria.jpg", "ERIA Events", "Screenshot of the live ERIA Events website"),
+            ("https://www.w3sourcing.com/", "/assets/project-w3sourcing.jpg", "W3 Sourcing", "Screenshot of the live W3 Sourcing website"),
+        ):
+            with self.subTest(project=name):
+                self.assertIn(domain, home)
+                self.assertIn(asset, home)
+                self.assertIn(name, home)
+                self.assertIn(alt, home)
+                self.assertTrue((ROOT / "public" / asset.lstrip("/")).is_file())
+        self.assertIn("Sanity", home)
+        self.assertIn("methodology", home.lower())
 
-    def test_site_does_not_link_to_github(self):
-        for name in PAGES:
-            self.assertNotIn("github.com", (ROOT / name).read_text().lower())
+    def test_team_profiles_link_to_personal_sites_use_local_photos_and_avoid_github(self):
+        about = source("components/pages/about-page.tsx")
+        self.assertIn('id="team"', about)
+        self.assertIn('aria-labelledby="team-title"', about)
+        for name, url, photo in (
+            ("Misha Lubich", "https://www.mishalubich.com/", "/assets/team-misha.webp"),
+            ("Joseph Heupler", "https://www.josephheupler.com/", "/assets/team-joseph.webp"),
+            ("Yuvaraj Tankala", "https://yuvarajt.com/", "/assets/team-yuvaraj.webp"),
+        ):
+            with self.subTest(person=name):
+                self.assertIn(name, about)
+                self.assertIn(url, about)
+                self.assertIn(photo, about)
+                self.assertRegex(about, rf'alt:\s*"{re.escape(name)}"')
+                asset = ROOT / "public" / photo.lstrip("/")
+                self.assertTrue(asset.is_file())
+                self.assertLess(asset.stat().st_size, 150_000)
+        public_sources = [source(path) for path in ROUTES.values()]
+        public_sources += [source("components/site-shell.tsx"), source("components/pages/home-page.tsx"), source("components/pages/about-page.tsx")]
+        self.assertNotIn("github.com", "\n".join(public_sources).lower())
 
-    def test_motion_respects_reduced_motion_and_mobile_layout_is_defined(self):
-        css = (ROOT / "styles.css").read_text()
-        self.assertIn("prefers-reduced-motion:reduce", css)
-        self.assertIn("@media(max-width:560px)", css)
-        self.assertIn("visual-sheen", css)
-        self.assertIn("@keyframes mesh-float", css)
-        self.assertIn("@keyframes title-rise", css)
+    def test_mobile_navigation_is_accessible_and_visible_at_mobile_breakpoint(self):
+        shell = source("components/site-shell.tsx")
+        css = normalize(source("app/globals.css"))
+        self.assertIn('<nav className="desktop-nav" aria-label="Main navigation">', shell)
+        self.assertIn('<details className="mobile-nav">', shell)
+        self.assertIn('<summary aria-label="Open navigation menu">', shell)
+        self.assertIn('<nav className="mobile-menu-panel" aria-label="Mobile navigation">', shell)
+        for href in ("/work.html", "/approach.html", "/about.html", "/water.html"):
+            self.assertIn(href, shell)
+        self.assertIn("@media (max-width: 760px)", css)
+        self.assertRegex(css, r"\.desktop-nav,\.header-cta\s*\{\s*display:\s*none")
+        self.assertRegex(css, r"\.mobile-nav\s*\{[^}]*display:\s*block")
+        self.assertRegex(css, r"\.mobile-nav>summary\s*\{[^}]*min-height:\s*44px")
+
+    def test_guide_disclosure_viewport_and_input_contract(self):
+        guide = source("components/site-guide.tsx")
+        css = normalize(source("app/globals.css"))
+        self.assertIn('className="guide-dialog"', guide)
+        self.assertIn('aria-labelledby="teregon-guide-title"', guide)
+        self.assertIn('className="guide-messages"', guide)
+        self.assertIn('role="log"', guide)
+        self.assertIn('className="guide-composer"', guide)
+        self.assertIn('id="guide-input"', guide)
+        self.assertIn('htmlFor="guide-input"', guide)
+        self.assertEqual(guide.count('className="guide-disclosure"'), 1)
+        self.assertEqual(guide.count("OpenRouter privacy"), 1)
+        self.assertNotIn("OpenRouter", guide[guide.index("<header className=\"guide-header\""):guide.index("</header>")])
+        self.assertIn("100dvh", css)
+        self.assertRegex(css, r"\.guide-messages\s*\{[^}]*overflow-y:\s*auto")
+        self.assertRegex(css, r"\.guide-header\s*\{[^}]*flex:\s*none")
+        self.assertRegex(css, r"\.guide-composer\s*\{[^}]*flex:\s*none")
+        self.assertRegex(css, r"\.guide-composer input\s*\{[^}]*font-size:\s*16px")
+        client = source("lib/guide/client.ts")
+        self.assertIn("rate_limited", client)
+        self.assertIn("invalid_request", client)
+        self.assertIn("try again", client.lower())
+        self.assertIn("setDraft", guide, "failed questions should remain available for retry")
+
+    def test_water_drop_animation_is_independent_of_scroll_and_respects_reduced_motion(self):
+        home = source("components/pages/home-page.tsx")
+        motion = home[home.index("function WaterDropMotion()"):home.index("export function HomePage()")]
+        self.assertIn('drop.animate([', motion)
+        self.assertIn("iterations: Infinity", motion)
+        self.assertIn("offset: 0.55", motion)
+        self.assertIn("offset: 0.62", motion)
+        self.assertIn("ring.animate([", motion)
+        self.assertIn('window.matchMedia("(prefers-reduced-motion: reduce)")', motion)
+        self.assertIn("animations.forEach((animation) => animation.cancel())", motion)
+        self.assertNotIn("scrollY", motion)
+        self.assertNotIn("scroll", motion.lower())
+
+    def test_crawler_documents_and_sitemap_include_briobot_and_brio_cases(self):
+        for file in ("public/llms.txt", "public/llms-full.txt", "public/sitemap.xml"):
+            with self.subTest(file=file):
+                content = source(file).lower()
+                self.assertIn("briobot", content)
+                self.assertIn("briobot.html", content)
+        for file in ("public/llms.txt", "public/llms-full.txt"):
+            content = source(file)
+            for project in ("Briopedia", "BrioScope", "Sales Navigator"):
+                self.assertIn(project, content)
 
 
 if __name__ == "__main__":

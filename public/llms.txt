@@ -1,0 +1,49 @@
+# Teregon
+
+> Teregon Labs is a broad applied AI and custom software consultancy building custom AI solutions for business workflows, business operations, and complex software problems. Teregon Aqua is a focused water-industry specialization for filtration and appliance support, service operations, and watershed planning.
+
+## The studio and two practices
+
+- **Teregon** — the parent point of view: systems that connect people, software, and the living world.
+- **Teregon Labs** — the broad applied AI and custom software consultancy, building custom AI solutions for business workflows, decision systems, integrations, and production software.
+- **Teregon Aqua** — a focused specialization offering configurable AI and software for water filtration/appliance customer service, water operations, and watershed decisions. Offerings are not presented as deployed water products or live monitoring.
+
+## Live client website builds
+
+- **ERIA Events** — https://www.eria.co/ — a Bay Area venue and events site with discovery, event stories, and private-event and corporate inquiry. Built with Next.js 16, React 19, and Sanity CMS.
+- **W3 Sourcing** — https://www.w3sourcing.com/ — an executive-search site explaining technology, legal, and finance practices, methodology, results, leadership, and inquiry. Built with Next.js 16, React 19, and TypeScript.
+
+These are Teregon website builds, not water or AI product deployments.
+
+## Prior Brio team systems
+
+These describe prior Brio product experience by team members, not Teregon client engagements:
+
+- **BrioBot** — e-commerce Salesforce case triage with LangGraph, retrieval, image reading, deterministic Python write gates, dry-run/safe-stop paths, and Langfuse tracing.
+- **Briopedia** — Next.js and FastAPI support knowledge system with a git-backed wiki, FAISS retrieval, and local or cloud LLM chat. See the [Briopedia case study](https://teregonlabs.com/briopedia.html).
+- **BrioScope** — support analytics for recurring issues and service signals.
+- **Sales Navigator** — read-only Salesforce forecasting and customer analytics with SARIMAX, XGBoost, DuckDB, and Parquet.
+
+Team-reported company-level ARR context: approximately $240K during BrioBot work and approximately $2M currently for Briopedia's company. These figures are not attributed to either system and are not Teregon client results.
+
+## Water offerings
+
+Teregon Aqua can build or configure grounded support assistants for approved manuals and policies, evidence-gated service triage, and support-signal analytics for water product businesses. Watershed concepts can bring together available rainfall, stream observations, land cover, and community context for planning. These are proposed offerings and illustrative concepts, not deployed water products or live sensor services.
+
+## Pages
+
+- [Home](https://teregonlabs.com/): Teregon, Teregon Labs, Teregon Aqua, live client websites, and prior team systems.
+- [What we build](https://teregonlabs.com/work.html): Applied AI, connected data systems, software engineering, and Teregon Aqua.
+- [Teregon Aqua](https://teregonlabs.com/water.html): Water filtration and appliance workflows, service systems, and watershed context.
+- [Approach](https://teregonlabs.com/approach.html): How Teregon scopes, builds, and measures useful systems.
+- [About](https://teregonlabs.com/about.html): Parent point of view, practices, principles, and team.
+- [Briopedia case study](https://teregonlabs.com/briopedia.html): Prior Brio team knowledge-system work.
+- [BrioBot case study](https://teregonlabs.com/briobot.html): Prior Brio team Salesforce support triage work.
+- [Studio deck](https://teregonlabs.com/pitch-deck.html): On-page presentation and downloadable PDF.
+
+## Guide and contact
+
+The Teregon Guide is a site-scoped, model-backed assistant for Teregon Labs, published work, Teregon Aqua, and starting a project. It sends visitor questions and recent conversation context to OpenRouter using the fixed free `nvidia/nemotron-3.5-super-vl:free` route. Teregon does not store chat history; OpenRouter may apply its own privacy and retention practices (https://openrouter.ai/privacy). The Guide may not know every detail. Contact forms open an email draft and do not store submissions.
+
+- General studio inquiries: hello@teregonlabs.com
+Water-industry projects: hello@teregonlabs.com

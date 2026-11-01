@@ -1,38 +1,43 @@
 const { describe, expect, test } = require('bun:test');
 const { readFileSync } = require('node:fs');
-const { normalizeHeroPointer, shouldEnableHeroPointer } = require('../terrain.js');
-const styles = readFileSync(require.resolve('../styles.css'), 'utf8');
 
-describe('desktop hero pointer motion', () => {
-  test('normalizes pointer position around the hero center and clamps the edges', () => {
-    const rect = { left: 100, top: 50, width: 800, height: 400 };
-    expect(normalizeHeroPointer(500, 250, rect)).toEqual({ x: 0, y: 0 });
-    expect(normalizeHeroPointer(100, 50, rect)).toEqual({ x: -1, y: -1 });
-    expect(normalizeHeroPointer(900, 450, rect)).toEqual({ x: 1, y: 1 });
-    expect(normalizeHeroPointer(2000, -100, rect)).toEqual({ x: 1, y: -1 });
+const home = readFileSync(require.resolve('../components/pages/home-page.tsx'), 'utf8');
+const styles = readFileSync(require.resolve('../app/globals.css'), 'utf8');
+const guide = readFileSync(require.resolve('../components/site-guide.tsx'), 'utf8');
+
+describe('active Next.js homepage motion and controls', () => {
+  test('hero pointer parallax is gated to wide fine-pointer, hover-capable, motion-enabled devices', () => {
+    expect(home).toContain('window.matchMedia("(min-width: 801px) and (hover: hover) and (pointer: fine)")');
+    expect(home).toMatch(/const reducedMotion = window\.matchMedia\("\(prefers-reduced-motion: reduce\)"\)\.matches;[\s\S]*?if \(reducedMotion \|\| !desktopPointer\.matches\) return/);
+    expect(home).toContain('hero.addEventListener("pointermove", handleMove, { passive: true })');
+    expect(home).toContain('hero.addEventListener("pointerleave", reset, { passive: true })');
+    expect(home).toContain('hero.removeEventListener("pointermove", handleMove)');
+    expect(home).toContain('hero.removeEventListener("pointerleave", reset)');
   });
 
-  test('enables pointer tracking only for desktop fine-pointer motion users', () => {
-    const desktop = { innerWidth: 1440, finePointer: true, hover: true, reducedMotion: false };
-    expect(shouldEnableHeroPointer(desktop)).toBe(true);
-    expect(shouldEnableHeroPointer({ ...desktop, innerWidth: 800 })).toBe(false);
-    expect(shouldEnableHeroPointer({ ...desktop, finePointer: false })).toBe(false);
-    expect(shouldEnableHeroPointer({ ...desktop, hover: false })).toBe(false);
-    expect(shouldEnableHeroPointer({ ...desktop, reducedMotion: true })).toBe(false);
+  test('parallax is centered on the hero and resets both layers on pointer leave', () => {
+    expect(home).toContain('const x = (event.clientX - bounds.left) / bounds.width - 0.5');
+    expect(home).toContain('const y = (event.clientY - bounds.top) / bounds.height - 0.5');
+    expect(home).toContain('visual.style.translate = `${x * -7}px ${y * -6}px`');
+    expect(home).toContain('mesh.style.translate = `${x * 13}px ${y * 10}px`');
+    expect(home).toContain('visual.style.translate = "0 0"');
+    expect(home).toContain('mesh.style.translate = "0 0"');
   });
 
-  test('rotating hero verbs overlap so the cycle stays legible', () => {
-    expect(styles).toContain('.hero-word-cycle>span:nth-child(2){animation-delay:2.92s}');
-    expect(styles).toContain('.hero-word-cycle>span:nth-child(3){animation-delay:5.84s}');
-    expect(styles).toContain('.hero-word-cycle>span:nth-child(4){animation-delay:8.76s}');
-    expect(styles).toMatch(/@keyframes hero-word-turn\{0%\{opacity:0;[\s\S]*?1%,23\.5%\{opacity:1;[\s\S]*?27%,100%\{opacity:0;/);
-    expect(styles).toContain('@media(prefers-reduced-motion:reduce){.hero-word-cycle>span');
+  test('hero headline is plain static copy instead of the retired cycling headline', () => {
+    expect(home).toMatch(/Software<br\s*\/>that <em[^>]*>flows\.<\/em>/);
+    expect(home).not.toContain('hero-word-cycle');
   });
 
-  test('Guide and contact controls keep readable text and touch sizes', () => {
-    expect(styles).toContain('.contact-form label,.guide-form label{font:12px/1.4 var(--sans)');
-    expect(styles).toContain('.contact-form input,.contact-form textarea,.guide-form input{font-size:16px}');
-    expect(styles).toContain('.guide-prompts button{font-size:13px;min-height:40px}');
-    expect(styles).toContain('.guide-form small,.guide-answer{font:13px/1.55 var(--sans)');
+  test('Guide and contact controls retain legible, touch-sized targets', () => {
+    expect(styles).toMatch(/\.guide-trigger\s*\{[^}]*min-height:\s*48px/);
+    expect(styles).toMatch(/\.guide-composer input\s*\{[^}]*min-height:\s*48px;[^}]*font-size:\s*16px/);
+    expect(styles).toMatch(/\.guide-composer button\s*\{[^}]*min-height:\s*48px/);
+    expect(styles).toMatch(/@media \(max-width: 760px\) \{[\s\S]*?\.guide-close \{[^}]*width:\s*44px; height:\s*44px/);
+    expect(styles).toMatch(/\.guide-prompts button\s*\{[^}]*min-height:\s*44px/);
+    expect(guide).toContain('aria-label="Close Teregon Guide"');
+    expect(home).toMatch(/href="mailto:hello@teregonlabs\.com\?subject=Talk%20with%20Teregon"/);
+    expect(home).toContain('min-h-14 items-center justify-between');
+    expect(home).toContain('min-h-12 items-center');
   });
 });

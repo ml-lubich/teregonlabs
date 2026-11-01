@@ -2,10 +2,26 @@
   "name": "teregonlabs-site",
   "private": true,
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
     "test": "bun test",
     "test:python": "python3 -m unittest discover -s tests -v",
     "test:scroll": "node --test tests/scroll-stack.test.cjs",
     "test:ci": "bun run test && bun run test:python && bun run test:scroll",
-    "ci": "bun run test:ci"
+    "ci": "bun run test:ci && bun run typecheck && bun run build"
+  },
+  "dependencies": {
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
   }
 }

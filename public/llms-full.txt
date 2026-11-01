@@ -1,0 +1,83 @@
+# Teregon — full site context
+
+Teregon is the parent studio point of view. **Teregon Labs** is a broad applied AI and custom software consultancy building custom AI solutions for business workflows, business operations, and complex software problems. **Teregon Aqua** is a focused specialization for water filtration and appliance support, service operations, and watershed planning.
+
+## What Teregon Labs builds
+
+### Applied AI
+
+We consult on and build custom AI solutions for business workflows: grounded knowledge search, support and operations assistants, case triage, summarization, and decision support. Workflows can retrieve approved source material, show evidence, and keep consequential decisions with people.
+
+### Data and decision systems
+
+Connect scattered CRM, product, support, and operational data; build forecasts, dashboards, and shared views shaped around a real decision.
+
+### Software engineering
+
+Ship production web applications, internal tools, integrations, evaluation, and observability around existing workflows.
+
+## Teregon Aqua
+
+Teregon Aqua is a focused specialization that applies software and AI to water filtration and appliance businesses, service operations, and watershed planning. These are configurable offerings—not deployed Teregon Aqua products or claims of proven impact:
+
+- **Grounded product support:** search approved product manuals, installation guides, and service policies; draft source-linked answers and escalate when evidence is missing.
+- **Evidence-gated case triage:** classify a service case, retrieve product and policy evidence, draft a next step, then require deterministic checks and human review before consequential record changes.
+- **Service-signal analytics:** group recurring cases, questions, and service notes so teams can investigate patterns against source records.
+- **Watershed context:** combine available rainfall, stream observations, land cover, and community assets to support human-led planning. Data availability and freshness are confirmed with each project; no live sensor network is implied.
+
+Illustrative low-flow service scenario: a case arrives with a product model and customer description; the assistant retrieves relevant manual and service-policy sections; the technician reviews the draft and approves any next action. This is a proposed workflow, not a deployed water customer system.
+
+## Live client website builds
+
+### ERIA Events — https://www.eria.co/
+
+A deployed site for ERIA’s Bay Area venues and event experiences. It connects venue discovery, event stories, press context, and private-event or corporate inquiries. Built with Next.js 16, React 19, and Sanity CMS. The current public site lists Forbes among its press features. This is a website build, not an AI or water-system deployment.
+
+### W3 Sourcing — https://www.w3sourcing.com/
+
+A deployed public website for a principal-led executive search firm. It explains technology, legal, and finance practices, methodology, results, leadership, and inquiry. Built with Next.js 16, React 19, and TypeScript. W3’s AI-assisted search is its own service description, not an AI system delivered by Teregon.
+
+## Prior Brio team experience
+
+These product examples were built by team members in prior Brio work; they are not Teregon client engagements:
+
+- **BrioBot / Case Triage Agent:** e-commerce Salesforce case triage. A LangGraph flow gathers case context, retrieves product and policy evidence, reads attached images, plans and extracts a structured action. Deterministic Python evidence gates validate writable fields; dry-run and safe-stop paths control optional Salesforce updates; Langfuse provides traces for review.
+- **Briopedia:** internal support knowledge system with a Next.js interface, FastAPI async backend, git-backed wiki corpus, FAISS retrieval, and provider-agnostic local or cloud LLM chat. Retrieved source context grounds answers while the wiki preserves editable history.
+- **BrioScope:** support analytics that brings service events together to surface recurring issues and patterns.
+- **Sales Navigator:** read-only Salesforce pipeline analytics combining SARIMAX and XGBoost forecasts with churn, lifecycle, and SKU analysis over a DuckDB and Parquet warehouse.
+
+The prior Brio work is team experience rather than Teregon client delivery. The team reports company-level ARR context of approximately $240K during BrioBot work and approximately $2M currently for Briopedia's company. These figures describe company scale only; they are not attributed to BrioBot or Briopedia and are not Teregon client results.
+
+## Teregon Aqua illustrative concepts
+
+Teregon Aqua concepts include “From ridge to river,” an illustrative watershed view combining land cover, rainfall, stream observations, and nearby assets. “Where water gathers” explores rainfall, slope, land cover, drainage paths, and nearby assets as a hypothetical runoff-planning view. These are illustrative concepts, not completed water client work, live data products, or sensor monitoring deployments.
+
+## How Teregon works
+
+1. Understand the decision, workflow, source data, constraints, and owners.
+2. Connect relevant sources, retrieval, models, and software checks; keep uncertainty visible and evidence close.
+3. Ship into the real workflow, review with the people using it, and compare against an agreed baseline.
+
+Measures may include handling time, time to detect, repeat issues, exposure reduced, or revenue protected. Publish an impact result only after the client verifies it. No outcomes are inferred from the Brio ARR context.
+
+## Founder
+
+Misha Lubich is CEO of Teregon Labs. His background includes machine-learning research using USGS stream data, machine-learning pipeline experience at Lawrence Berkeley National Laboratory (LBNL), and six research publications in machine learning for hydrology and environmental science. This phrasing describes research using USGS data and LBNL experience; it does not imply USGS employment or that the publications were jointly produced with either institution.
+
+## Teregon Guide and contact
+
+The Teregon Guide is a bounded, model-backed assistant for Teregon Labs, its published work, Teregon Aqua, and starting a project. It sends visitor questions and recent conversation context to OpenRouter using the fixed free `nvidia/nemotron-3.5-super-vl:free` route. Teregon does not store chat history; OpenRouter may apply its own privacy and retention practices. Review https://openrouter.ai/privacy. The assistant may not know every detail and directs visitors to the contact page when information is unavailable. Contact forms open a mail draft and do not store submissions.
+
+## Pages
+
+- Home: https://teregonlabs.com/
+- What we build: https://teregonlabs.com/work.html
+- Teregon Aqua: https://teregonlabs.com/water.html
+- Approach: https://teregonlabs.com/approach.html
+- About: https://teregonlabs.com/about.html
+- Briopedia case study (prior Brio team work): https://teregonlabs.com/briopedia.html
+- BrioBot case study (prior Brio team work): https://teregonlabs.com/briobot.html
+- Studio deck and PDF: https://teregonlabs.com/pitch-deck.html
+
+General studio inquiries: hello@teregonlabs.com
+Water-industry inquiries: hello@teregonlabs.com

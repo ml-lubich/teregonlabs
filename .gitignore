@@ -6,3 +6,8 @@
 crash.log
 .vercel
 .env*
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+tasks/

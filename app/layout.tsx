@@ -1,0 +1,57 @@
+import type { Metadata, Viewport } from "next";
+import { DM_Mono, Manrope } from "next/font/google";
+import { GuideWidget, SiteFooter, SiteHeader } from "@/components/site-shell";
+import "./globals.css";
+import "../briopedia.css";
+
+const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], display: "swap" });
+const dmMono = DM_Mono({ variable: "--font-dm-mono", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
+const siteUrl = new URL("https://teregonlabs.com");
+
+export const metadata: Metadata = {
+  metadataBase: siteUrl,
+  title: {
+    default: "Teregon Labs | Applied AI and Custom Software",
+    template: "%s | Teregon Labs",
+  },
+  description:
+    "Teregon Labs builds applied AI and custom software for customer workflows and complex operations, with a focused practice for water systems.",
+  applicationName: "Teregon Labs",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "Teregon Labs",
+    url: "/",
+    title: "Teregon Labs | Applied AI and Custom Software",
+    description:
+      "Applied AI and custom software for customer workflows and complex operations.",
+    images: [{ url: "/assets/social-preview.jpg", width: 1200, height: 630, alt: "Teregon Labs" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Teregon Labs | Applied AI and Custom Software",
+    description:
+      "Applied AI and custom software for customer workflows and complex operations.",
+    images: ["/assets/social-preview.jpg"],
+  },
+  icons: { icon: "/favicon.svg" },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#13241d",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body className={`${manrope.variable} ${dmMono.variable}`}>
+        <SiteHeader />
+        <main id="main-content" tabIndex={-1}>{children}</main>
+        <SiteFooter />
+        <GuideWidget />
+      </body>
+    </html>
+  );
+}

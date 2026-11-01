@@ -249,14 +249,8 @@ footer>a.site-credit{font-size:10px}
 /* Scroll progress carries the water drop into the surface, then reveals the mesh. */
 @supports (animation-timeline:view()){
   .water-story{view-timeline-name:--water-flow;view-timeline-axis:block}
-  .water-drop-loop{animation:scroll-drop 1s linear both;animation-timeline:--water-flow;animation-range:entry 7% entry 46%}
-  .water-impact-ring{animation:scroll-ripple 1s linear both;animation-timeline:--water-flow;animation-range:entry 37% entry 72%}
-  .water-impact-ring.ring-two{animation-range:entry 42% entry 78%}
-  .water-impact-ring.ring-three{animation-range:entry 48% entry 84%}
   .water-relief{animation:scroll-relief 1s linear both;animation-timeline:--water-flow;animation-range:entry 30% exit 18%}
 }
-@keyframes scroll-drop{from{opacity:0;transform:translate3d(0,-22px,0) scale(.72)}to{opacity:1;transform:translate3d(0,112px,0) scale(.78)}}
-@keyframes scroll-ripple{from{opacity:0;transform:translate(-50%,-50%) scale(.18,.24)}to{opacity:.68;transform:translate(-50%,-50%) scale(3.2,2.4)}}
 @keyframes scroll-relief{from{opacity:.08;transform:perspective(760px) rotateX(54deg) scale(1.12) translate3d(0,10px,0)}to{opacity:.42;transform:perspective(760px) rotateX(58deg) rotateZ(1deg) scale(1.14) translate3d(0,0,0)}}
 @media(prefers-reduced-motion:reduce){.water-drop-loop,.water-impact-ring,.water-relief{animation:none!important}.water-drop-loop{opacity:.85;transform:translateY(58px) scale(.8)}.water-impact-ring{opacity:.55;transform:translate(-50%,-50%) scale(1.8,1.2)}.water-relief{opacity:.3;transform:perspective(760px) rotateX(54deg) scale(1.12)}}
 
@@ -362,4 +356,45 @@ footer>a.site-credit{font-size:10px}
 @media(min-width:801px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
   .hero-visual{translate:var(--hero-shift-x,0px) var(--hero-shift-y,0px);transition:translate .8s cubic-bezier(.2,.75,.2,1)}
   .hero-ai-mesh{translate:var(--mesh-shift-x,0px) var(--mesh-shift-y,0px);transition:translate 1s cubic-bezier(.2,.75,.2,1)}
+}
+
+/* Specific service tiles stay calm so the work, not the ornament, stands out. */
+.offering-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.offering-card{min-width:0;padding:clamp(20px,2.5vw,32px);border:1px solid #cbd5c7;border-radius:12px;background:#f4f6ef;color:#20281f}
+.offering-card h3{margin:0 0 10px;font-size:clamp(20px,2vw,26px);font-weight:500;letter-spacing:-.045em;line-height:1.15}
+.offering-card p{max-width:38ch;margin:0;color:#59665a;font-size:13px;line-height:1.75}
+@media(max-width:850px){.offering-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.offering-grid{grid-template-columns:1fr;gap:10px}.offering-card{padding:19px 20px}.offering-card h3{font-size:21px}}
+
+/* Custom mesh artwork replaces placeholder line diagrams in the AI and Brio stories. */
+.ai-flow-art{position:relative;aspect-ratio:1.42;min-height:0;overflow:hidden;border:1px solid #a7c6a33d;border-radius:18px;background:#10231d;box-shadow:0 20px 60px #07110d35;perspective:none}
+.ai-flow-art::before{opacity:.08;animation:none}
+.ai-flow-art .ai-workflow-image{position:absolute;z-index:0;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center 53%;transform:scale(1.01);animation:mesh-art-drift 20s ease-in-out infinite alternate}
+.ai-flow-art .flow-mesh,.ai-flow-art .flow-node,.ai-flow-art .flow-thread{display:none}
+.case-visual .case-mesh-image{position:absolute;z-index:0;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center;transform:scale(1.01);transition:transform .8s cubic-bezier(.23,1,.32,1),filter .6s ease}
+.case-brio .case-mesh-image{object-position:center 50%}
+.case-bot .case-mesh-image{object-position:center 52%}
+.case-wiki .case-mesh-image{object-position:center 50%}
+.case-visual .case-mesh-image~.signal-orbit,.case-visual .case-mesh-image~.signal-core,.case-visual .case-mesh-image~.diagram-mark,.case-visual .case-mesh-image~.chart-mark{display:none}
+.case-visual:has(.case-mesh-image){background:#12251f}
+.case-visual:has(.case-mesh-image)::after{z-index:1;background:linear-gradient(180deg,#0a181122 0%,transparent 44%,#08150d66 100%)}
+.case-visual .case-mesh-image~.case-visual-label,.case-visual .case-mesh-image~.case-visual-coordinate{z-index:2;text-shadow:0 1px 10px #07130bcc}
+@media(hover:hover) and (pointer:fine){.case-card:hover .case-mesh-image{transform:scale(1.045);filter:saturate(1.06) brightness(1.04)}}
+@keyframes mesh-art-drift{from{transform:scale(1.01) translate3d(0,0,0)}to{transform:scale(1.055) translate3d(0,-.35%,0)}}
+
+/* The drop repeats on its own timeline; section scrolling cannot freeze it at impact. */
+.water-drop-loop{top:16%;--water-fall:clamp(117px,21.45svh,171px);animation:water-drop-cycle 3.35s cubic-bezier(.36,.05,.38,.95) infinite}
+.water-impact-ring{animation:water-ripple-cycle 3.35s ease-out infinite}
+.water-impact-ring.ring-two{animation-delay:-.12s}
+.water-impact-ring.ring-three{animation-delay:-.24s}
+@keyframes water-drop-cycle{0%,3%{opacity:0;transform:translate3d(0,-16px,0) scale(.7)}10%{opacity:1;transform:translate3d(0,0,0) scale(.82)}55%{opacity:1;transform:translate3d(0,var(--water-fall),0) scale(.82)}62%,100%{opacity:0;transform:translate3d(0,calc(var(--water-fall) + 12px),0) scale(.55)}}
+@keyframes water-ripple-cycle{0%,52%{opacity:0;transform:translate(-50%,-50%) scale(.18,.24)}58%{opacity:.66}82%{opacity:0;transform:translate(-50%,-50%) scale(3.2,2.4)}100%{opacity:0;transform:translate(-50%,-50%) scale(3.2,2.4)}}
+@media(max-width:560px){.ai-flow-art{aspect-ratio:1.32;min-height:0;margin:0;border-radius:14px}.ai-flow-art .ai-workflow-image{object-position:48% center}.water-drop-loop{top:16%;--water-fall:47.6vw}}
+@media(prefers-reduced-motion:reduce){
+  .ai-flow-art .ai-workflow-image{animation:none;transform:none}
+  .case-visual .case-mesh-image{transition:none;transform:none}
+  .water-drop-loop{animation:none;opacity:.9;transform:translate3d(0,var(--water-fall),0) scale(.82)}
+  .water-impact-ring{animation:none;opacity:.5;transform:translate(-50%,-50%) scale(1.5,1.2)}
+  .water-impact-ring.ring-two{opacity:.34;transform:translate(-50%,-50%) scale(2.2,1.8)}
+  .water-impact-ring.ring-three{opacity:.22;transform:translate(-50%,-50%) scale(2.9,2.3)}
 }

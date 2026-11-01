@@ -6,5 +6,6 @@
   <url><loc>https://teregonlabs.com/about.html</loc><priority>0.7</priority></url>
   <url><loc>https://teregonlabs.com/water.html</loc><priority>0.9</priority></url>
   <url><loc>https://teregonlabs.com/briopedia.html</loc><priority>0.6</priority></url>
+  <url><loc>https://teregonlabs.com/briobot.html</loc><priority>0.6</priority></url>
   <url><loc>https://teregonlabs.com/pitch-deck.html</loc><priority>0.6</priority></url>
 </urlset>
