@@ -32,11 +32,20 @@ describe('active Next.js homepage motion and controls', () => {
     expect(home).toContain('<span>connects.</span>');
     expect(home).toContain('<span>adapts.</span>');
     expect(home).toContain('<span>works.</span>');
+    expect(theme).toMatch(/animation-delay: -1\.5s/);
+    expect(theme).toMatch(/nth-child\(2\) \{ animation-delay: -10\.5s/);
+    expect(theme).toMatch(/nth-child\(3\) \{ animation-delay: -7\.5s/);
+    expect(theme).toMatch(/nth-child\(4\) \{ animation-delay: -4\.5s/);
+    expect(theme).toMatch(/0%, 1% \{ opacity: 0;[\s\S]*?2%, 27% \{ opacity: 1;[\s\S]*?28%, 100% \{ opacity: 0;/);
   });
 
   test('hero headline can wrap within the viewport on narrow screens', () => {
     expect(theme).toMatch(/\.hero-copy h1 \.hero-prefix\s*\{[^}]*white-space:\s*normal/);
     expect(theme).toMatch(/@media \(min-width: 640px\)\s*\{[^}]*\.hero-copy h1 \.hero-prefix\s*\{[^}]*white-space:\s*nowrap/);
+  });
+
+  test('scroll reveals begin as soon as the section peeks into view', () => {
+    expect(home).toMatch(/threshold: 0\.02, rootMargin: "0px"/);
   });
 
   test('Guide and contact controls retain legible, touch-sized targets', () => {

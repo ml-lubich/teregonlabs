@@ -175,7 +175,7 @@ export function HomePage() {
           (entry.target as HTMLElement).dataset.revealed = "true";
           revealObserver.unobserve(entry.target);
         });
-      }, { threshold: 0.12, rootMargin: "0px 0px -5% 0px" });
+      }, { threshold: 0.02, rootMargin: "0px" });
       observer = revealObserver;
       targets.forEach((target) => revealObserver.observe(target));
     }

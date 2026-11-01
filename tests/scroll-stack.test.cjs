@@ -12,7 +12,7 @@ test('active homepage reveals content progressively, with mobile and reduced-mot
   assert.match(home, /motion-reduce:translate-y-0 motion-reduce:opacity-100/);
   assert.match(home, /const targets = document\.querySelectorAll<HTMLElement>\("\[data-scroll-reveal\]"\)/);
   assert.match(home, /if \(reducedMotion \|\| !desktopPointer\.matches \|\| !\("IntersectionObserver" in window\)\)\s*\{\s*targets\.forEach\(\(target\) => \{ target\.dataset\.revealed = "true"; \}\)/);
-  assert.match(home, /new IntersectionObserver\([\s\S]*?threshold: 0\.12, rootMargin: "0px 0px -5% 0px"/);
+  assert.match(home, /new IntersectionObserver\([\s\S]*?threshold: 0\.02, rootMargin: "0px"/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
 });
 

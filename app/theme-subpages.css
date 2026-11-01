@@ -70,15 +70,15 @@
   animation: hero-word-turn 12s cubic-bezier(.23, 1, .32, 1) infinite;
 }
 
-.hero-word-cycle > span:first-child { animation-delay: -1.2s; }
-.hero-word-cycle > span:nth-child(2) { animation-delay: 1.8s; }
-.hero-word-cycle > span:nth-child(3) { animation-delay: 4.8s; }
-.hero-word-cycle > span:nth-child(4) { animation-delay: 7.8s; }
+.hero-word-cycle > span:first-child { animation-delay: -1.5s; }
+.hero-word-cycle > span:nth-child(2) { animation-delay: -10.5s; }
+.hero-word-cycle > span:nth-child(3) { animation-delay: -7.5s; }
+.hero-word-cycle > span:nth-child(4) { animation-delay: -4.5s; }
 
 @keyframes hero-word-turn {
-  0%, 2% { opacity: 0; transform: translate3d(0, 42%, 0) rotateX(-58deg); }
-  7%, 22% { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0); }
-  27%, 100% { opacity: 0; transform: translate3d(0, -38%, 0) rotateX(48deg); }
+  0%, 1% { opacity: 0; transform: translate3d(0, 42%, 0) rotateX(-58deg); }
+  2%, 27% { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0); }
+  28%, 100% { opacity: 0; transform: translate3d(0, -38%, 0) rotateX(48deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
