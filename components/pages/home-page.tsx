@@ -12,7 +12,7 @@ const capabilities = [
     title: "Assistants grounded in your work",
     copy: "Search approved knowledge, summarize records, and prepare answers or actions for review.",
     image: "/assets/mesh/ai-workflow.webp",
-    alt: "Luminous three-dimensional mesh representing information moving through an AI system",
+    alt: "Three-dimensional mesh with luminous points moving across a flowing information landscape",
   },
   {
     number: "02",
@@ -210,34 +210,60 @@ export function HomePage() {
 
   return (
     <div className="w-full">
-      <section ref={heroRef} className="relative isolate overflow-hidden bg-[linear-gradient(118deg,#11231c_0%,#142b2d_58%,#1b3738_100%)] text-[#f4f5ef]">
-        <div className="mx-auto grid min-h-[min(790px,calc(100svh-76px))] w-full max-w-[1600px] items-center gap-10 px-5 py-14 sm:px-8 md:grid-cols-[.94fr_1.06fr] md:gap-7 md:px-12 lg:px-[7vw] lg:py-20">
-          <div className="relative z-10 max-w-[680px]">
-            <p className="mb-7 font-mono text-[11px] uppercase tracking-[.18em] text-[#c1d09f]">APPLIED AI / SOFTWARE STUDIO</p>
-            <h1 className="max-w-[12ch] text-[clamp(3.5rem,7.8vw,7.4rem)] font-medium leading-[.91] tracking-[-.085em]">
-              Software<br />that <em className="font-serif font-normal text-[#c5d89e]">flows.</em>
-            </h1>
-            <p className="mt-7 max-w-[45ch] text-base leading-7 text-[#d2ddd4] sm:text-lg sm:leading-8">
-              Teregon Labs builds custom AI and software for business workflows: support assistants, workflow automation, data tools, integrations, and production software. Teregon Aqua is our focused practice for water-product service.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-5">
-              <Link className="inline-flex min-h-12 items-center justify-between gap-8 rounded-md bg-[#e4ebdc] px-5 text-sm font-medium text-[#17271f] transition hover:-translate-y-0.5 hover:bg-white" href="#selected-work">Selected work <span aria-hidden="true">↘</span></Link>
-              <Link className="inline-flex min-h-12 items-center gap-3 text-sm text-[#e3e9df] transition hover:text-[#c5d89e]" href="#contact">Start a conversation <span aria-hidden="true">↗</span></Link>
-            </div>
-            <p className="mt-12 font-mono text-[10px] uppercase tracking-[.14em] text-[#aab9aa]">AI ASSISTANTS · AUTOMATION · CUSTOM SOFTWARE</p>
+      <section ref={heroRef} className="hero hero-home">
+        <div ref={heroVisualRef} className="hero-visual" role="img" aria-label="Conceptual aerial watershed terrain with an overlaid AI signal mesh">
+          <canvas id="terrain" aria-hidden="true" />
+          <div ref={heroMeshRef} className="hero-ai-mesh" aria-hidden="true">
+            <svg viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="meshLine" x1="0" x2="1">
+                  <stop stopColor="#b8d1a0" stopOpacity="0" />
+                  <stop offset=".5" stopColor="#d4e8bc" stopOpacity=".68" />
+                  <stop offset="1" stopColor="#a7c88c" stopOpacity="0" />
+                  <animate attributeName="x1" values="-.4;.4;-.4" dur="14s" repeatCount="indefinite" />
+                  <animate attributeName="x2" values=".6;1.4;.6" dur="14s" repeatCount="indefinite" />
+                </linearGradient>
+                <radialGradient id="nodeGlow">
+                  <stop stopColor="#e1f2c9" stopOpacity=".85" />
+                  <stop offset="1" stopColor="#d6edba" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+              <g fill="none" stroke="url(#meshLine)" strokeWidth="1">
+                <path d="M58 410 154 325 247 362 350 228 451 272 550 154 653 208 765 105 880 145" />
+                <path d="M48 478 154 390 260 427 350 302 464 350 550 228 665 280 765 182 870 220" />
+                <path d="M82 544 180 460 284 495 378 379 484 420 580 313 688 359 790 270 890 308" />
+                <path d="M154 325 154 390 180 460M247 362 260 427 284 495M350 228 350 302 378 379M451 272 464 350 484 420M550 154 550 228 580 313M653 208 665 280 688 359M765 105 765 182 790 270" />
+                <path d="m58 410 96-20m93-28 103-60m114-30 86-44m115-22 100-43" strokeDasharray="2 8" />
+              </g>
+              <g fill="url(#nodeGlow)">
+                <circle cx="350" cy="228" r="34" />
+                <circle cx="550" cy="154" r="44" />
+                <circle cx="765" cy="105" r="30" />
+              </g>
+              <g fill="#d9edc1">
+                <circle cx="350" cy="228" r="2.5" />
+                <circle cx="550" cy="154" r="3" />
+                <circle cx="765" cy="105" r="2.5" />
+              </g>
+            </svg>
           </div>
+          <div className="visual-shade" />
+          <div className="visual-note">WATER SYSTEMS / CONCEPT</div>
+        </div>
 
-          <div ref={heroVisualRef} className="relative min-h-[300px] overflow-hidden rounded-[1.4rem] border border-[#b8d2bf33] bg-[#10221e] shadow-[0_28px_90px_#07120e55] transition-[translate] duration-700 ease-out md:min-h-[520px] lg:min-h-[590px]">
-            <Image src="/assets/mesh/ai-workflow.webp" alt="Three-dimensional mesh with luminous points moving across a flowing information landscape" fill priority sizes="(max-width: 767px) 100vw, 52vw" className="object-cover object-center opacity-90" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,#10241c1a_15%,#10241c08_48%,#10241cbb_100%)]" />
-            <div ref={heroMeshRef} className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-5 transition-[translate] duration-700 ease-out sm:inset-x-7 sm:bottom-7">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-[.15em] text-[#c8d8ad]">FROM INPUTS TO WORKING SYSTEMS</p>
-                <p className="mt-2 max-w-[26ch] text-sm leading-6 text-white/85">Retrieval · validation · human review</p>
-              </div>
-              <span className="hidden rounded-full border border-white/20 bg-[#10231eb8] px-3 py-2 font-mono text-[9px] uppercase tracking-[.1em] text-[#dae4d1] sm:inline-flex">01 / AI WORKFLOW</span>
-            </div>
+        <div className="hero-copy">
+          <p className="eyebrow mb-7">APPLIED AI / SOFTWARE STUDIO</p>
+          <h1 className="max-w-[12ch] text-[clamp(3.5rem,7.8vw,7.4rem)] font-medium leading-[.91] tracking-[-.085em]">
+            Software<br />that <em className="font-serif font-normal text-[#c5d89e]">flows.</em>
+          </h1>
+          <p className="lede mt-7 max-w-[45ch] text-base leading-7 text-[#d2ddd4] sm:text-lg sm:leading-8">
+            Teregon Labs builds custom AI and software for business workflows: support assistants, workflow automation, data tools, integrations, and production software. Teregon Aqua is our focused practice for water-product service.
+          </p>
+          <div className="hero-actions mt-8 flex flex-wrap items-center gap-5">
+            <Link className="inline-flex min-h-14 items-center justify-between gap-8 rounded-md bg-[#e4ebdc] px-5 text-sm font-medium text-[#17271f] transition hover:-translate-y-0.5 hover:bg-white" href="#selected-work">Selected work <span aria-hidden="true">↘</span></Link>
+            <a className="inline-flex min-h-12 items-center gap-3 text-sm text-[#e3e9df] transition hover:text-[#c5d89e]" href="mailto:hello@teregonlabs.com?subject=Talk%20with%20Teregon">Start a conversation <span aria-hidden="true">↗</span></a>
           </div>
+          <p className="mt-12 font-mono text-[10px] uppercase tracking-[.14em] text-[#aab9aa]">AI ASSISTANTS · AUTOMATION · CUSTOM SOFTWARE</p>
         </div>
       </section>
 
