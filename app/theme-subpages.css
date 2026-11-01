@@ -43,7 +43,11 @@
 /* Hero Word Cycle (rotating shifting verb) */
 .hero-copy h1 .hero-prefix {
   display: block;
-  white-space: nowrap;
+  white-space: normal;
+}
+
+@media (min-width: 640px) {
+  .hero-copy h1 .hero-prefix { white-space: nowrap; }
 }
 
 .hero-word-cycle {

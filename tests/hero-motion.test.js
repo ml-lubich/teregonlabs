@@ -3,6 +3,7 @@ const { readFileSync } = require('node:fs');
 
 const home = readFileSync(require.resolve('../components/pages/home-page.tsx'), 'utf8');
 const styles = readFileSync(require.resolve('../app/globals.css'), 'utf8');
+const theme = readFileSync(require.resolve('../app/theme-subpages.css'), 'utf8');
 const guide = readFileSync(require.resolve('../components/site-guide.tsx'), 'utf8');
 
 describe('active Next.js homepage motion and controls', () => {
@@ -31,6 +32,11 @@ describe('active Next.js homepage motion and controls', () => {
     expect(home).toContain('<span>connects.</span>');
     expect(home).toContain('<span>adapts.</span>');
     expect(home).toContain('<span>works.</span>');
+  });
+
+  test('hero headline can wrap within the viewport on narrow screens', () => {
+    expect(theme).toMatch(/\.hero-copy h1 \.hero-prefix\s*\{[^}]*white-space:\s*normal/);
+    expect(theme).toMatch(/@media \(min-width: 640px\)\s*\{[^}]*\.hero-copy h1 \.hero-prefix\s*\{[^}]*white-space:\s*nowrap/);
   });
 
   test('Guide and contact controls retain legible, touch-sized targets', () => {

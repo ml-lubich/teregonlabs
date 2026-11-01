@@ -46,6 +46,10 @@ def image_dimensions(data):
 
 
 class TeregonSiteContract(unittest.TestCase):
+    def test_next_font_variables_are_available_to_root_design_tokens(self):
+        layout = source("app/layout.tsx")
+        self.assertRegex(layout, r'<html lang="en" className=\{`\$\{inter\.variable\} \$\{spaceGrotesk\.variable\} \$\{dmMono\.variable\}`\}>')
+
     def test_vercel_uses_nextjs_framework_instead_of_public_static_output(self):
         config = source("vercel.json")
         self.assertIn('"framework": "nextjs"', config)

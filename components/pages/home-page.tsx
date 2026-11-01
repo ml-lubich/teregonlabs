@@ -254,7 +254,7 @@ export function HomePage() {
         <div className="hero-copy">
           <p className="eyebrow mb-7">APPLIED AI / SOFTWARE STUDIO</p>
           <h1 className="max-w-[12ch] text-[clamp(3.5rem,7.8vw,7.4rem)] font-medium leading-[.91] tracking-[-.085em]" aria-label="Software that flows.">
-            <span className="hero-prefix block whitespace-nowrap">Software that</span>
+            <span className="hero-prefix block">Software that</span>
             <span className="hero-word-cycle" aria-hidden="true">
               <span>flows.</span>
               <span>connects.</span>
