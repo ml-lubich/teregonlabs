@@ -86,3 +86,35 @@ The `/water.html` illustrative service-flow section renders as plain stacked tex
 - At widths ≤860px the section becomes one column, the heading is not sticky, and all copy remains legible without horizontal overflow.
 - The live stylesheet is the active Next stylesheet; no dependency or legacy stylesheet import is added.
 - The regression test fails against the current missing selectors and passes after the fix; `bun run ci` passes before deployment.
+
+# Product and project-story refresh (2026-11-01)
+
+## Goal
+Create a standalone Products page for the six configurable Teregon offerings, expand project proof into readable execution stories with restrained scroll-linked milestones, and make the shared responsive navigation feel quieter and more deliberate. Preserve Teregon's own palette, type, words, assets, and layouts; public Apple/Vercel/Anthropic/Codex references inform interaction quality only, never literal copying.
+
+## Scope and non-goals
+- Add `/products.html`, linked from desktop and mobile navigation; explain Aqua, Oasis, Aquifer, Zephyr, Equinox, and Terra as configured services, with practical fit, typical inputs, deliverables, and review boundaries.
+- Give each project story a concise sequence from problem/context through build choices to shipped/use state. Use dated milestones only when source-backed; otherwise show an explicitly undated sequence of verified implementation steps.
+- Add a calm responsive navigation treatment and restrained timeline reveals. Keep mobile low-compute, keyboard/touch accessible, and `prefers-reduced-motion` safe. No new motion dependency.
+- Do not promise project revenue return, ROI, savings, or causal business impact without project-specific, attributable evidence.
+
+## Claims and attribution guardrails
+- Verified repo copy: BrioBot's Brio-company ARR context was reported at about $240K at the time, and is explicitly not attributed to BrioBot.
+- `public/llms.txt` reports Briopedia-era/current company ARR context around $2M; treat as team-reported and not caused by Briopedia. Verify the date/source before tightening wording.
+- User previously reported ERIA company ARR around $10M; the current case page has no supporting record or attribution. Do not present this as project return. Include only if separately labeled as user/team-reported company context with a clear not-attributed note; otherwise omit.
+- Real project proof may describe live launches, architecture, integrations, approval controls, and private workflow tooling at the level already documented. Do not imply confidential admin/customer UI is public.
+
+## Disjoint work packages (one writer per file)
+1. Products page: new `components/pages/products-page.tsx`, `components/pages/products-page.module.css`, and `app/products.html/page.tsx`; reuse current offering facts, avoid duplicating homepage markup. Do not edit shared nav.
+2. Project stories: one owner for `components/pages/work-page.tsx`, `components/pages/eria-case-study.tsx`, `components/pages/briobot-page.tsx`, and `components/pages/briopedia-page.tsx`, plus a new reusable timeline component/module if useful. Add W3 project flow only from current verified live-build facts. Do not invent BrioScope as a deployed Teregon product.
+3. Navigation: one owner for `components/site-shell.tsx` and `app/globals.css`; add Products link and calm glass-like surface with accessible open/close, focus, touch, mobile, and reduced-motion behavior.
+4. Regression tests/docs: separate owner for new/updated tests and `docs/DESIGN.md`; keep test files disjoint from implementation. Assert route/menu links, six configured offerings, project attribution guardrails, timeline content, responsive layout, and reduced-motion behavior.
+5. Fresh-context reviewer: review page screenshots at desktop and mobile, keyboard/ARIA behavior, copy attribution, and spec acceptance without overlapping implementation edits.
+
+## Acceptance and verification
+- Products route renders all six offerings with practical inputs/output/fit; links and canonical metadata work.
+- Work stories cover ERIA and W3 live client website builds plus BrioBot and Briopedia prior Brio team projects; no invented revenue ROI or deployment status.
+- Timeline nodes reveal calmly as they enter view on desktop; static/low-compute mobile, no horizontal overflow, and immediate readable fallback with reduced motion.
+- Header has one obvious primary contact action, working Products disclosure, visible focus, touch-sized mobile control, and no menu overlap/clipping at 320px through desktop.
+- Add a failing regression before implementation; run existing `bun run ci`, browser screenshots/accessibility checks, plus existing service-offerings coverage command (must remain >=90%).
+- Before commit/push, scan public changes for private identifiers/claims; deploy and verify the new route and modified case pages.
