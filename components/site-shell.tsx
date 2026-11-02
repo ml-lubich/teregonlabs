@@ -2,12 +2,12 @@ import Link from "next/link";
 export { GuideWidget } from "@/components/site-guide";
 
 const products = [
-  { name: "Teregon Aqua", href: "/water.html", detail: "Focused water-industry practice" },
-  { name: "Teregon Oasis", href: "/#offerings", detail: "Support automation for water and product teams" },
-  { name: "Teregon Aquifer", href: "/#offerings", detail: "Grounded search across manuals, policies, and case history" },
-  { name: "Teregon Zephyr", href: "/#offerings", detail: "Workflow agents" },
-  { name: "Teregon Equinox", href: "/#offerings", detail: "Forecasting and planning" },
-  { name: "Teregon Terra", href: "/water.html#watershed-context", detail: "Land and watershed systems" },
+  { name: "Teregon Aqua", href: "/products.html#aqua", detail: "Focused water-industry practice" },
+  { name: "Teregon Oasis", href: "/products.html#oasis", detail: "Support automation" },
+  { name: "Teregon Aquifer", href: "/products.html#aquifer", detail: "Grounded knowledge search" },
+  { name: "Teregon Zephyr", href: "/products.html#zephyr", detail: "Workflow agents" },
+  { name: "Teregon Equinox", href: "/products.html#equinox", detail: "Forecasting and planning" },
+  { name: "Teregon Terra", href: "/products.html#terra", detail: "Land and watershed systems" },
 ];
 
 function ProductLinks() {
@@ -35,8 +35,8 @@ export function SiteHeader({ active }: { active?: string }) {
           <Link href="/work.html" {...isActive("work")}>Work</Link>
           <Link href="/approach.html" {...isActive("approach")}>Approach</Link>
           <details className="products-dropdown">
-            <summary>Products <span aria-hidden="true">⌄</span></summary>
-            <div className="products-menu"><ProductLinks /></div>
+            <summary aria-label="Browse configurable services" aria-current={active === "products" ? "page" : undefined}>Products <span aria-hidden="true">⌄</span></summary>
+            <div className="products-menu"><Link className="product-menu-link product-menu-overview" href="/products.html"><span>All services</span><small>Six configurable services</small></Link><ProductLinks /></div>
           </details>
           <Link href="/about.html" {...isActive("about")}>About</Link>
         </nav>
@@ -49,7 +49,8 @@ export function SiteHeader({ active }: { active?: string }) {
             <Link href="/work.html" {...isActive("work")}>Work <span aria-hidden="true">↗</span></Link>
             <Link href="/approach.html" {...isActive("approach")}>Approach <span aria-hidden="true">↗</span></Link>
             <div className="mobile-products">
-              <p>Products</p>
+              <p>Products / configurable services</p>
+              <Link className="product-menu-link" href="/products.html"><span>All services</span><small>Six configurable services</small></Link>
               <ProductLinks />
             </div>
             <Link href="/about.html" {...isActive("about")}>About <span aria-hidden="true">↗</span></Link>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ProjectTimeline } from "../project-timeline";
 
 const steps = [
   ["01", "Gather the case", "Collect Salesforce case details and the supporting context available to the workflow."],
@@ -28,6 +29,17 @@ export function BriobotPage() {
           </figure>
         </div>
       </section>
+
+      <ProjectTimeline
+        eyebrow="PRIOR BRIO TEAM WORK / UNDATED STEPS"
+        title="A case moves through evidence and checks."
+        steps={[
+          { title: "Gather the case", detail: "Collect Salesforce case details and available supporting context." },
+          { title: "Retrieve evidence", detail: "Use LangGraph to find product and policy material and read attached images." },
+          { title: "Prepare a proposal", detail: "Draft structured response or case-update fields for a person to review." },
+          { title: "Validate the write", detail: "Python gates, dry-run and safe-stop paths, human review, and Langfuse traces bound the workflow." },
+        ]}
+      />
 
       <section id="workflow" className="scroll-mt-24 px-5 py-16 sm:px-8 md:py-24 lg:px-[8vw]" aria-labelledby="workflow-title">
         <div className="mx-auto max-w-[1320px]">

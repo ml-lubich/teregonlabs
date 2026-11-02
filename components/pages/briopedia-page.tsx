@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
+import { ProjectTimeline } from "../project-timeline";
 
 const system = [
   {
@@ -101,6 +102,24 @@ export function BriopediaPage() {
         <div className="bp-architecture-note bp-reveal">
           <span>IMPLEMENTATION</span>
           <p><b>Next.js</b> interface · <b>FastAPI</b> async backend · <b>FAISS</b> retrieval · <b>Docker Compose</b> deployment</p>
+        </div>
+      </section>
+
+      <ProjectTimeline
+        eyebrow="PRIOR BRIO TEAM WORK / UNDATED STEPS"
+        title="Keep knowledge maintained, then bring it into the answer."
+        steps={[
+          { title: "Maintain the source", detail: "Keep support guidance in a git-backed wiki with reviewable history." },
+          { title: "Retrieve relevant passages", detail: "Index the knowledge corpus with FAISS and retrieve context for a question." },
+          { title: "Generate with context", detail: "Pass retrieved material through a provider-agnostic local or cloud LLM layer." },
+          { title: "Package the system", detail: "Connect the Next.js interface and FastAPI service in a Docker Compose deployment." },
+        ]}
+      />
+
+      <section className="px-5 py-12 sm:px-8 md:py-16 lg:px-[8vw]" aria-labelledby="bp-company-context-title">
+        <div className="mx-auto grid max-w-[1320px] gap-4 border-y border-[var(--line)] py-6 md:grid-cols-[.5fr_1fr] md:gap-10 md:py-8">
+          <p className="bp-kicker">COMPANY CONTEXT</p>
+          <div><h2 id="bp-company-context-title" className="text-2xl font-medium tracking-[-.05em]">Reported company scale</h2><p className="mt-3 max-w-[68ch] text-sm leading-7 text-[var(--muted)]">At the time this material was prepared, the Brio team reported company-level ARR of approximately $2M. This is company context, not revenue attributable to Briopedia or a return from this system.</p></div>
         </div>
       </section>
 

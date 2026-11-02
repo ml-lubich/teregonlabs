@@ -31,11 +31,16 @@ Team-reported company-level ARR context: approximately $240K during BrioBot work
 
 Teregon Aqua can build or configure grounded support assistants for approved manuals and policies, evidence-gated service triage, and support-signal analytics for water product businesses. Watershed concepts can bring together available rainfall, stream observations, land cover, and community context for planning. These are proposed offerings and illustrative concepts, not deployed water products or live sensor services.
 
+## Configurable services
+
+Teregon Labs configures these services with each team; they are not standalone off-the-shelf products: **Teregon Aqua** (water-industry practice), **Teregon Oasis** (support automation), **Teregon Aquifer** (grounded knowledge search), **Teregon Zephyr** (workflow agents), **Teregon Equinox** (forecasting and planning), and **Teregon Terra** (land and watershed systems). [Offerings](https://teregonlabs.com/products.html).
+
 ## Pages
 
 - [Home](https://teregonlabs.com/): Teregon, Teregon Labs, Teregon Aqua, live client websites, and prior team systems.
 - [ERIA Events case study](https://teregonlabs.com/eria.html): live client website build.
 - [What we build](https://teregonlabs.com/work.html): Applied AI, connected data systems, software engineering, and Teregon Aqua.
+- [Products and services](https://teregonlabs.com/products.html): Six configurable services, their intended use, inputs, and typical deliverables.
 - [Teregon Aqua](https://teregonlabs.com/water.html): Water filtration and appliance workflows, service systems, and watershed context.
 - [Approach](https://teregonlabs.com/approach.html): How Teregon scopes, builds, and measures useful systems.
 - [About](https://teregonlabs.com/about.html): Parent point of view, practices, principles, and team.

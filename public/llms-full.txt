@@ -25,6 +25,10 @@ Teregon Aqua is a focused specialization that applies software and AI to water f
 - **Service-signal analytics:** group recurring cases, questions, and service notes so teams can investigate patterns against source records.
 - **Watershed context:** combine available rainfall, stream observations, land cover, and community assets to support human-led planning. Data availability and freshness are confirmed with each project; no live sensor network is implied.
 
+## Configurable services
+
+Teregon Labs offers six named services configured around a team's workflow, data, and review needs. They are not standalone off-the-shelf products. **Teregon Aqua** is the focused water-industry practice. **Teregon Oasis** covers support automation; **Teregon Aquifer**, grounded search across approved knowledge; **Teregon Zephyr**, repeatable workflow agents; **Teregon Equinox**, forecasting and planning; and **Teregon Terra**, land and watershed systems. Their scope and deliverables are agreed with each team. See https://teregonlabs.com/products.html.
+
 Illustrative low-flow service scenario: a case arrives with a product model and customer description; the assistant retrieves relevant manual and service-policy sections; the technician reviews the draft and approves any next action. This is a proposed workflow, not a deployed water customer system.
 
 ## Live client website builds
@@ -75,6 +79,7 @@ The Teregon Guide is a bounded, model-backed assistant for Teregon Labs, its pub
 - Home: https://teregonlabs.com/
 - What we build: https://teregonlabs.com/work.html
 - Teregon Aqua: https://teregonlabs.com/water.html
+- Products and services: https://teregonlabs.com/products.html
 - Approach: https://teregonlabs.com/approach.html
 - About: https://teregonlabs.com/about.html
 - Briopedia case study (prior Brio team work): https://teregonlabs.com/briopedia.html

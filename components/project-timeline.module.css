@@ -1,0 +1,105 @@
+.timeline {
+  --timeline-ink: var(--ink, #172723);
+  --timeline-muted: var(--muted, #68776d);
+  --timeline-line: color-mix(in srgb, var(--timeline-ink) 16%, transparent);
+  display: grid;
+  grid-template-columns: minmax(190px, .72fr) minmax(0, 1.7fr);
+  gap: clamp(24px, 5vw, 72px);
+  padding: clamp(44px, 7vw, 88px) clamp(22px, 8vw, 132px);
+  color: var(--timeline-ink);
+  background: linear-gradient(120deg, #e9eee5, #edf1ed 70%, #e5eff0);
+}
+
+.heading p {
+  margin: 0 0 14px;
+  color: var(--timeline-muted);
+  font: 10px/1.5 var(--mono, monospace);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.heading h2 {
+  max-width: 12ch;
+  margin: 0;
+  font: 500 clamp(28px, 3.3vw, 46px)/1.04 var(--display, sans-serif);
+  letter-spacing: -.055em;
+}
+
+:global(.project-timeline-list) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  align-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.milestone {
+  position: relative;
+  min-width: 0;
+  padding: 31px 18px 0 0;
+  border-top: 1px solid var(--timeline-line);
+  animation: timeline-arrive .65s both;
+  animation-timeline: view();
+  animation-range: entry 5% cover 24%;
+}
+
+.milestone:nth-child(2) { animation-delay: 70ms; }
+.milestone:nth-child(3) { animation-delay: 140ms; }
+.milestone:nth-child(4) { animation-delay: 210ms; }
+
+.node {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  border: 1px solid #6d8b7e;
+  border-radius: 50%;
+  color: #173d42;
+  background: #eaf0e8;
+}
+
+.milestone h3 {
+  margin: 0 0 9px;
+  font: 500 clamp(16px, 1.5vw, 21px)/1.2 var(--display, sans-serif);
+  letter-spacing: -.035em;
+}
+
+.milestone p {
+  max-width: 30ch;
+  margin: 0;
+  color: var(--timeline-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+@keyframes timeline-arrive {
+  from { opacity: .42; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 860px) {
+  .timeline { grid-template-columns: 1fr; gap: 30px; padding-inline: 24px; }
+  .heading h2 { max-width: 22ch; }
+  :global(.project-timeline-list) { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .milestone { padding-right: 12px; }
+}
+
+@media (max-width: 520px) {
+  .timeline { padding-block: 48px; }
+  :global(.project-timeline-list) { grid-template-columns: 1fr; row-gap: 24px; }
+  .milestone { padding: 23px 0 0 20px; border-top: 0; border-left: 1px solid var(--timeline-line); }
+  .node { top: 22px; left: -8px; }
+  .milestone p { max-width: 46ch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .milestone { animation: none; opacity: 1; transform: none; }
+}
+
+@supports not (animation-timeline: view()) {
+  .milestone { animation: none; }
+}

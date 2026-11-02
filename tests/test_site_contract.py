@@ -13,6 +13,7 @@ ROUTES = {
     "/approach.html": "app/approach.html/page.tsx",
     "/about.html": "app/about.html/page.tsx",
     "/water.html": "app/water.html/page.tsx",
+    "/products.html": "app/products.html/page.tsx",
     "/briobot.html": "app/briobot.html/page.tsx",
     "/briopedia.html": "app/briopedia.html/page.tsx",
     "/pitch-deck.html": "app/pitch-deck.html/page.tsx",
@@ -49,6 +50,69 @@ def image_dimensions(data):
 
 
 class TeregonSiteContract(unittest.TestCase):
+    def test_products_route_is_discoverable_in_sitemap_and_crawler_summaries(self):
+        sitemap = source("public/sitemap.xml")
+        self.assertIn("https://teregonlabs.com/products.html", sitemap)
+        for path in ("public/llms.txt", "public/llms-full.txt"):
+            with self.subTest(document=path):
+                content = source(path).lower()
+                self.assertTrue("https://teregonlabs.com/products.html" in content, f"{path} must link to Products")
+                for offering in ("teregon aqua", "teregon oasis", "teregon aquifer", "teregon zephyr", "teregon equinox", "teregon terra"):
+                    self.assertTrue(offering in content, f"{path} must list {offering}")
+                self.assertTrue("not standalone" in content, f"{path} must say offerings are configured services")
+
+    def test_products_page_describes_six_configured_offerings_and_has_canonical_route(self):
+        self.assertTrue((ROOT / "app/products.html/page.tsx").is_file(), "Products route has not been added")
+        route = source("app/products.html/page.tsx")
+        self.assertTrue((ROOT / "components/pages/products-page.tsx").is_file(), "Products page component has not been added")
+        page = source("components/pages/products-page.tsx").lower()
+        offering_data = source("components/service-offerings.tsx").lower()
+        self.assertTrue('canonical: "/products.html"' in route, "Products route must set its canonical URL")
+        for offering in ("teregon aqua", "teregon oasis", "teregon aquifer", "teregon zephyr", "teregon equinox", "teregon terra"):
+            with self.subTest(offering=offering):
+                self.assertTrue(offering in offering_data, f"Products data missing {offering}")
+        self.assertIn("offerings.map", page, "Products page must render the shared offering data")
+        for detail in ("configured", "inputs", "deliverables", "human review"):
+            with self.subTest(detail=detail):
+                self.assertTrue(detail in page, f"Products page must explain {detail}")
+        self.assertTrue("not standalone" in page, "Offerings must be identified as configured services")
+
+    def test_products_navigation_is_linked_and_accessible(self):
+        shell = source("components/site-shell.tsx")
+        self.assertTrue('href="/products.html"' in shell, "Shared navigation must link to Products")
+        self.assertTrue('className="products-dropdown"' in shell, "Products menu must have a disclosure")
+        self.assertTrue("<summary" in shell and 'aria-label="Main navigation"' in shell, "Products disclosure must sit in the labeled navigation")
+
+    def test_project_story_timelines_are_responsive_and_reduced_motion_safe(self):
+        pages = (
+            "components/pages/work-page.tsx",
+            "components/pages/eria-case-study.tsx",
+            "components/pages/briobot-page.tsx",
+            "components/pages/briopedia-page.tsx",
+        )
+        for path in pages:
+            with self.subTest(page=path):
+                content = source(path).lower()
+                self.assertIn("projecttimeline", content, f"Missing project timeline in {path}")
+        timeline = source("components/project-timeline.tsx")
+        self.assertIn("<ol", timeline, "Project sequences must use an ordered list")
+        self.assertIn("steps.map", timeline)
+
+        css = normalize(source("components/project-timeline.module.css")).lower()
+        self.assertIn("prefers-reduced-motion: reduce", css)
+        self.assertIn("@media (max-width: 860px)", css, "Timeline needs a mobile layout rule")
+        self.assertIn("animation-timeline: view()", css)
+
+    def test_project_revenue_context_is_not_attributed_to_case_study_software(self):
+        for path in (
+            "components/pages/eria-case-study.tsx",
+            "components/pages/briobot-page.tsx",
+            "components/pages/briopedia-page.tsx",
+        ):
+            content = source(path).lower()
+            if re.search(r"\$\s?\d|arr.{0,30}\d", content):
+                self.assertTrue(re.search(r"not attributed|not attributable|not caused by|company-level", content), f"Revenue context in {path} needs attribution language")
+
     def test_next_font_variables_are_available_to_root_design_tokens(self):
         layout = source("app/layout.tsx")
         self.assertRegex(layout, r'<html lang="en" className=\{`\$\{inter\.variable\} \$\{spaceGrotesk\.variable\} \$\{dmMono\.variable\}`\}>')

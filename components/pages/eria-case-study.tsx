@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ProjectTimeline } from "../project-timeline";
 
 const buildFacts = [
   ["01", "Public website", "A responsive destination for ERIA’s venues, experiences, events, and press."],
@@ -64,6 +65,17 @@ export function EriaCaseStudy() {
           ))}
         </div>
       </section>
+
+      <ProjectTimeline
+        eyebrow="LIVE CLIENT BUILD / UNDATED PROJECT STEPS"
+        title="From the guest journey to the tools behind it."
+        steps={[
+          { title: "Map the experience", detail: "Organize ERIA’s venues, events, experiences, and inquiry paths for public discovery." },
+          { title: "Build the site", detail: "Create a responsive Next.js and React website with Sanity CMS content operations." },
+          { title: "Connect team workflows", detail: "Add private content tools and automation for repeatable team tasks and inquiry follow-through." },
+          { title: "Launch publicly", detail: "Publish the client website at ERIA.co; private admin and operational screens stay private." },
+        ]}
+      />
 
       <section className="eria-ops-section" aria-labelledby="eria-ops-title">
         <div className="eria-ops-visual" aria-label="Illustrative view of content moving from an editorial system into a live venue page and team workflow">

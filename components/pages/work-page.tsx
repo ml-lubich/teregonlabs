@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ProjectTimeline } from "../project-timeline";
 
 const capabilities = [
   {
@@ -81,6 +82,19 @@ export function WorkPage() {
           </article>
         ))}
       </section>
+
+      <ProjectTimeline
+        eyebrow="SELECTED WORK / PROJECT SEQUENCES"
+        title="From the first workflow to a live build."
+        steps={[
+          { title: "ERIA · shape the journey", detail: "Organize venues, experiences, events, press, and inquiry paths for public discovery." },
+          { title: "ERIA · build and launch", detail: "Build a live responsive Next.js and React website with Sanity content operations." },
+          { title: "W3 Sourcing · structure the story", detail: "Connect practices, methodology, results, and leadership context for a principal-led search firm." },
+          { title: "W3 Sourcing · publish", detail: "Build and launch a responsive client website with a direct inquiry path." },
+          { title: "BrioBot · support operations", detail: "Prior Brio team work: retrieve case evidence, draft updates, validate fields, and retain human review." },
+          { title: "Briopedia · support knowledge", detail: "Prior Brio team work: maintain a versioned wiki, retrieve source passages, and connect them to chat." },
+        ]}
+      />
 
       <section className="page-callout">
         <p className="eyebrow">CUSTOM AI / BUILT AROUND BUSINESS WORK</p>

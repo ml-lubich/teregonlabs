@@ -22,3 +22,13 @@ Use confident editorial hierarchy, strong project proof, composed photography or
 ## Verification
 
 Use the existing `bun run ci` gate. Add regression tests for service copy, actual work-panel images, hero wrapping/cadence, and responsive/reduced-motion contracts. Measure service-rendering line coverage with `bun test --coverage tests/service-offerings.test.js`; require at least 90% and report the measured percentage.
+
+## Products and project stories
+
+- `/products.html` lists Teregon Aqua, Oasis, Aquifer, Zephyr, Equinox, and Terra. Describe each as a configurable service, with its intended use, likely inputs, deliverables, and human review or operating boundary. State that these are not standalone off-the-shelf products.
+- Link Products from the shared desktop and mobile navigation. The disclosure must work with keyboard and touch, expose its state accessibly, preserve visible focus, and fit narrow viewports without clipping.
+- ERIA, W3 Sourcing, BrioBot, and Briopedia project stories may use ordered timeline steps to explain the verified sequence from need through implementation and use. Do not invent dates; label undated sequences as steps or phases.
+- Keep live client website work distinct from prior Brio team experience. Do not imply BrioBot or Briopedia were Teregon client engagements.
+- Do not attribute company ARR, revenue, ROI, savings, or other business results to a project without project-specific evidence. If company-level figures appear, identify them as reported context and explicitly state that the project did not cause or earn that figure.
+- Timelines must remain readable without animation, avoid horizontal overflow, and stack naturally on mobile. Reveals may use opacity and transform only; honor `prefers-reduced-motion` with an immediate static presentation and keep mobile motion low-compute.
+- Add focused regression tests for the Products route and metadata, all six offering descriptions, navigation accessibility, project-story timeline coverage, and revenue-attribution wording. Keep `bun run ci` as the repository verification gate.
