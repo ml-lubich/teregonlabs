@@ -33,8 +33,10 @@ function makeRawRequest(body, headers = {}) {
 
 const env = {
   OPENROUTER_API_KEY: 'test-only-not-a-real-key',
-  GUIDE_RATE_SECRET: 'test-only-rate-signing-secret-long-enough'
+  GUIDE_RATE_SECRET: 'test-only-rate-signing-secret-long-enough',
+  OPENROUTER_FREE_MODELS: 'nvidia/nemotron-3.5-super-vl:free,google/gemma-4-31b-it:free,thinkingmachines/inkling:free'
 };
+const freeModels = env.OPENROUTER_FREE_MODELS.split(',');
 const question = { messages: [{ role: 'user', content: 'What does Teregon build?' }] };
 
 describe('Guide client IP selection', () => {
@@ -45,6 +47,7 @@ describe('Guide client IP selection', () => {
   test('uses the left-most valid client address in the forwarded chain as fallback', () => {
     expect(getClientIp({ headers: { 'x-forwarded-for': '198.51.100.10, 192.0.2.5, 203.0.113.8' } })).toBe('198.51.100.10');
     expect(getClientIp({ headers: { 'x-real-ip': 'not-an-ip', 'x-forwarded-for': 'invalid, 192.0.2.5' } })).toBe('192.0.2.5');
+    expect(getClientIp({ headers: {} })).toBe('unknown');
   });
 });
 
@@ -84,10 +87,50 @@ describe('Teregon Guide API', () => {
     expect(calls).toBe(0);
   });
 
+  test('rejects malformed raw JSON and a request stream that fails while reading', async () => {
+    let calls = 0;
+    const handler = createGuideHandler({ env, fetchImpl: async () => { calls += 1; } });
+    const malformed = mockResponse();
+    await handler(makeRawRequest('{"messages":'), malformed);
+    expect(malformed.statusCode).toBe(400);
+    expect(JSON.parse(malformed.body)).toEqual({ error: 'invalid_request' });
+
+    const brokenStream = {
+      method: 'POST',
+      headers: { 'x-forwarded-for': '198.51.100.23' },
+      async *[Symbol.asyncIterator]() { throw new Error('client stream failed'); }
+    };
+    const failedRead = mockResponse();
+    await handler(brokenStream, failedRead);
+    expect(failedRead.statusCode).toBe(400);
+    expect(JSON.parse(failedRead.body)).toEqual({ error: 'invalid_request' });
+    expect(calls).toBe(0);
+  });
+
+  test('rejects a cross-origin request when Host is missing or Origin is malformed', async () => {
+    let calls = 0;
+    const handler = createGuideHandler({ env, fetchImpl: async () => { calls += 1; } });
+    for (const headers of [
+      { origin: 'https://teregonlabs.com' },
+      { origin: 'not an origin', host: 'teregonlabs.com' }
+    ]) {
+      const res = mockResponse();
+      await handler(makeRequest(question, headers), res);
+      expect(res.statusCode).toBe(403);
+      expect(JSON.parse(res.body)).toEqual({ error: 'forbidden' });
+    }
+    expect(calls).toBe(0);
+  });
+
   test('fails closed when either server secret is missing without calling the provider', async () => {
     for (const incomplete of [
       { GUIDE_RATE_SECRET: env.GUIDE_RATE_SECRET },
-      { OPENROUTER_API_KEY: env.OPENROUTER_API_KEY }
+      { OPENROUTER_API_KEY: env.OPENROUTER_API_KEY },
+      { ...env, OPENROUTER_FREE_MODELS: undefined },
+      { ...env, OPENROUTER_FREE_MODELS: 'nvidia/nemotron-3.5-super-vl:free,google/gemma-4-31b-it:free' },
+      { ...env, OPENROUTER_FREE_MODELS: 'nvidia/nemotron-3.5-super-vl:free,google/gemma-4-31b-it:free,anthropic/paid-model' },
+      { ...env, OPENROUTER_FREE_MODELS: 'nvidia/nemotron-3.5-super-vl:free,google/gemma-4-31b-it:free,unknown/model:free' },
+      { ...env, OPENROUTER_FREE_MODELS: `${freeModels[0]},${freeModels[0]},${freeModels[2]}` }
     ]) {
       let calls = 0;
       const handler = createGuideHandler({ env: incomplete, fetchImpl: async () => { calls += 1; } });
@@ -116,8 +159,8 @@ describe('Teregon Guide API', () => {
     expect(calls).toBe(0);
   });
 
-  test('sends only the fixed free model and streams provider deltas', async () => {
-    let providerRequest;
+  test('uses all three configured free models in order and streams provider deltas', async () => {
+    const providerRequests = [];
     const providerBody = [
       'data: {"choices":[{"delta":{"content":"Teregon builds "}}]}\n\n',
       'data: {"choices":[{"delta":{"content":"custom AI systems."}}]}\n\n',
@@ -126,7 +169,7 @@ describe('Teregon Guide API', () => {
     const handler = createGuideHandler({
       env,
       fetchImpl: async (url, options) => {
-        providerRequest = { url, options, json: JSON.parse(options.body) };
+        providerRequests.push({ url, options, json: JSON.parse(options.body) });
         return new Response(providerBody, { status: 200, headers: { 'content-type': 'text/event-stream' } });
       }
     });
@@ -138,28 +181,122 @@ describe('Teregon Guide API', () => {
     expect(res.headers['set-cookie']).toContain('HttpOnly');
     expect(res.headers['set-cookie']).toContain('Secure');
     expect(res.headers['set-cookie']).toContain('SameSite=Lax');
-    expect(providerRequest.url).toContain('openrouter.ai');
-    expect(providerRequest.options.headers.Authorization).toBe(`Bearer ${env.OPENROUTER_API_KEY}`);
-    expect(providerRequest.json.model).toBe('nvidia/nemotron-3.5-super-vl:free');
-    expect(providerRequest.json.stream).toBe(true);
-    expect(providerRequest.json.tools ?? []).toHaveLength(0);
+    expect(providerRequests).toHaveLength(1);
+    expect(providerRequests[0].url).toContain('openrouter.ai');
+    expect(providerRequests[0].options.headers.Authorization).toBe(`Bearer ${env.OPENROUTER_API_KEY}`);
+    expect(providerRequests[0].json.model).toBe(freeModels[0]);
+    expect(providerRequests[0].json.models).toEqual([freeModels[0]]);
+    expect(providerRequests[0].json.stream).toBe(true);
+    expect(providerRequests[0].json.tools ?? []).toHaveLength(0);
     expect(res.body).toContain('Teregon builds ');
     expect(res.body).toContain('custom AI systems.');
     expect(res.body).toContain('[DONE]');
   });
 
-  test('maps upstream quota exhaustion to retryable 429 without fallback', async () => {
+  test('tries each free model after upstream 429 and succeeds without a second app reservation', async () => {
     let calls = 0;
+    const limiterCalls = { check: 0, release: 0 };
     const handler = createGuideHandler({
       env,
-      fetchImpl: async () => { calls += 1; return new Response('quota', { status: 429 }); }
+      limiter: {
+        getVisitor: () => 'visitor',
+        check: () => { limiterCalls.check += 1; return { allowed: true }; },
+        release: () => { limiterCalls.release += 1; }
+      },
+      fetchImpl: async (_url, options) => {
+        calls += 1;
+        const request = JSON.parse(options.body);
+        expect(request.model).toBe(freeModels[calls - 1]);
+        expect(request.models).toEqual([freeModels[calls - 1]]);
+        return calls < 3
+          ? new Response('quota', { status: 429, headers: { 'retry-after': '17' } })
+          : new Response('data: {"choices":[{"delta":{"content":"Recovered answer."}}]}\n\ndata: [DONE]\n\n', { status: 200 });
+      }
+    });
+    const res = mockResponse();
+    await handler(makeRequest(question), res);
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toContain('Recovered answer.');
+    expect(calls).toBe(3);
+    expect(limiterCalls).toEqual({ check: 1, release: 1 });
+  });
+
+  test('returns the final upstream 429 as a safe retryable response after all free models fail', async () => {
+    let calls = 0;
+    const limiterCalls = { check: 0, release: 0 };
+    const handler = createGuideHandler({
+      env,
+      limiter: {
+        getVisitor: () => 'visitor',
+        check: () => { limiterCalls.check += 1; return { allowed: true }; },
+        release: () => { limiterCalls.release += 1; }
+      },
+      fetchImpl: async () => { calls += 1; return new Response('provider quota details', { status: 429, headers: { 'retry-after': '23' } }); }
     });
     const res = mockResponse();
     await handler(makeRequest(question), res);
     expect(res.statusCode).toBe(429);
-    expect(res.headers['retry-after']).toBeTruthy();
-    expect(calls).toBe(1);
+    expect(res.headers['retry-after']).toBe('23');
+    expect(calls).toBe(3);
+    expect(limiterCalls).toEqual({ check: 1, release: 1 });
     expect(JSON.stringify(res.jsonBody ?? res.body)).not.toContain(env.OPENROUTER_API_KEY);
+    expect(JSON.stringify(res.jsonBody ?? res.body)).not.toContain('provider quota details');
+  });
+
+  test('bounds provider Retry-After and supplies a safe default when invalid', async () => {
+    for (const [header, expected] of [['99999', '3600'], ['not-a-number', '60']]) {
+      const handler = createGuideHandler({
+        env,
+        fetchImpl: async () => new Response('quota', { status: 429, headers: { 'retry-after': header } })
+      });
+      const res = mockResponse();
+      await handler(makeRequest(question), res);
+      expect(res.statusCode).toBe(429);
+      expect(res.headers['retry-after']).toBe(expected);
+    }
+  });
+
+  test('returns a safe unavailable response when an upstream success has no stream body', async () => {
+    const handler = createGuideHandler({ env, fetchImpl: async () => ({ ok: true, status: 200, body: null }) });
+    const res = mockResponse();
+    await handler(makeRequest(question), res);
+    expect(res.statusCode).toBe(502);
+    expect(JSON.parse(res.body)).toEqual({ error: 'unavailable' });
+  });
+
+  test('does not retry non-429 provider errors or network failures', async () => {
+    for (const fetchImpl of [
+      async () => new Response('provider error', { status: 401 }),
+      async () => new Response('provider error', { status: 503 }),
+      async () => { throw new Error('network error'); }
+    ]) {
+      let calls = 0;
+      const handler = createGuideHandler({
+        env,
+        fetchImpl: async (...args) => { calls += 1; return fetchImpl(...args); }
+      });
+      const res = mockResponse();
+      await handler(makeRequest(question), res);
+      expect(res.statusCode).toBe(502);
+      expect(calls).toBe(1);
+    }
+  });
+
+  test('does not call OpenRouter when the app limiter rejects the visitor', async () => {
+    let calls = 0;
+    const handler = createGuideHandler({
+      env,
+      limiter: {
+        getVisitor: () => 'visitor',
+        check: () => ({ allowed: false, status: 429, retryAfter: 31 })
+      },
+      fetchImpl: async () => { calls += 1; }
+    });
+    const res = mockResponse();
+    await handler(makeRequest(question), res);
+    expect(res.statusCode).toBe(429);
+    expect(res.headers['retry-after']).toBe('31');
+    expect(calls).toBe(0);
   });
 
   test('does not echo provider errors or visitor prompts into error responses', async () => {

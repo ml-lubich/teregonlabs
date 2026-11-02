@@ -55,6 +55,7 @@ describe('active Next.js homepage motion and controls', () => {
     expect(theme).not.toMatch(/\.hero-copy h1 \.hero-prefix\s*\{[^}]*white-space:\s*nowrap/);
     expect(home).toContain('max-w-[16ch] text-[clamp(2.75rem,6vw,6.5rem)]');
     expect(styles).toMatch(/@media \(min-width: 900px\)\s*\{[^}]*\.hero-copy\s*\{[^}]*width:\s*min\(980px, 92%\)/);
+    expect(styles).toMatch(/@media \(min-width: 900px\)\s*\{[^}]*\.hero-copy\s*\{[^}]*padding-right:\s*clamp\(16px, 1vw, 24px\)/);
   });
 
   test('scroll reveals begin as soon as the section peeks into view', () => {

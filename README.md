@@ -25,14 +25,22 @@ Teregon Labs is a broad applied AI and custom software consultancy. Teregon Aqua
 
 ## Teregon Guide
 
-The bottom-right Guide answers only questions about Teregon Labs, published work, Teregon Aqua, and starting a project. It sends the visitor's question and recent conversation context to OpenRouter for generation using the fixed `nvidia/nemotron-3.5-super-vl:free` route. Teregon does not store chat history or log prompts. OpenRouter processes the request; review its [privacy policy](https://openrouter.ai/privacy) for provider-side handling. The site makes no promise about provider retention.
+The bottom-right Guide answers only questions about Teregon Labs, published work, Teregon Aqua, and starting a project. It sends the visitor's question and recent conversation context to OpenRouter using three configured free routes, in order: `nvidia/nemotron-3.5-super-vl:free`, `google/gemma-4-31b-it:free`, and `thinkingmachines/inkling:free`. Teregon does not store chat history or log prompts. OpenRouter processes the request; review its [privacy policy](https://openrouter.ai/privacy) for provider-side handling. The site makes no promise about provider retention.
 
-The endpoint is `/api/guide`, handled by the Next.js Pages API route at `pages/api/guide.js`. Enable it by configuring `OPENROUTER_API_KEY` and an independent `GUIDE_RATE_SECRET` (at least 32 characters) in the Vercel project environment. Do not put either value in source control or browser code. Requests fail closed if either value is missing. The model route is fixed to `nvidia/nemotron-3.5-super-vl:free`, with no paid fallback. The application applies per-visitor, per-IP, burst, concurrency, and 25-request daily limits in process memory. For per-IP limits it prefers Vercel's `x-real-ip`; if unavailable, it uses the left-most valid address in `x-forwarded-for`, assuming the hosting edge appends trusted proxy addresses. IP values are HMAC-hashed before they enter limiter state. These limits are best-effort across serverless instances and restarts; OpenRouter may apply its own shared free-tier limits. Provider outages or quota exhaustion return a retryable error.
+The endpoint is `/api/guide`, handled by the Next.js Pages API route at `pages/api/guide.js`. Configure `OPENROUTER_API_KEY`, an independent `GUIDE_RATE_SECRET` (at least 32 characters), and the ordered `OPENROUTER_FREE_MODELS` value in the Vercel server environment. The required model value is:
+
+```dotenv
+OPENROUTER_FREE_MODELS=nvidia/nemotron-3.5-super-vl:free,google/gemma-4-31b-it:free,thinkingmachines/inkling:free
+```
+
+Keep the API key and rate secret out of source control and browser code; keep the model list server-side as well. Requests fail closed when configuration is missing or invalid. The handler advances to the next free model only when OpenRouter returns HTTP 429 before streaming starts. It does not retry app-side rate limits, other provider statuses, network errors, or an established stream. There is no paid fallback. The application applies per-visitor, per-IP, burst, concurrency, and 25-request daily limits in process memory. For per-IP limits it prefers Vercel's `x-real-ip`; if unavailable, it uses the left-most valid address in `x-forwarded-for`, assuming the hosting edge appends trusted proxy addresses. IP values are HMAC-hashed before they enter limiter state. These limits are best-effort across serverless instances and restarts; OpenRouter may apply its own shared free-tier limits. If all three routes return 429, the Guide returns a sanitized retryable response.
 
 ## Verify
 
 Run the production build with `bun run build`. Run the full local CI suite with `bun run ci`; this runs Guide API/client/widget tests, site contract checks, the scroll-stack viewport check, TypeScript validation, and the Next.js production build. Run `bun test --coverage tests/service-offerings.test.js` to verify the service-rendering module meets its 90% line-coverage target. Tests use provider stubs and need no secrets.
 
+Vercel environment and Guide deployment requirements are documented in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+
 ## Deploy
 
-The repository is connected to the `teregonlabs-site` Vercel project on `main`. `vercel.json` pins the deployment framework to Next.js so Vercel serves the generated application routes; static media is served from `public/`. After configuring the two server environment variables above, deploy to the production Vercel project and check both the home page and `/api/guide` from a browser. Without those variables, the site remains available and the Guide responds with a generic unavailable state.
+The repository is connected to the `teregonlabs-site` Vercel project on `main`. `vercel.json` pins the deployment framework to Next.js so Vercel serves the generated application routes; static media is served from `public/`. After configuring the three server environment variables above, deploy to the production Vercel project and check both the home page and `/api/guide` from a browser. Without valid Guide configuration, the site remains available and the Guide responds with a generic unavailable state.

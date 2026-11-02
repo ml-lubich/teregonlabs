@@ -14,7 +14,7 @@ Use confident editorial hierarchy, strong project proof, composed photography or
 - The six service offerings explain their use cases and typical deliverables. Each card has its own accessible, simple SVG mark and restrained hover/reveal motion.
 - `/work.html` capability panels use actual local visual assets with descriptive alt text and an explicit illustrative label when artwork is conceptual. Never leave pale blank art panels.
 - Scenario and service-flow sections use a deliberate desktop content grid, readable step copy, and a stacked mobile layout; their active Next stylesheet must own the styles.
-- The homepage hero headline wraps inside the viewport at desktop and mobile sizes. Its rotating final word has a calm cadence and a stable reduced-motion fallback. Pointer parallax runs only on desktop fine pointers with motion enabled.
+- The homepage hero headline is fully visible at desktop widths from 1024px through ultrawide and at mobile widths; no line is clipped by its container or the hero art. Its rotating final word has a calm cadence and a stable reduced-motion fallback. Pointer parallax runs only on desktop fine pointers with motion enabled.
 - Navigation remains compact, keyboard accessible, and touch friendly. Content order and legibility take priority over decorative composition on small screens.
 - Small labels and footer text on pale backgrounds must retain readable text contrast.
 - Use motion on opacity and transforms, preserve reduced-motion preferences, and avoid layout shifts. No new animation dependency without measured need.
@@ -32,3 +32,21 @@ Use the existing `bun run ci` gate. Add regression tests for service copy, actua
 - Do not attribute company ARR, revenue, ROI, savings, or other business results to a project without project-specific evidence. If company-level figures appear, identify them as reported context and explicitly state that the project did not cause or earn that figure.
 - Timelines must remain readable without animation, avoid horizontal overflow, and stack naturally on mobile. Reveals may use opacity and transform only; honor `prefers-reduced-motion` with an immediate static presentation and keep mobile motion low-compute.
 - Add focused regression tests for the Products route and metadata, all six offering descriptions, navigation accessibility, project-story timeline coverage, and revenue-attribution wording. Keep `bun run ci` as the repository verification gate.
+
+## Case-study presentations and ERIA
+
+- BrioBot and Briopedia each have a dedicated, Teregon-styled presentation route with an editable HTML source and a downloadable PDF generated from that source. Keep the presentations useful on screen and cleanly paginated in print.
+- Use a clear story arc: operating context, workflow, architecture and controls, known limits, and what the experience informs at Teregon. Use verified implementation details; avoid unsupported customer, performance, or financial outcomes.
+- Label BrioBot and Briopedia as prior Brio team product experience, not Teregon client work. Do not attribute company revenue figures to either product.
+- Briopedia visuals must remain original illustrations or public, authorized captures. Never expose authenticated product UI, private portal URLs, customer records, or internal-only screenshots.
+- ERIA is a live client website case study linked to its public production site. Public screenshots may illustrate the venue and event experience. Describe content management, private workflows, or automation only when supported by project records; do not publish portal URLs or private screens.
+- Keep ERIA and W3 Sourcing clearly distinct from prior Brio team projects. Company-level financial context must remain explicitly sourced and must not imply project causation or return.
+- Flock Safety may inform general hierarchy, clarity, and interaction pacing. Teregon must keep its own compositions, wording, assets, and visual identity.
+- Case-study motion should support the story rather than delay reading. PDFs must remain understandable without animation, and print styles must honor reduced-motion and accessibility requirements.
+
+## Guide model fallback
+
+- Configure exactly three approved OpenRouter free model IDs in the server-only `OPENROUTER_FREE_MODELS` environment variable, in failover order. The IDs must select free routes; do not add a paid fallback or expose this setting to browser code.
+- Retry the next model only when OpenRouter returns HTTP 429 before any stream headers or content reach the visitor. Never retry on the app's own visitor/IP limiter 429, other provider errors, or after a stream has begun.
+- Preserve the existing visitor/IP/burst/concurrency/daily limiter, safe public error shape, and retry-after handling across a fallback chain. One visitor request consumes one app-side reservation.
+- Add regression cases for 429→429→success, all-three-429 exhaustion, no retry for non-429 provider errors, no provider call for app-side 429, and env/model validation. Document preview and production configuration in `docs/DEPLOYMENT.md` without storing secret values.

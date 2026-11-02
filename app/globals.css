@@ -82,6 +82,7 @@ img, svg { max-width: 100%; }
     width: min(980px, 92%);
     margin-inline: 0;
     padding-left: clamp(32px, 8vw, 120px);
+    padding-right: clamp(16px, 1vw, 24px);
   }
 }
 
