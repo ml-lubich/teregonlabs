@@ -118,3 +118,50 @@ Create a standalone Products page for the six configurable Teregon offerings, ex
 - Header has one obvious primary contact action, working Products disclosure, visible focus, touch-sized mobile control, and no menu overlap/clipping at 320px through desktop.
 - Add a failing regression before implementation; run existing `bun run ci`, browser screenshots/accessibility checks, plus existing service-offerings coverage command (must remain >=90%).
 - Before commit/push, scan public changes for private identifiers/claims; deploy and verify the new route and modified case pages.
+
+## Implementation-ready package assignments (current tree, 2026-11-02)
+
+Earlier packages above describe the full requested scope. Current repository already contains the Products page, project timelines, ERIA detail route, Brio case-study routes, and both downloadable case-study decks (per `tasks/T-002` and `tasks/T-004`). Do not recreate them. Review for gaps first, then assign only remaining fixes:
+
+1. **Homepage and metadata** — `components/pages/home-page.tsx`, `app/page.tsx`. One writer owns the homepage story, project-card wording, and metadata. Reuse current public ERIA screenshot; do not edit shared CSS or case-study source here.
+2. **Brio presentations** — `components/pages/case-study-decks.tsx`, `components/pages/case-study-decks.module.css`, `app/brio-bot-deck.html/page.tsx`, `app/briopedia-deck.html/page.tsx`, and the two case-study PDFs under `public/assets/case-studies/`. One writer owns both decks and print exports so the shared presentation system and claims stay aligned.
+3. **ERIA case study** — `components/pages/eria-case-study.tsx`, `app/eria.html/page.tsx`, `app/eria-case-study.css`, and ERIA-only assets. Keep screenshots public and scope descriptions to verified launch/build evidence; avoid private admin screens and portal URLs.
+4. **Shared identity and navigation** — `app/globals.css`, `app/theme-subpages.css`, `components/site-shell.tsx`. One writer owns palette, global interaction, and shared navigation. Do not edit page-specific deck or ERIA styles.
+5. **Discovery copy and regression coverage** — `components/pages/pitch-deck-page.tsx`, `README.md`, `public/llms.txt`, `public/llms-full.txt`, `public/sitemap.xml`, and tests. Keep route inventory/metadata aligned, add/adjust focused coverage, and do not edit page implementations.
+6. **Independent review** — fresh context checks desktop, phone, print/PDF output, accessibility/reduced motion, truth of case attribution, route links, and current design criteria. Reviewer does not edit implementation files.
+
+Canonical design requirements for this work are appended under “Case-study presentations and ERIA” in `docs/DESIGN.md`. Avoid overlapping ownership; if a shared claim needs a cross-page correction, let the case-story owner make the single source change and have page owners consume it.
+
+## Additional follow-up (2026-11-02)
+
+### Teregon homepage hero
+
+The desktop hero heading currently clips. Fix the active Next implementation and prove full visibility at standard and wide desktop widths as well as phone widths. Do not treat horizontal overflow clipping as a fix. Add regression coverage for actual heading/container fit and inspect screenshots at 1024, 1280, 1440, 1920, and 2560 CSS pixels.
+
+### Teregon Guide: server-side free-model fallback
+
+- Replace the single hard-coded OpenRouter route with `OPENROUTER_FREE_MODELS`, a server-only, ordered, comma-separated list of exactly three approved free model IDs. Reject missing/invalid configuration safely; never expose it under `NEXT_PUBLIC_*` or add paid routes.
+- Try the next configured model only for an upstream HTTP 429 before streaming starts. Do not retry application visitor/IP limiter 429s, auth/other provider errors, network errors, or a stream that has already emitted content.
+- The whole attempt chain remains one app-side rate-limit reservation/concurrency slot; preserve existing safe public errors and bounded `Retry-After` behavior. Test first→second→third success paths, all-model exhaustion, non-429 stop, and local 429 no-provider-call.
+- Own the route logic/tests separately from deployment documentation. Add `docs/DEPLOYMENT.md` for Preview and Production variable setup/validation/verification; update `README.md` so it no longer describes a fixed single model. Do not record credential values.
+
+### Portfolio Brio case studies
+
+In `~/dev/.worktrees/teregon-portfolio` only (never touch the dirty original checkout), expand the public BrioBot, Briopedia, and BrioScope entries with verified story/architecture detail and reviewed visual sources. Portfolio items are prior Brio team product experience, not Teregon client work. No private customer records, authenticated product UI, production case screenshots, or unsupported outcomes/ROI. Exclude `sf-case-*` and Briopedia signed-in screenshot assets unless explicitly confirmed public and sanitized. Candidate technical diagrams and marks from the project repos require visual content review before copying; existing Teregon-published abstract mesh art is an approved fallback.
+
+## Exact disjoint packages for the new follow-up
+
+1. **Teregon hero + browser fit** — `components/pages/home-page.tsx`, `app/globals.css`, `app/theme-subpages.css`, `tests/hero-motion.test.js`.
+2. **Guide failover logic + regression** — `lib/guide/handler.js` and `tests/guide-api.test.js`. Keep `pages/api/guide.js` as the existing thin wrapper unless the API contract itself must change.
+3. **Guide deployment contract** — `README.md`, new `docs/DEPLOYMENT.md`; keep the docs factual about required env vars and preview/production setup, never values.
+4. **Portfolio case-study content** — `~/dev/.worktrees/teregon-portfolio/data/projects.ts`; update BrioBot/Briopedia and add BrioScope using verified, public-safe claims only.
+5. **Portfolio visual source assets** — new `~/dev/.worktrees/teregon-portfolio/public/images/projects/brio-bot-caseflow.webp`, `briopedia-knowledge-path.webp`, and `brioscope-support-signals.webp`; candidate source diagrams are `~/dev/briobot-presentation/assets/infographics/` and (brand mark only, if already public) `~/dev/brioscope/static/images/`. For Briopedia, retain the already-public illustrative art unless a public-safe dev-project illustration is found. Copy only after visual/source-content review clears each asset; exclude raw `sf-case-*`, Briopedia UI screenshots, and wiki/product-catalogue imagery.
+6. **Portfolio project rendering/tests** — `~/dev/.worktrees/teregon-portfolio/components/sections/projects.tsx`, `__tests__/featured-projects.test.ts`, `__tests__/project-thumbnails.test.ts`, and `__tests__/projects-showcase-integration.test.ts`. Add BrioScope visibility/attribution coverage here. Keep data files and docs out of this package.
+7. **Owning docs, portfolio** — `~/dev/.worktrees/teregon-portfolio/docs/DESIGN.md` and `docs/REQUIREMENTS.md`; specify public case-story presentation, attribution, and asset-release rules. No code edits in this package.
+8. **Independent reviewer** — verify portfolio worktree remains isolated from the dirty original, claim/source attribution, no private imagery, desktop/mobile case visuals, Teregon hero fit, Guide 429 matrix, and docs/tests. Reviewer does not edit implementation files.
+
+## Completion status (2026-11-02)
+
+- Teregon Guide fallback and desktop hero fit are implemented in local commit `461e571`. `bun run ci` passes; Guide handler line coverage is 94.37%; service-offering line coverage is 100%.
+- Portfolio BrioBot, Briopedia, and BrioScope entries and original illustrative 3D covers are pushed in `00e6980` to the personal portfolio repository. Portfolio `bun run ci` passes (2,162 tests, 2 skipped, production build); Playwright passes (255 passed, 24 skipped). The personal Vercel check is successful and the live site shows all three entries after the projects section loads.
+- Teregon Guide is pushed at `461e571` and deployed to the personal Vercel project. `OPENROUTER_API_KEY` was verified against OpenRouter and set as a Vercel Secret for Preview and Production; `GUIDE_RATE_SECRET` is present in both; the three approved free model IDs are configured as a server-side Vercel Config value in both. Production `/api/guide` returned a streamed answer with HTTP 200. The stale key was replaced without exposing its value. GitHub CI passed; the production deployment is READY and aliases `teregonlabs.com`.
