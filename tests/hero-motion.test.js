@@ -8,6 +8,25 @@ const theme = readFileSync(require.resolve('../app/theme-subpages.css'), 'utf8')
 const guide = readFileSync(require.resolve('../components/site-guide.tsx'), 'utf8');
 
 describe('active Next.js homepage motion and controls', () => {
+  test('floating homepage navigation sits on the forest canvas instead of white gutters', () => {
+    expect(styles).toMatch(/body:has\(\.hero-home\)\s*\{[^}]*background:\s*var\(--forest\)/);
+    expect(styles).toMatch(/body:has\(\.hero-home\) \.site-header\s*\{[^}]*position:\s*absolute;[^}]*width:\s*100%;[^}]*border-radius:\s*0/);
+    expect(styles).toMatch(/body:has\(\.hero-home\) \.hero-visual\s*\{[^}]*inset:\s*0;[^}]*border-radius:\s*0/);
+    expect(styles).toMatch(/@media \(max-width: 760px\)\s*\{[\s\S]*?body:has\(\.hero-home\) \.site-header-inner\s*\{[^}]*min-height:\s*72px/);
+  });
+
+  test('hero proof links distinguish live client builds, prior team work, and the water practice', () => {
+    expect(home).toContain('className="hero-proof"');
+    expect(home).toContain('LIVE CLIENT BUILDS');
+    expect(home).toContain('ERIA Events');
+    expect(home).toContain('W3 Sourcing');
+    expect(home).toContain('PRIOR TEAM EXPERIENCE');
+    expect(home).toContain('BrioBot + Briopedia');
+    expect(home).toContain('TEREGON AQUA');
+    expect(styles).toMatch(/body:has\(\.hero-home\) \.hero-proof-card\s*\{[^}]*backdrop-filter:/);
+    expect(styles).toMatch(/@media\s*\(max-width:\s*760px\)[\s\S]*?body:has\(\.hero-home\) \.hero-proof\s*\{[^}]*overflow-x:\s*auto/);
+  });
+
   test('water service-flow scenario owns responsive layout in the active stylesheet', () => {
     expect(water).toContain('className="outcomes section-pad water-example"');
     expect(theme).toMatch(/\.outcomes\.water-example\s*\{[^}]*display:\s*grid/);
@@ -35,19 +54,11 @@ describe('active Next.js homepage motion and controls', () => {
     expect(home).toContain('mesh.style.translate = "0 0"');
   });
 
-  test('hero headline has rotating shifting verb cycle with accessible label', () => {
+  test('hero headline is static and fully accessible', () => {
     expect(home).toContain('aria-label="Software that flows."');
-    expect(home).toContain('hero-word-cycle');
-    expect(home).toContain('<span>flows.</span>');
-    expect(home).toContain('<span>connects.</span>');
-    expect(home).toContain('<span>adapts.</span>');
-    expect(home).toContain('<span>works.</span>');
-    expect(theme).toMatch(/animation: hero-word-turn 20s/);
-    expect(theme).toMatch(/animation-delay: -2\.5s/);
-    expect(theme).toMatch(/nth-child\(2\) \{ animation-delay: -17\.5s/);
-    expect(theme).toMatch(/nth-child\(3\) \{ animation-delay: -12\.5s/);
-    expect(theme).toMatch(/nth-child\(4\) \{ animation-delay: -7\.5s/);
-    expect(theme).toMatch(/0%, 1% \{ opacity: 0;[\s\S]*?2%, 22% \{ opacity: 1;[\s\S]*?24%, 100% \{ opacity: 0;/);
+    expect(home).toContain('className="hero-word-static" aria-hidden="true">flows.</span>');
+    expect(theme).toContain('.hero-word-static { display: block;');
+    expect(home).not.toContain('hero-word-cycle');
   });
 
   test('hero headline can wrap within the viewport on narrow screens', () => {

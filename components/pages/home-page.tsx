@@ -247,12 +247,7 @@ export function HomePage() {
           <p className="eyebrow mb-7">APPLIED AI / SOFTWARE STUDIO</p>
           <h1 className="max-w-[16ch] text-[clamp(2.75rem,6vw,6.5rem)] font-medium leading-[.96] tracking-[-.075em]" aria-label="Software that flows.">
             <span className="hero-prefix block">Software that</span>
-            <span className="hero-word-cycle" aria-hidden="true">
-              <span>flows.</span>
-              <span>connects.</span>
-              <span>adapts.</span>
-              <span>works.</span>
-            </span>
+            <span className="hero-word-static" aria-hidden="true">flows.</span>
           </h1>
           <p className="lede mt-7 max-w-[45ch] text-base leading-7 text-[#d2ddd4] sm:text-lg sm:leading-8">
             We build support assistants, case automation, data tools, integrations, and production software for the work teams already do. Teregon Aqua focuses that work on water filtration and appliance service.
@@ -263,6 +258,26 @@ export function HomePage() {
           </div>
           <p className="mt-12 font-mono text-[10px] uppercase tracking-[.14em] text-[#aab9aa]">SUPPORT · OPERATIONS · SOFTWARE</p>
         </div>
+        <aside className="hero-proof" aria-label="Selected work and practice">
+          <Link className="hero-proof-card" href="/work.html">
+            <span className="hero-proof-kicker"><i aria-hidden="true" /> LIVE CLIENT BUILDS</span>
+            <strong>ERIA Events + W3 Sourcing</strong>
+            <span>Websites, content systems, and workflows</span>
+            <b aria-hidden="true">↗</b>
+          </Link>
+          <Link className="hero-proof-card" href="#brio-title">
+            <span className="hero-proof-kicker"><i aria-hidden="true" /> PRIOR TEAM EXPERIENCE</span>
+            <strong>BrioBot + Briopedia</strong>
+            <span>Support automation and product knowledge</span>
+            <b aria-hidden="true">↗</b>
+          </Link>
+          <Link className="hero-proof-card hero-proof-card-aqua" href="/water.html">
+            <span className="hero-proof-kicker"><i aria-hidden="true" /> FOCUSED PRACTICE</span>
+            <strong>Teregon Aqua</strong>
+            <span>AI for water filtration and appliance service</span>
+            <b aria-hidden="true">↗</b>
+          </Link>
+        </aside>
       </section>
 
       <section className="bg-[var(--paper)] px-5 py-12 sm:px-8 md:py-16 lg:px-[8vw]">

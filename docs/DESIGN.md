@@ -14,8 +14,10 @@ Use confident editorial hierarchy, strong project proof, composed photography or
 - The six service offerings explain their use cases and typical deliverables. Each card has its own accessible, simple SVG mark and restrained hover/reveal motion.
 - `/work.html` capability panels use actual local visual assets with descriptive alt text and an explicit illustrative label when artwork is conceptual. Never leave pale blank art panels.
 - Scenario and service-flow sections use a deliberate desktop content grid, readable step copy, and a stacked mobile layout; their active Next stylesheet must own the styles.
-- The homepage hero headline is fully visible at desktop widths from 1024px through ultrawide and at mobile widths; no line is clipped by its container or the hero art. Its rotating final word has a calm cadence and a stable reduced-motion fallback. Pointer parallax runs only on desktop fine pointers with motion enabled.
+- The homepage hero headline is fully visible at desktop widths from 1024px through ultrawide and at mobile widths; no line is clipped by its container or the hero art. Keep the final word static for a clear first read. Pointer parallax runs only on desktop fine pointers with motion enabled.
 - Navigation remains compact, keyboard accessible, and touch friendly. Content order and legibility take priority over decorative composition on small screens.
+- On the homepage, use a full-bleed hero, put navigation over the image, and keep a forest-green canvas behind it so no paper-white gutters frame the header. Keep the mobile menu simple and its links touch-sized. Other pages retain their own surface colors and navigation treatment.
+- Give the homepage hero a compact proof stack on desktop and a horizontal, touch-scrollable proof row on mobile. Use verified project names and keep live client builds distinct from prior team product work; do not use unsupported performance metrics.
 - Small labels and footer text on pale backgrounds must retain readable text contrast.
 - Use motion on opacity and transforms, preserve reduced-motion preferences, and avoid layout shifts. No new animation dependency without measured need.
 
