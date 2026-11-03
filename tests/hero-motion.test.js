@@ -27,6 +27,15 @@ describe('active Next.js homepage motion and controls', () => {
     expect(styles).toMatch(/@media\s*\(max-width:\s*760px\)[\s\S]*?body:has\(\.hero-home\) \.hero-proof\s*\{[^}]*overflow-x:\s*auto/);
   });
 
+  test('homepage capability and case-study cards use distinct visual assets', () => {
+    const capabilities = home.match(/const capabilities = \[([\s\S]*?)\n\];/)?.[1] ?? '';
+    const studies = home.match(/const caseStudies = \[([\s\S]*?)\n\];/)?.[1] ?? '';
+    const sources = [capabilities, studies].join('\n').matchAll(/image:\s*"([^"]+)"/g);
+    const images = Array.from(sources, (match) => match[1]);
+    expect(images).toHaveLength(6);
+    expect(new Set(images).size).toBe(images.length);
+  });
+
   test('water service-flow scenario owns responsive layout in the active stylesheet', () => {
     expect(water).toContain('className="outcomes section-pad water-example"');
     expect(theme).toMatch(/\.outcomes\.water-example\s*\{[^}]*display:\s*grid/);

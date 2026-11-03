@@ -20,16 +20,16 @@ const capabilities = [
     label: "WORKFLOW AUTOMATION",
     title: "Move a case through its checks",
     copy: "Gather records, read attachments, validate fields, and send uncertain cases to a person.",
-    image: "/assets/mesh/briobot.webp",
-    alt: "Abstract three-dimensional mesh representing a checked workflow",
+    image: "/assets/mesh/support-automation.webp",
+    alt: "A three-dimensional wire mesh carrying a support workflow along connected luminous nodes",
   },
   {
     number: "03",
     label: "CUSTOM SOFTWARE",
     title: "Build around the way work happens",
     copy: "Connect the existing systems with internal tools, integrations, and production software.",
-    image: "/assets/mesh/briopedia.webp",
-    alt: "Abstract three-dimensional mesh representing connected knowledge",
+    image: "/assets/mesh/software-architecture.webp",
+    alt: "Translucent three-dimensional software modules connected by glowing aqua paths",
   },
 ];
 
