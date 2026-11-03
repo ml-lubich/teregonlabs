@@ -49,6 +49,12 @@ def image_dimensions(data):
     return None
 
 
+def png_dimensions(data):
+    if data[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    return (int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big"))
+
+
 class TeregonSiteContract(unittest.TestCase):
     def test_products_route_is_discoverable_in_sitemap_and_crawler_summaries(self):
         sitemap = source("public/sitemap.xml")
@@ -125,7 +131,7 @@ class TeregonSiteContract(unittest.TestCase):
         layout = source("app/layout.tsx")
         self.assertIn('new URL("https://teregonlabs.com")', layout)
         self.assertIn('card: "summary_large_image"', layout)
-        self.assertIn('url: "/assets/social-preview.jpg"', layout)
+        self.assertIn('url: "/assets/social-preview.png"', layout)
 
         for canonical, route_file in ROUTES.items():
             with self.subTest(route=canonical):
@@ -144,13 +150,26 @@ class TeregonSiteContract(unittest.TestCase):
     def test_social_preview_dimensions_match_root_metadata(self):
         layout = source("app/layout.tsx")
         match = re.search(
-            r'url:\s*"(/assets/social-preview\.jpg)"\s*,\s*width:\s*(\d+)\s*,\s*height:\s*(\d+)',
+            r'url:\s*"(/assets/social-preview\.png)"\s*,\s*width:\s*(\d+)\s*,\s*height:\s*(\d+)',
             layout,
         )
         self.assertIsNotNone(match, "root Open Graph image must declare dimensions")
         asset = ROOT / "public" / match.group(1).lstrip("/")
         self.assertTrue(asset.is_file())
-        self.assertEqual(image_dimensions(asset.read_bytes()), (int(match.group(2)), int(match.group(3))))
+        self.assertEqual(png_dimensions(asset.read_bytes()), (int(match.group(2)), int(match.group(3))))
+        self.assertIn('"/assets/social-preview.png"', source("app/page.tsx"))
+
+    def test_capability_art_is_original_transparent_svg_not_generated_landscape(self):
+        home = source("components/pages/home-page.tsx")
+        self.assertIn("/assets/illustrations/workflow.svg", home)
+        self.assertIn("/assets/illustrations/software.svg", home)
+        self.assertNotIn("/assets/mesh/support-automation.webp", home)
+        self.assertNotIn("/assets/mesh/software-architecture.webp", home)
+        for asset in ("public/assets/illustrations/workflow.svg", "public/assets/illustrations/software.svg"):
+            svg = source(asset)
+            self.assertIn("<svg", svg)
+            self.assertIn('fill="none"', svg)
+            self.assertNotIn("<image", svg)
 
     def test_homepage_has_plain_service_copy_and_named_offerings(self):
         home = source("components/pages/home-page.tsx").lower()

@@ -26,14 +26,14 @@ export const metadata: Metadata = {
     title: "Teregon Labs | Applied AI and Custom Software",
     description:
       "Applied AI and custom software for customer workflows and complex operations.",
-    images: [{ url: "/assets/social-preview.jpg", width: 1200, height: 630, alt: "Teregon Labs" }],
+    images: [{ url: "/assets/social-preview.png", width: 1200, height: 630, alt: "Teregon Labs — software that flows" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Teregon Labs | Applied AI and Custom Software",
     description:
       "Applied AI and custom software for customer workflows and complex operations.",
-    images: ["/assets/social-preview.jpg"],
+    images: ["/assets/social-preview.png"],
   },
   icons: { icon: "/favicon.svg" },
 };

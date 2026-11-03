@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     url: "/",
     title: "Teregon Labs | Applied AI and Custom Software",
     description: "Custom AI assistants, workflow automation, data tools, and production software for business operations.",
-    images: [{ url: "/assets/social-preview.jpg", alt: "Teregon Labs applied AI and software" }],
+    images: [{ url: "/assets/social-preview.png", alt: "Teregon Labs — software that flows" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Teregon Labs | Applied AI and Custom Software",
     description: "Custom AI and software for business workflows, with a focused practice for water systems.",
-    images: ["/assets/social-preview.jpg"],
+    images: ["/assets/social-preview.png"],
   },
 };
 

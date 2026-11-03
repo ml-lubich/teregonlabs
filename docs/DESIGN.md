@@ -8,6 +8,9 @@ Teregon Labs is a general applied AI and custom software consultancy. Teregon Aq
 
 Use confident editorial hierarchy, strong project proof, composed photography or original rendered artwork, clear section transitions, and restrained motion. Public design references may inform general interaction patterns and pacing; Teregon keeps its own name, palette, writing, assets, and compositions. The visual system uses deep forest green, pale mineral green, and restrained water blue. Avoid generic AI slogans, repeated “signal” metaphors, empty gradient placeholders, and excessive blank space.
 
+- Use the branded 1200×630 social preview for homepage sharing: concise Teregon identity, applied AI/custom software positioning, and original vector linework. Avoid generated-looking landscape collages and text that duplicates the platform's link title.
+- Capability cards may use transparent original SVG diagrams over the existing forest/aqua surface. Keep each diagram distinct, readable at card size, and labeled with descriptive alt text; reserve photographic assets for real places or documented project visuals.
+
 ## Page and content requirements
 
 - The homepage identifies applied AI and software work in direct language, gives concrete examples, and distinguishes live client builds from prior team experience and illustrative concepts.

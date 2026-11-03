@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Connected business software</title>
+  <desc id="desc">Three existing business systems connect through a central integration layer to a clear shared view.</desc>
+  <defs>
+    <linearGradient id="link" x1="150" y1="193" x2="567" y2="193" gradientUnits="userSpaceOnUse"><stop stop-color="#B9D68D"/><stop offset=".5" stop-color="#82C9C1"/><stop offset="1" stop-color="#C9DDB0"/></linearGradient>
+    <linearGradient id="panel" x1="300" y1="120" x2="420" y2="278" gradientUnits="userSpaceOnUse"><stop stop-color="#244B45"/><stop offset="1" stop-color="#17332F"/></linearGradient>
+  </defs>
+  <path d="M153 122 302 182m-149 96 149-60m118-36 147-60m-147 60 147 96" stroke="url(#link)" stroke-width="1.7" stroke-opacity=".8"/>
+  <path d="M153 122 302 182m-149 96 149-60m118-36 147-60m-147 60 147 96" stroke="url(#link)" stroke-width="5" stroke-opacity=".08"/>
+  <rect x="70" y="88" width="166" height="67" rx="13" fill="#18332E" stroke="#C3D4BE" stroke-opacity=".45"/><rect x="70" y="243" width="166" height="67" rx="13" fill="#18332E" stroke="#C3D4BE" stroke-opacity=".45"/>
+  <rect x="484" y="88" width="166" height="67" rx="13" fill="#18332E" stroke="#C3D4BE" stroke-opacity=".45"/><rect x="484" y="243" width="166" height="67" rx="13" fill="#18332E" stroke="#C3D4BE" stroke-opacity=".45"/>
+  <g stroke="#B9D68D" stroke-width="1.6" stroke-linecap="round"><path d="M90 110h23v24H90zM95 116h13m-13 5h13m-13 5h8"/><circle cx="100" cy="276" r="11"/><path d="M100 265v22m-11-11h22"/><path d="M505 110h23v24h-23zM510 116h13m-13 5h13m-13 5h8"/><path d="M506 273h21m-17-7 17 7-17 7"/></g>
+  <g fill="#D4E0D1" font-family="monospace" font-size="9" letter-spacing="1.2"><text x="127" y="124">CRM</text><text x="127" y="280">SUPPORT</text><text x="542" y="124">PRODUCT</text><text x="542" y="280">OPERATIONS</text></g>
+  <rect x="286" y="126" width="148" height="145" rx="20" fill="url(#panel)" stroke="#9ED6CE" stroke-opacity=".8" stroke-width="1.4"/><circle cx="360" cy="168" r="17" fill="#90CDC3" fill-opacity=".15" stroke="#90CDC3"/><circle cx="360" cy="168" r="5" fill="#D5E9C0"/><path d="M330 211h60m-60 12h60m-60 12h42" stroke="#E1EBDD" stroke-opacity=".63" stroke-width="2" stroke-linecap="round"/>
+  <g fill="#C8D8C1" font-family="monospace" font-size="9" letter-spacing="1.2"><text x="321" y="300">SHARED DATA LAYER</text></g>
+  <circle cx="253" cy="162" r="3" fill="#D6E8B9"/><circle cx="253" cy="224" r="3" fill="#D6E8B9"/><circle cx="467" cy="162" r="3" fill="#D6E8B9"/><circle cx="467" cy="224" r="3" fill="#D6E8B9"/>
+</svg>

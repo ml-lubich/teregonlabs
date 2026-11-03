@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Support workflow</title>
+  <desc id="desc">A case moves through source retrieval, review, and a checked action.</desc>
+  <defs>
+    <linearGradient id="route" x1="114" y1="211" x2="605" y2="211" gradientUnits="userSpaceOnUse"><stop stop-color="#B9D68D"/><stop offset=".52" stop-color="#80C8C2"/><stop offset="1" stop-color="#C9DDB0"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#B9D68D" stop-opacity=".34"/><stop offset="1" stop-color="#B9D68D" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path d="M136 201h118m93 0h115m93 0h41" stroke="url(#route)" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 9"/>
+  <circle cx="136" cy="201" r="54" fill="url(#glow)"/><circle cx="136" cy="201" r="29" fill="#17352F" stroke="#B9D68D" stroke-opacity=".8"/>
+  <rect x="116" y="184" width="40" height="34" rx="7" stroke="#E3EBDD" stroke-width="1.5"/><path d="M125 192h22m-22 8h16m-16 8h19" stroke="#B9D68D" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="254" y="150" width="94" height="102" rx="16" fill="#1D3C36" stroke="#B9D68D" stroke-opacity=".42"/><circle cx="301" cy="180" r="13" fill="#B9D68D" fill-opacity=".16" stroke="#B9D68D"/><path d="m295 180 4 4 8-9" stroke="#E6EFDA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M277 210h48m-48 13h33" stroke="#D4DED0" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="462" cy="201" r="29" fill="#173B3A" stroke="#8BD0CA" stroke-opacity=".85"/><path d="M450 201h24m-12-12v24" stroke="#D5E9DA" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="604" cy="201" r="54" fill="url(#glow)"/><circle cx="604" cy="201" r="29" fill="#17352F" stroke="#C9DDB0" stroke-opacity=".85"/><path d="m592 201 8 8 16-18" stroke="#E6EFDA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M136 253v49h166v-50m160 0v50h142v-49" stroke="#C0D3BE" stroke-opacity=".28" stroke-width="1.2" stroke-dasharray="3 7"/>
+  <g fill="#C8D8C1" font-family="monospace" font-size="10" letter-spacing="1.4"><text x="102" y="324">CASE</text><text x="265" y="324">SOURCE CHECK</text><text x="440" y="324">HUMAN REVIEW</text><text x="583" y="324">ACTION</text></g>
+</svg>

@@ -20,16 +20,16 @@ const capabilities = [
     label: "WORKFLOW AUTOMATION",
     title: "Move a case through its checks",
     copy: "Gather records, read attachments, validate fields, and send uncertain cases to a person.",
-    image: "/assets/mesh/support-automation.webp",
-    alt: "A three-dimensional wire mesh carrying a support workflow along connected luminous nodes",
+    image: "/assets/illustrations/workflow.svg",
+    alt: "Transparent workflow diagram connecting a customer case to reviewed service actions",
   },
   {
     number: "03",
     label: "CUSTOM SOFTWARE",
     title: "Build around the way work happens",
     copy: "Connect the existing systems with internal tools, integrations, and production software.",
-    image: "/assets/mesh/software-architecture.webp",
-    alt: "Translucent three-dimensional software modules connected by glowing aqua paths",
+    image: "/assets/illustrations/software.svg",
+    alt: "Transparent software diagram connecting business systems through a shared integration layer",
   },
 ];
 
@@ -305,8 +305,8 @@ export function HomePage() {
             {capabilities.map((capability) => (
               <Reveal key={capability.number} className="h-full">
                 <Link href={`/work.html#${capability.number === "01" ? "ai" : capability.number === "02" ? "data" : "build"}`} className="group flex h-full flex-col overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--paper)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_18px_48px_#18231d14]">
-                  <div className="relative aspect-[1.8] overflow-hidden bg-[#142923]">
-                    <Image src={capability.image} alt={capability.alt} fill sizes="(max-width: 767px) 100vw, 33vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
+                  <div className="relative aspect-[1.8] overflow-hidden bg-[linear-gradient(145deg,#122823,#17343a)]">
+                    <Image src={capability.image} alt={capability.alt} fill sizes="(max-width: 767px) 100vw, 33vw" className="object-contain p-4 transition duration-500 group-hover:scale-[1.03] sm:p-6" />
                     <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-[#10231dbb] px-3 py-2 font-mono text-[9px] tracking-[.12em] text-[#e7eddf]">{capability.number} / {capability.label}</span>
                   </div>
                   <div className="flex flex-1 flex-col p-5 sm:p-6">
