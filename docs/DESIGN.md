@@ -14,7 +14,7 @@ Use confident editorial hierarchy, strong project proof, composed photography or
 ## Page and content requirements
 
 - The homepage identifies applied AI and software work in direct language, gives concrete examples, and distinguishes live client builds from prior team experience and illustrative concepts.
-- The six service offerings explain their use cases and typical deliverables. Each card has its own accessible, simple SVG mark and restrained hover/reveal motion.
+- The six service offerings explain their use cases and typical deliverables. Each card has its own accessible, simple SVG mark and restrained hover/reveal motion. The Products hero uses a compact two-column layout with a custom service map; service rows reveal gently on scroll, with clear anchor links and reduced-motion support.
 - `/work.html` capability panels use actual local visual assets with descriptive alt text and an explicit illustrative label when artwork is conceptual. Never leave pale blank art panels.
 - Do not reuse the same image between homepage capability cards and case-study cards; give each story its own visual asset.
 - Scenario and service-flow sections use a deliberate desktop content grid, readable step copy, and a stacked mobile layout; their active Next stylesheet must own the styles.

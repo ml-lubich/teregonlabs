@@ -57,13 +57,26 @@ export function ProductsPage() {
   return (
     <div className={styles.page}>
       <section className={styles.hero} aria-labelledby="products-title">
-        <p className={styles.eyebrow}>TEREGON LABS / SERVICES</p>
-        <h1 id="products-title">Configured for the work<br /><em>your team already does.</em></h1>
-        <div className={styles.heroFoot}>
-          <p>We build applied AI and software around a team’s data, tools, and workflow. These named services describe the work we can configure together; they are not standalone off-the-shelf products.</p>
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}>TEREGON LABS / SERVICES</p>
+          <h1 id="products-title">Configured for the work <em>your team already does.</em></h1>
+          <p className={styles.heroDescription}>We build applied AI and software around your team’s data, tools, and workflows. These services are configured with your team, not standalone products.</p>
           <a className={styles.heroLink} href="#offerings">Explore the services <span aria-hidden="true">↓</span></a>
         </div>
-        <div className={styles.heroRule} aria-hidden="true"><span /><span /><span /></div>
+        <div className={styles.heroVisual} aria-hidden="true">
+          <svg viewBox="0 0 620 390" fill="none">
+            <path className={styles.mapLine} d="M310 195C216 195 206 88 111 88M310 195C216 195 206 302 111 302M310 195C404 195 414 88 509 88M310 195C404 195 414 302 509 302" />
+            <circle className={styles.mapOrbit} cx="310" cy="195" r="117" />
+            <circle className={styles.mapOrbit} cx="310" cy="195" r="83" />
+            <circle className={styles.mapCore} cx="310" cy="195" r="47" />
+            <path d="M310 173v44m-22-22h44" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <g className={styles.mapNode}><circle cx="111" cy="88" r="34" /><text x="111" y="92">AQUA</text></g>
+            <g className={styles.mapNode}><circle cx="111" cy="302" r="34" /><text x="111" y="306">OASIS</text></g>
+            <g className={styles.mapNode}><circle cx="509" cy="88" r="34" /><text x="509" y="92">ZEPHYR</text></g>
+            <g className={styles.mapNode}><circle cx="509" cy="302" r="34" /><text x="509" y="306">TERRA</text></g>
+            <text className={styles.mapCaption} x="310" y="374" textAnchor="middle">SIX SERVICES / BUILT AROUND YOUR WORK</text>
+          </svg>
+        </div>
       </section>
 
       <nav className={styles.index} aria-label="Service offerings" id="offerings">

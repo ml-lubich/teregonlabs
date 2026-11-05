@@ -83,6 +83,16 @@ class TeregonSiteContract(unittest.TestCase):
                 self.assertTrue(detail in page, f"Products page must explain {detail}")
         self.assertTrue("not standalone" in page, "Offerings must be identified as configured services")
 
+    def test_products_page_has_compact_illustrated_hero_and_link_first_service_navigation(self):
+        page = source("components/pages/products-page.tsx")
+        styles = source("components/pages/products-page.module.css")
+        self.assertIn('className={styles.heroVisual}', page)
+        self.assertIn('href={`#${serviceDetails[index].id}`}', page)
+        self.assertIn('href="/water.html"', page)
+        self.assertIn("animation-timeline: view()", styles)
+        self.assertIn("prefers-reduced-motion: reduce", styles)
+        self.assertIn("@media (max-width: 620px)", styles)
+
     def test_products_navigation_is_linked_and_accessible(self):
         shell = source("components/site-shell.tsx")
         self.assertTrue('href="/products.html"' in shell, "Shared navigation must link to Products")
